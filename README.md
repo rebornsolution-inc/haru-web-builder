@@ -46,25 +46,25 @@ The project uses MCP (Model Context Protocol) for web exploration. Configuration
 ```
 
 This will:
-1. Analyze the website structure (content)
-2. Extract design system (style)
-3. Generate integrated specification
-4. Create production-ready code
+1. Explore the website (MCP-based browser interaction)
+2. Analyze the website structure (content) → `01_contents_web.json`
+3. Extract design system (style) → `02_style_web.json`
+4. ⚠️ **Auto-stop here** (integration and code generation require manual commands)
 
-### Step-by-Step Approach
+### Complete Workflow
 
 ```bash
-# 1. Content analysis
-/contents https://example.com
+# Step 1: Analysis (Auto-stop after this)
+/web https://example.com
+# → Outputs: 01_contents_web.json + 02_style_web.json
 
-# 2. Style analysis
-/style https://example.com
-
-# 3. Integration
+# Step 2: Integration (Manual request)
 /integrate
+# → Outputs: 03_integrate_web.json
 
-# 4. Generate code (Tailwind single-page)
+# Step 3: Code Generation (Manual request)
 /generate
+# → Outputs: output/web/index.html
 ```
 
 ## 📁 Project Structure
@@ -122,13 +122,11 @@ Automatically extracts:
 
 ## 🛠️ Commands
 
-| Command | Description |
-|---------|-------------|
-| `/web [url]` | Complete pipeline: analysis → code |
-| `/contents [url]` | Content structure analysis only |
-| `/style [url]` | Design system extraction only |
-| `/integrate` | Merge content + style |
-| `/generate` | Generate code from specs |
+| Command | Execution | Output | Description |
+|---------|-----------|--------|-------------|
+| `/web [url]` | **AUTO** | `01_contents_web.json`<br>`02_style_web.json` | Web exploration + analysis (auto-stop) |
+| `/integrate` | **MANUAL** | `03_integrate_web.json` | Merge content + style specs |
+| `/generate` | **MANUAL** | `output/web/index.html` | Generate production code |
 
 ## 📋 Analysis Quality Checklist
 
@@ -138,14 +136,16 @@ Automatically extracts:
 - [ ] SEO metadata
 - [ ] Interactive elements documented
 - [ ] Accessibility requirements
+- [ ] **Complex features with full implementation details**
 
 **Style Analysis (02_style_web.json)**
 - [ ] Color system with states
 - [ ] Responsive typography
 - [ ] Spacing system
 - [ ] Component patterns
-- [ ] Animation specifications
+- [ ] Animation specifications (with code hints)
 - [ ] 21-checkpoint scroll coverage
+- [ ] **All animations include: type, trigger, properties, library, codeHint**
 
 **Integration (03_integrate_web.json)**
 - [ ] Content + style merged
@@ -153,6 +153,7 @@ Automatically extracts:
 - [ ] All states documented
 - [ ] Responsive behavior defined
 - [ ] Accessibility mapped
+- [ ] **Implementation details preserved from analysis**
 
 **Code Generation**
 - [ ] Production-ready code
@@ -160,6 +161,14 @@ Automatically extracts:
 - [ ] SEO optimized
 - [ ] All animations implemented
 - [ ] No placeholder content (except images)
+- [ ] **✅ JSON-to-HTML Fidelity Check (MANDATORY)**
+  - [ ] Every visual element from JSON is rendered
+  - [ ] All animations from JSON are implemented
+  - [ ] All images use exact paths from JSON (no placeholders unless specified)
+  - [ ] All complex features (3D, video, SVG) are fully implemented
+  - [ ] All specified libraries are included via CDN
+  - [ ] No simplification or placeholder replacements
+  - [ ] Interactive behaviors match JSON specifications
 
 ## 🔒 Core Principles
 
@@ -188,6 +197,28 @@ The AI follows strict protocols:
 - Mandatory interaction testing
 - Complete feature implementation
 - No simplification of complex features
+- **Detailed JSON schemas to prevent information loss**
+
+### Key Feature: Information Preservation
+
+**Problem Solved:** AI analyzes in detail but JSON simplification causes implementation detail loss
+
+**Solution:**
+- Content JSON includes full `implementation` objects
+- Style JSON includes `codeHint` for animations
+- Integration JSON preserves all technical specifications
+- Code generation has complete implementation instructions
+
+**Example:**
+```
+Analysis: "Ship moves in 3D with scroll, ocean has parallax"
+     ↓
+JSON: { type: "3d-canvas-animation", implementation: { technology: "Three.js", 
+       trigger: "scroll", details: "Ship translateX 0→100vw, ocean -20% parallax",
+       codeHint: "gsap.to('.ship', {x:'100vw', scrollTrigger:{scrub:true}})" }}
+     ↓
+Code: Full Three.js implementation with GSAP ScrollTrigger
+```
 
 ## 🎯 Use Cases
 
@@ -218,5 +249,5 @@ Contributions welcome! Please read our contributing guidelines first.
 
 ---
 
-**Version:** 2.1.0  
+**Version:** 2.2.0  
 **Last Updated:** November 11, 2025

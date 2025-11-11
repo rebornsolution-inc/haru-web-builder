@@ -94,9 +94,9 @@ Corrective Action: Resuming from last valid checkpoint with PageDown.
 8. **Generate Analysis Files (STOP HERE)**
    - Write to `analysis/web-pipeline/01_contents_web.json`
    - Write to `analysis/web-pipeline/02_style_web.json`
-   - Write to `analysis/web-pipeline/03_integrate_web.json`
-   - ⚠️ **DO NOT generate HTML/CSS code automatically**
-   - ⚠️ **STOP after 03_integrate_web.json is written**
+   - ⚠️ **STOP HERE - Do NOT proceed to integration or code generation**
+   - ⚠️ **DO NOT automatically create 03_integrate_web.json**
+   - ⚠️ **User must manually request `/integrate` or `/generate` commands**
 
 ---
 
@@ -306,15 +306,16 @@ await mcp_kapture_keypress({ tabId, key: "ArrowDown" }); // Fine adjustment
 
 | Command | Pipeline | Output | Description |
 |---------|----------|--------|-------------|
-| **`/web`** | Web Development | HTML/CSS/JS Files | Complete web analysis → responsive site code |
+| **`/web`** | Web Development | 2 Analysis Files | Web exploration + content analysis + style analysis (AUTO-STOP) |
+| **`/integrate`** | Integration | 1 Integration File | Merge analyses into unified spec (MANUAL REQUEST ONLY) |
+| **`/generate`** | Code Generation | HTML/CSS Files | Generate production code (MANUAL REQUEST ONLY) |
 
 ### Command Detection
 
 1. **Explicit Commands** (Highest Priority)
-   - `/web` → Web development pipeline
-   - `/contents` → Content analysis only
-   - `/style` → Visual analysis only
-   - `/full` → Complete pipeline
+   - `/web` → Web development pipeline (AUTO-STOP after analysis)
+   - `/integrate` → Integration (MANUAL REQUEST ONLY)
+   - `/generate` → Code generation (MANUAL REQUEST ONLY)
 
 2. **Natural Language Intent Detection**
    - Web: "웹사이트", "사이트", "HTML", "반응형", URLs
@@ -326,9 +327,18 @@ await mcp_kapture_keypress({ tabId, key: "ArrowDown" }); // Fine adjustment
 
 ### 1. Web Development (`/web`)
 
-**Pipeline:**
+**Pipeline (AUTO-STOP after Step 2):**
 ```
-01_contents_web → 02_style_web → 03_integrate_web → 04_generate_[html|tailwind]
+01_contents_web → 02_style_web → ⚠️ STOP (wait for manual /integrate or /generate)
+```
+
+**Full Manual Pipeline:**
+```
+/web → 01_contents_web + 02_style_web (AUTO)
+  ↓
+/integrate → 03_integrate_web (MANUAL REQUEST)
+  ↓
+/generate → 04_generate_[html|tailwind] (MANUAL REQUEST)
 ```
 
 **User Input Format:**
@@ -360,18 +370,253 @@ await mcp_kapture_keypress({ tabId, key: "ArrowDown" }); // Fine adjustment
 #### 01. Web Content Analysis
 - Site structure, SEO, navigation, interactive elements
 - Output: Page structure, navigation hierarchy, metadata
+- **Critical:** Preserve ALL observed details (animations, interactions, complex features)
 
 #### 02. Web Style Analysis
 - Responsive design tokens, component states, CSS specifications
 - Output: Color system, typography, spacing, component patterns
+- **Critical:** Document animation types, scroll behaviors, 3D effects with full context
 
 #### 03. Web Integration
 - Merge content + style into complete developer spec
 - Output: Page-by-page specifications, component library
+- **Critical:** Maintain detailed implementation instructions from analysis phase
 
 #### 04. Code Generation
 - **Option A:** Semantic HTML (multi-file, BEM, vanilla JS)
 - **Option B:** Tailwind Single-Page (single file, Tailwind v4)
+
+---
+
+## ⚠️ CRITICAL: JSON Analysis Schema - PREVENT INFORMATION LOSS
+
+### Problem: Analysis Detail Loss
+**Issue:** AI analyzes in detail ("ship moves in 3D scroll animation") but simplifies in JSON ("3D animation")  
+**Impact:** Integration JSON lacks implementation details → Generated code is incomplete
+
+### Solution: Detailed JSON Structure
+
+#### 01_contents_web.json - Required Fields for Complex Features
+
+```json
+{
+  "sections": [
+    {
+      "id": "hero",
+      "type": "hero",
+      "content": {
+        "heading": "Global Shipping Solutions",
+        "subheading": "Reliable ocean freight for your business"
+      },
+      "visual": {
+        "type": "3d-canvas-animation",
+        "subject": "container ship",
+        "description": "Container ship moves across ocean with parallax scroll effect",
+        "observedBehavior": "As user scrolls, ship travels from left to right across viewport. Ocean background moves slower creating depth. Ship slightly tilts during movement.",
+        "implementation": {
+          "technology": "Three.js or CSS 3D transforms",
+          "trigger": "scroll position",
+          "details": "Ship starts at left (-100px, 0% scroll), moves to right (viewport-width+100px, 100% scroll). Ocean waves have subtle parallax effect (-20% scroll speed).",
+          "elements": [
+            {
+              "subject": "container ship",
+              "role": "main animated element",
+              "visualDescription": "Blue cargo ship with red containers on deck",
+              "behavior": "translateX from -100px to viewport-width+100px",
+              "curve": "linear with scroll progress",
+              "additionalEffects": "subtle rotateY tilt (0deg → 15deg → 0deg)"
+            },
+            {
+              "subject": "ocean background",
+              "role": "parallax background layer",
+              "visualDescription": "Blue ocean with white wave patterns",
+              "behavior": "slight vertical parallax (-20% scroll speed)",
+              "effect": "creates depth perception"
+            }
+          ]
+        },
+        "assets": {
+          "ship": {
+            "path": "/images/container-ship.png",
+            "description": "Blue cargo ship with red containers",
+            "dimensions": "approx 400x200px",
+            "purpose": "Main 3D animated element"
+          },
+          "ocean": {
+            "path": "/images/ocean-bg.jpg",
+            "description": "Ocean water with wave texture",
+            "dimensions": "full viewport width/height",
+            "purpose": "Parallax background layer"
+          }
+        }
+      }
+    }
+  ]
+}
+```
+
+#### 02_style_web.json - Animation Detail Schema
+
+```json
+{
+  "animations": {
+    "scrollAnimations": [
+      {
+        "name": "ship-movement-3d",
+        "type": "scroll-triggered-3d",
+        "trigger": {
+          "element": "#hero .ship-container",
+          "start": "top 80%",
+          "end": "bottom 20%"
+        },
+        "properties": {
+          "transform": "translateX(-100px) → translateX(calc(100vw + 100px))",
+          "rotateY": "0deg → 15deg → 0deg (subtle tilt)",
+          "scale": "1 → 1.1 → 1 (perspective zoom)"
+        },
+        "library": "GSAP ScrollTrigger",
+        "codeHint": "gsap.to('.ship', { x: '100vw', scrollTrigger: { scrub: true } })"
+      }
+    ],
+    "hoverEffects": [
+      {
+        "selector": ".card",
+        "description": "Card lifts with shadow expansion on hover",
+        "properties": {
+          "transform": "translateY(0) → translateY(-10px)",
+          "boxShadow": "0 2px 4px rgba(0,0,0,0.1) → 0 20px 40px rgba(0,0,0,0.2)",
+          "transition": "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+        }
+      }
+    ]
+  }
+}
+```
+
+#### 03_integrate_web.json - Complete Implementation Spec
+
+```json
+{
+  "components": [
+    {
+      "id": "hero-3d-animation",
+      "type": "3d-canvas-animation",
+      "framework": "Three.js",
+      "subject": "container ship on ocean",
+      "description": "Container ship moves horizontally with scroll, ocean parallax background",
+      "content": {
+        "mainElement": "Blue cargo ship with red containers",
+        "background": "Ocean water with wave texture",
+        "purpose": "Illustrate global shipping capability"
+      },
+      "implementation": {
+        "markup": "<div id='hero-canvas-container'><canvas id='ship-scene'></canvas><img id='ship-fallback' src='/images/container-ship.png' alt='Container ship' style='display:none;'></div>",
+        "libraries": [
+          "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js",
+          "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js",
+          "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+        ],
+        "javascript": {
+          "initialization": "Create Three.js scene with PerspectiveCamera. Set up ship as TextureLoader object.",
+          "loadAssets": "Load ship texture from /images/container-ship.png (blue cargo ship). Load ocean texture from /images/ocean-bg.jpg.",
+          "scrollHandler": "GSAP ScrollTrigger: On scroll progress 0→1, update ship mesh.position.x from -5 to +5 (world units). Apply subtle rotation mesh.rotation.y = sin(scrollProgress * PI) * 0.1",
+          "parallaxEffect": "Ocean background mesh moves at -20% scroll speed: mesh.position.y = scrollProgress * -2",
+          "render": "Continuous requestAnimationFrame loop with camera.lookAt(ship)",
+          "pseudoCode": "gsap.to(shipMesh.position, { x: 5, scrollTrigger: { trigger: '#hero', scrub: true, start: 'top top', end: 'bottom top' } })"
+        },
+        "fallback": "If WebGL unavailable: Hide canvas, show #ship-fallback image with CSS transform animation"
+      },
+      "assets": [
+        {
+          "path": "/images/container-ship.png",
+          "subject": "blue cargo ship with red containers",
+          "dimensions": "400x200px",
+          "purpose": "3D texture for ship mesh object",
+          "mustUseExactPath": true
+        },
+        {
+          "path": "/images/ocean-bg.jpg",
+          "subject": "ocean water with wave patterns",
+          "dimensions": "1920x1080px",
+          "purpose": "Parallax background layer texture",
+          "mustUseExactPath": true
+        }
+      ]
+    }
+  ]
+}
+```
+
+### Mandatory Analysis Rules
+
+**When observing ANY complex feature, document:**
+
+1. **Subject Identification** (what is being shown)
+   - "Container ship with cargo", "Product showcase carousel", "Animated logo sequence"
+   
+2. **Visual Description** (detailed appearance)
+   - "Blue cargo ship with red containers on deck, moving across blue ocean with white waves"
+   
+3. **Observed Behavior** (what happens)
+   - "As user scrolls, ship travels left to right. Ocean background moves slower creating depth."
+   
+4. **Technical Type** (implementation category)
+   - "3d-canvas-animation" | "video-player" | "svg-path-animation" | "parallax-scroll"
+   
+5. **Trigger Mechanism** (user action)
+   - "scroll position 0-100%" | "hover on element" | "click button" | "viewport intersection"
+   
+6. **Property Changes** (what transforms)
+   - "translateX: -100px → 1500px" | "opacity: 0 → 1" | "rotateY: 0deg → 360deg"
+   
+7. **Suggested Implementation** (technology)
+   - "Three.js with ScrollTrigger" | "CSS 3D transforms" | "SVG SMIL animation" | "GSAP timeline"
+   
+8. **Code Hint** (pseudo-code or actual snippet)
+   - "gsap.to('.ship', { x: '100vw', scrollTrigger: { trigger: '#hero', scrub: true } })"
+
+**❌ FORBIDDEN Simplifications:**
+
+```json
+// ❌ BAD (loses subject and context)
+{
+  "animation": "3D animation"
+}
+
+// ✅ GOOD (preserves subject, description, and implementation)
+{
+  "animation": {
+    "subject": "container ship",
+    "visualDescription": "Blue cargo ship with red containers",
+    "type": "3d-canvas-animation",
+    "observedBehavior": "Ship moves horizontally with scroll, ocean parallax background",
+    "implementation": "Three.js scene with ScrollTrigger",
+    "properties": "translateX(-100px → 1500px), subtle rotateY tilt",
+    "codeHint": "gsap.to(shipMesh.position, { x: 5, scrollTrigger: { scrub: true } })"
+  }
+}
+```
+
+### Checkpoint Logging Enhancement
+
+**During 21-checkpoint analysis, log:**
+
+```json
+{
+  "checkpoint": "5/21",
+  "position": "25%",
+  "detectedFeatures": [
+    {
+      "type": "scroll-animation",
+      "subject": "container ship",
+      "element": ".ship-container",
+      "visualDescription": "Blue cargo ship with red containers",
+      "observation": "Ship has moved 25% across screen (approx left viewport edge to center). Appears to use smooth interpolation. Ocean background visible underneath moving slower.",
+      "technicalNote": "Likely GSAP ScrollTrigger with scrub:true for ship. Parallax effect on ocean layer."
+    }
+  ]
+}
+```
 
 ---
 
@@ -499,14 +744,34 @@ await mcp_kapture_keypress({ tabId, key: "ArrowDown" }); // Fine adjustment
 
 ## Execution Workflow
 
-### Web Pipeline
+### Web Pipeline (Updated: Auto-Stop After Analysis)
+
+**Command: `/web [input]`**
 ```
-/web [input]
-  ↓ 01. Analyze content → OVERWRITE 01_contents_web.json
-  ↓ 02. Extract style → OVERWRITE 02_style_web.json
-  ↓ 03. Merge → OVERWRITE 03_integrate_web.json
-  ↓ ⚠️ STOP HERE - Do NOT proceed to code generation
-  ↓ User must manually request code generation via /generate command
+Step 1: Browser exploration (MCP Kapture)
+  ↓
+Step 2: Analyze content → OVERWRITE 01_contents_web.json
+  ↓
+Step 3: Extract style → OVERWRITE 02_style_web.json
+  ↓
+⚠️ AUTO-STOP HERE ⚠️
+Output: "✅ 분석 완료. 통합이 필요하면 /integrate를 입력하세요."
+```
+
+**Command: `/integrate` (Manual Request Only)**
+```
+Step 4: Merge analyses → OVERWRITE 03_integrate_web.json
+  ↓
+⚠️ AUTO-STOP HERE ⚠️
+Output: "✅ 통합 완료. 코드 생성이 필요하면 /generate를 입력하세요."
+```
+
+**Command: `/generate` (Manual Request Only)**
+```
+Step 5: Generate code → output/web/index.html
+  ↓
+✅ COMPLETE
+Output: "✅ 코드 생성 완료."
 ```
 
 ---
@@ -595,8 +860,221 @@ await mcp_kapture_keypress({ tabId, key: "ArrowDown" }); // Fine adjustment
 
 ---
 
+## 📐 HTML Generation Workflow - Step-by-Step Strategy
+
+### ⚠️ CRITICAL: Systematic Section-Based Generation
+
+**When generating HTML from `03_integrate_web.json`, ALWAYS use this workflow:**
+
+### Phase 1: Pre-Generation Planning
+
+**1. Read Integration JSON**
+```javascript
+// Load complete specification
+const spec = readFile('analysis/web-pipeline/03_integrate_web.json');
+const totalSections = spec.sections.length;
+```
+
+**2. Create Todo List**
+- Use `manage_todo_list` tool to create structured plan
+- Break work into logical groups (2-4 sections per task)
+- Group related sections together:
+  - Header + Navigation
+  - Hero + Social Proof
+  - Features + Benefits
+  - Gallery + Specs
+  - CTA + Footer
+
+**Example Todo Structure:**
+```json
+[
+  {
+    "id": 1,
+    "title": "HTML 기본 구조 및 헤드 섹션 생성",
+    "description": "DOCTYPE, meta 태그, Tailwind CDN, 구글 폰트, 페이지 타이틀 설정",
+    "status": "not-started"
+  },
+  {
+    "id": 2,
+    "title": "프로모션 배너 및 헤더 구현",
+    "description": "섹션 1-2: announcement-bar, site-header 컴포넌트 생성",
+    "status": "not-started"
+  },
+  // ... continue for all sections
+  {
+    "id": 13,
+    "title": "푸터 구현 및 파일 저장",
+    "description": "footer 컴포넌트 생성, HTML 파일 완성",
+    "status": "not-started"
+  }
+]
+```
+
+### Phase 2: Sequential Implementation
+
+**FOR EACH TODO ITEM:**
+
+**Step 1: Mark as In-Progress**
+```javascript
+manage_todo_list({
+  operation: "write",
+  todoList: [...todos, currentTodo.status = "in-progress"]
+});
+```
+
+**Step 2: Extract Section Data**
+```javascript
+// Get sections for this todo
+const sections = spec.sections.filter(s => s.order >= startOrder && s.order <= endOrder);
+```
+
+**Step 3: Generate HTML**
+- Convert JSON `content` to HTML structure
+- Apply JSON `style` as Tailwind classes
+- Implement JSON `layout` (grid, flex, columns)
+- Add images using smart policy (functional vs decorative)
+
+**Step 4: Add to File**
+```javascript
+replace_string_in_file({
+  filePath: "output/web/index.html",
+  oldString: "    </section>\n\n</body>",  // Last closing tag
+  newString: "    </section>\n\n    <!-- New Section -->\n    <section>...</section>\n\n</body>"
+});
+```
+
+**Step 5: Mark as Completed**
+```javascript
+manage_todo_list({
+  operation: "write",
+  todoList: [...todos, currentTodo.status = "completed"]
+});
+```
+
+**Step 6: Move to Next**
+- Report progress: "✅ 할 일 X/13 완료"
+- Continue with next todo
+
+### Phase 3: Finalization
+
+**After all todos completed:**
+1. ✅ Verify all sections present
+2. ✅ Check Tailwind classes applied correctly
+3. ✅ Confirm responsive breakpoints (mobile/tablet/desktop)
+4. ✅ Validate image paths (exact vs placeholder)
+5. ✅ Test accessibility attributes (alt, aria-*)
+
+### 🎯 Key Principles
+
+**1. Never Generate Entire File at Once**
+- ❌ FORBIDDEN: Creating complete HTML in one step
+- ✅ REQUIRED: Build incrementally, section by section
+
+**2. Always Track Progress**
+- Use todo list for visibility
+- Update status after each section
+- Report progress to user
+
+**3. Maintain Context**
+- Each `replace_string_in_file` preserves existing code
+- Add new sections between last section and `</body>`
+- Never overwrite completed sections
+
+**4. JSON-to-HTML Mapping**
+```json
+// JSON spec
+{
+  "id": "hero",
+  "component": "hero-section",
+  "content": { "heading": "Welcome" },
+  "style": { "background": "#FFFFFF", "padding": "60px 0" },
+  "layout": { "type": "centered", "maxWidth": "800px" }
+}
+
+// Generated HTML
+<section id="hero" class="bg-white py-16 text-center">
+  <div class="max-w-3xl mx-auto px-5">
+    <h1 class="text-4xl font-bold">Welcome</h1>
+  </div>
+</section>
+```
+
+**5. Tailwind Class Conversion**
+| JSON Style | Tailwind Class |
+|------------|----------------|
+| `background: "#FF6B35"` | `bg-[#FF6B35]` or `bg-primary` |
+| `padding: "60px 0"` | `py-16` (60px ≈ 15rem ≈ 16) |
+| `fontSize: "36px"` | `text-4xl` |
+| `fontWeight: 700` | `font-bold` |
+| `borderRadius: "8px"` | `rounded-lg` |
+| `textAlign: "center"` | `text-center` |
+
+**6. Responsive Implementation**
+```html
+<!-- JSON: columns: { desktop: 3, tablet: 2, mobile: 1 } -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <!-- Cards -->
+</div>
+```
+
+### 📊 Progress Reporting Template
+
+**After every 3 todos:**
+```
+✅ HTML 생성 진행률: X/13 완료
+- 완성된 섹션: [섹션명 리스트]
+- 현재 작업: [현재 섹션명]
+- 남은 작업: Y개
+```
+
+### ❌ Anti-Patterns to Avoid
+
+1. ❌ Generating full HTML in single create_file call
+2. ❌ Skipping todo list creation
+3. ❌ Not updating todo status
+4. ❌ Batch completing multiple todos at once
+5. ❌ Ignoring JSON layout/style specifications
+6. ❌ Hard-coding colors instead of using design tokens
+
+### ✅ Correct Workflow Example
+
+```
+User: "analysis/web-pipeline/03_integrate_web.json 이거로 HTML 만들어"
+
+AI Response:
+1. Read 03_integrate_web.json (34 sections)
+2. Create todo list (13 grouped tasks)
+3. Start task 1: Mark in-progress → Generate HTML base → Mark completed
+4. Start task 2: Mark in-progress → Generate promo + header → Mark completed
+5. Start task 3: Mark in-progress → Generate hero + rankings → Mark completed
+... (continue for all 13 tasks)
+13. Start task 13: Mark in-progress → Generate footer → Mark completed
+✅ All tasks completed! File saved to output/web/index.html
+```
+
+### 🔧 Implementation Notes
+
+- **File Management**: Only ONE HTML file (`output/web/index.html`)
+- **Append Strategy**: Always add before `</body>` closing tag
+- **Section Order**: Follow JSON `order` property (1, 2, 3...)
+- **Component Reuse**: Similar sections use consistent HTML patterns
+- **Validation**: Check generated HTML in browser after completion
+
+---
+
 ## Version History
 
+- **v2.3.0** (2025-11-11): Added HTML Generation Workflow
+  - Step-by-step section-based generation strategy
+  - Todo list planning and progress tracking
+  - JSON-to-HTML mapping guidelines
+  - Tailwind conversion reference table
+  - Anti-patterns and correct workflow examples
+- **v2.2.0** (2025-11-11): Updated auto-stop behavior
+  - `/web` command now auto-stops after analysis (01_contents + 02_style)
+  - `/integrate` command requires manual request
+  - `/generate` command requires manual request
+  - Improved user control over pipeline execution
 - **v2.1.0** (2025-11-11): Fixed JSON-to-HTML fidelity issues
   - Added CRITICAL_POLICY for image handling (use exact paths)
   - Added FULL_IMPLEMENTATION mode for complex features
