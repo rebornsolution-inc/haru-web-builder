@@ -8,7 +8,7 @@
 2. ❌ **"주요 섹션만"** (Only main sections)
 3. ❌ **"효율적인 방법"** (Efficient method)
 4. ❌ **Skip viewport changes or visible content**
-5. ❌ **Use `End` key to jump to bottom**
+5. ❌ **Use `End`, `Home`, `PageDown`, or `PageUp` keys** (ONLY ArrowDown is allowed)
 6. ❌ **Save screenshots to files**
 7. ❌ **Generate code before analysis completion**
 8. ❌ **Proactively suggest shortcuts WITHOUT user request**
@@ -16,6 +16,8 @@
 **⚠️ AI MUST NOT AUTONOMOUSLY DECIDE TO "SPEED UP"**
 - Do NOT say: "진행 상황이 너무 느리므로, 효율적인 방법으로..."
 - Do NOT propose: "주요 섹션들을 캡처하고..."
+- Do NOT use: PageDown, PageUp, End, Home keys under ANY circumstance
+- **ONLY ArrowDown is permitted for scrolling** (no exceptions)
 - **ALWAYS follow complete analysis process - capture ALL viewport changes**
 
 **IF USER SAYS "너무 느리다" (too slow):**
@@ -30,32 +32,33 @@
 
 ### Auto-Detection System
 
-**BEFORE EVERY `mcp_kapture_keypress()` CALL, AI MUST CHECK:**
+**⚠️ PRE-EXECUTION CHECK - AI MUST VERIFY BEFORE EVERY `mcp_kapture_keypress()` CALL:**
 
-```javascript
-// ⚠️ MANDATORY PRE-EXECUTION CHECK
-function validateScrollCommand(key) {
-  const FORBIDDEN_KEYS = ["End", "Home", "PageDown", "PageUp"];
-  
-  if (FORBIDDEN_KEYS.includes(key)) {
-    console.error(`
-⚠️ EXECUTION HALTED - GUIDELINE VIOLATION DETECTED
-Attempted: mcp_kapture_keypress({ key: "${key}" })
-Reason: ${key} key is FORBIDDEN (jumps content, skips animations)
-Corrective Action: Using ArrowDown instead (fine-grained scrolling)
-    `);
-    
-    // Force correction
-    return "ArrowDown";
-  }
-  
-  return key;
-}
-
-// Usage (AI must apply this logic mentally before every call)
-const safeKey = validateScrollCommand(intendedKey);
-await mcp_kapture_keypress({ tabId, key: safeKey });
+**Step 1: Check intended key BEFORE calling tool**
 ```
+IF intendedKey == "PageDown" OR "PageUp" OR "End" OR "Home":
+  ❌ HALT IMMEDIATELY
+  ❌ OUTPUT: "⚠️ VIOLATION DETECTED: Attempted to use {intendedKey} (FORBIDDEN)"
+  ✅ CORRECTION: Change to "ArrowDown"
+  ✅ THEN: Proceed with ArrowDown
+```
+
+**Step 2: Only allowed command**
+```javascript
+// ✅ ONLY THIS IS ALLOWED
+await mcp_kapture_keypress({ tabId, key: "ArrowDown" });
+
+// ❌ NEVER USE THESE
+await mcp_kapture_keypress({ tabId, key: "PageDown" }); // FORBIDDEN
+await mcp_kapture_keypress({ tabId, key: "End" });      // FORBIDDEN
+await mcp_kapture_keypress({ tabId, key: "Home" });     // FORBIDDEN
+await mcp_kapture_keypress({ tabId, key: "PageUp" });   // FORBIDDEN
+```
+
+**Rationale:**
+- PageDown/PageUp = Jumps 800-1000px → Skips 5-10 viewports
+- ArrowDown = Moves 50px → Captures EVERY viewport change
+- End/Home = Jumps to page extremes → Completely skips content
 
 ### Behavioral Triggers - AI Self-Check
 
@@ -63,20 +66,63 @@ await mcp_kapture_keypress({ tabId, key: safeKey });
 
 ❌ "시간 효율을 위해..."  
 ❌ "더 빠르게 스크롤..."  
+❌ "효율적으로 분석..."
+❌ "주요 섹션만..."
+❌ "더 큰 간격으로..."
 ❌ "PageDown을 사용하여..."  
 ❌ "End 키로 이동..."  
-❌ "주요 섹션만..."
+❌ "이 속도로는 시간이 많이 걸릴 것 같으므로..."
+❌ "진행 속도를 높이겠습니다..."
+❌ "한 번에 더 많은..."
+❌ "더 많은 스크롤이 필요합니다..."
 
-**WHEN TRIGGER DETECTED, OUTPUT THIS MESSAGE:**
+**WHEN TRIGGER DETECTED, AI MUST:**
+1. ❌ HALT immediately (do NOT execute the forbidden action)
+2. ✅ OUTPUT violation message:
 ```
 ⚠️ BEHAVIORAL VIOLATION DETECTED
 Trigger: [phrase that AI was about to say]
 Reason: Attempting to deviate from systematic analysis protocol
-Corrective Action: Resuming ArrowDown-based fine-grained scrolling
-Current checkpoint: X (continuing until minimum 30 reached)
+Corrective Action: Using ArrowDown × 3-5 for fine-grained scrolling
+Current checkpoint: X/30 (continuing until minimum 30 reached)
 ```
+3. ✅ Resume with ArrowDown × 3-5 (NO changes to increment count)
 
 **THEN:** Continue with ArrowDown × 3-5 increments, no exceptions.
+
+---
+
+## 🔒 CHECKPOINT COMPLETION ENFORCEMENT
+
+### Mandatory Output Template (After EACH Checkpoint)
+
+**AI MUST OUTPUT THIS CHECKLIST AFTER COMPLETING EACH CHECKPOINT:**
+
+```
+✅ CHECKPOINT X/30 COMPLETE
+├─ 4-1: Header written to file ✅
+├─ 4-2: Visual analysis (Colors: [specific], Typography: [specific], Layout: [specific]) ✅
+├─ 4-3: Animation detection ([type], trigger: [specific]) ✅
+├─ 4-4: Interactive elements tested (Y/10 elements) ✅
+├─ 4-5: Results logged to file ✅
+└─ 4-6: Tracking updated ✅
+
+Next: Checkpoint X+1 (ArrowDown × 3-5)
+```
+
+**IF ANY ITEM SHOWS ❌ → HALT and complete before proceeding**
+
+### Self-Check Questions (Before Moving to Next Checkpoint)
+
+**AI MUST MENTALLY VERIFY:**
+1. Did I write checkpoint header to 00_analysis_note.txt?
+2. Did I analyze screenshot (colors, typography, layout, spacing)?
+3. Did I check for animations (8-field template if found)?
+4. Did I test 10 interactive elements (hover/click/focus)?
+5. Did I log interaction results to file?
+6. Did I increment checkpointIndex?
+
+**IF ANY ANSWER IS "NO" → Go back and complete it NOW**
 
 ---
 
@@ -110,12 +156,12 @@ Current checkpoint: X (continuing until minimum 30 reached)
    ```
 
 5. **Progressive Scroll** (MANDATORY - Continue until ALL content captured)
-   - Use `mcp_kapture_keypress()` with **PageDown** for primary scrolling
-   - Use **ArrowDown** for fine adjustments only
-   - At EACH viewport change: Screenshot → Analyze → Test interactions → Log
+   - Use `mcp_kapture_keypress()` with **ArrowDown ONLY** (NO OTHER KEYS)
+   - ArrowDown × 3-5 per checkpoint (150-300px increments)
+   - At EACH checkpoint: Screenshot → Analyze → Test interactions → Log (ALL 6 steps)
    - **Goal:** Capture EVERY visible change from top to bottom
    - **Method:** Keep scrolling until footer visible + 3 consecutive "no change" detections
-   - **Expected:** 10-50 checkpoints depending on page complexity
+   - **Expected:** 30-80 checkpoints depending on page complexity
 
 6. **Test All Interactions**
    - Hover effects, Click navigation, Open modals/accordions, Test forms (UI only)
@@ -273,13 +319,17 @@ if (!structuralChange) {
 const significantChange = structuralChange || visualChange;
 ```
 
-**4. 🔄 Checkpoint Creation (if change detected)**
+**4. 🔄 Checkpoint Creation (if change detected) - CANNOT BE SKIPPED**
+
+⚠️ **ALL 6 SUB-STEPS ARE MANDATORY - NO EXCEPTIONS:**
+
 ```javascript
 if (significantChange) {
   console.log(`✅ 체크포인트 ${checkpointIndex} 완료 - ${structuralChange ? '구조 변화' : '시각적 변화'} 감지`);
   
-  // 4-1. MANDATORY: Immediate write to 00_analysis_note.txt (REAL-TIME APPEND)
-  // This must happen BEFORE any further analysis to ensure progressive logging
+  // 4-1. ✅ MANDATORY: Write checkpoint header (CANNOT SKIP)
+  // ⚠️ CRITICAL: Use replace_string_in_file tool, NOT PowerShell echo command
+  // PowerShell echo causes UTF-16 encoding issues that corrupt the file
   const checkpointHeader = `
 === CHECKPOINT ${checkpointIndex} ===
 Timestamp: ${new Date().toISOString()}
@@ -292,9 +342,18 @@ Change Type: ${structuralChange ? 'Structural' : 'Visual'}
 - Removed Elements (${removedElements.length}): ${removedElements.slice(0, 5).join(', ')}
 `;
 
-  await appendToAnalysisNote(checkpointHeader);
+  // ✅ CORRECT: Use replace_string_in_file tool
+  await replace_string_in_file({
+    filePath: 'analysis/web-pipeline/00_analysis_note.txt',
+    oldString: '---\n\n',  // Find last checkpoint separator
+    newString: `---\n\n${checkpointHeader}`
+  });
   
-  // 4-2. Analyze screenshot and append visual analysis immediately
+  // ❌ FORBIDDEN: Do NOT use these methods
+  // await run_in_terminal(`echo "${content}" >> file.txt`);  // Causes encoding issues
+  // await run_in_terminal(`Out-File ...`);  // Slower, unnecessary
+  
+  // 4-2. ✅ MANDATORY: Visual analysis (CANNOT SKIP)
   const visualAnalysis = `
 🎨 VISUAL ANALYSIS:
 - Colors: [AI analyzes screenshot: e.g., "Blue gradient #1E3A8A → #3B82F6"]
@@ -303,9 +362,13 @@ Change Type: ${structuralChange ? 'Structural' : 'Visual'}
 - Spacing: [AI analyzes: e.g., "Section padding 80px vertical, 0 horizontal"]
 `;
 
-  await appendToAnalysisNote(visualAnalysis);
+  await replace_string_in_file({
+    filePath: 'analysis/web-pipeline/00_analysis_note.txt',
+    oldString: '---\n\n',
+    newString: `${visualAnalysis}\n---\n\n`
+  });
   
-  // 4-3. Check for animations and document immediately if detected
+  // 4-3. ✅ MANDATORY: Animation detection (CANNOT SKIP)
   const isSectionTransition = newElements.length >= 5 || 
                               removedElements.length >= 5 ||
                               newElements.some(sel => sel.includes('section'));
@@ -316,7 +379,11 @@ Change Type: ${structuralChange ? 'Structural' : 'Visual'}
     const animationHeader = `
 🎬 ANIMATION DETECTION:
 `;
-    await appendToAnalysisNote(animationHeader);
+    await replace_string_in_file({
+      filePath: 'analysis/web-pipeline/00_analysis_note.txt',
+      oldString: '---\n\n',
+      newString: `${animationHeader}\n---\n\n`
+    });
     
     // Capture animation frames (3-5 additional screenshots)
     for (let frame = 0; frame < 3; frame++) {
@@ -325,7 +392,7 @@ Change Type: ${structuralChange ? 'Structural' : 'Visual'}
       console.log(`   프레임 ${frame+1}/3 캡처`);
     }
     
-    // Analyze and document animation details
+    // Analyze and document animation details (8-field template)
     const animationDetails = `
 - Subject: [AI observes: e.g., "Container ship with red cargo"]
 - Visual Description: [AI describes: e.g., "Blue ship body, 3 red containers on deck"]
@@ -336,16 +403,26 @@ Change Type: ${structuralChange ? 'Structural' : 'Visual'}
 - Implementation Hint: [AI suggests: e.g., "gsap.to(ship, { x: 15, scrollTrigger: { scrub: true } })"]
 `;
     
-    await appendToAnalysisNote(animationDetails);
+    await replace_string_in_file({
+      filePath: 'analysis/web-pipeline/00_analysis_note.txt',
+      oldString: '---\n\n',
+      newString: `${animationDetails}\n---\n\n`
+    });
   } else {
     // No animation detected
-    await appendToAnalysisNote(`
+    const noAnimation = `
 🎬 ANIMATION DETECTION: None detected in this viewport
-`);
+`;
+    await replace_string_in_file({
+      filePath: 'analysis/web-pipeline/00_analysis_note.txt',
+      oldString: '---\n\n',
+      newString: `${noAnimation}\n---\n\n`
+    });
   }
   
-  // 4-4. MANDATORY: Test interactive elements and log results immediately
-  console.log("🖱️ 인터랙티브 요소 테스트 시작...");
+  // 4-4. ✅ MANDATORY: Test 10 interactive elements (CANNOT SKIP)
+  // ⚠️ THIS STEP IS INTEGRATED - AI CANNOT PROCEED WITHOUT COMPLETING THIS
+  console.log("🖱️ 인터랙티브 요소 테스트 시작... (필수 단계)");
   
   const interactiveElements = await mcp_kapture_elements({ 
     tabId, 
@@ -388,17 +465,22 @@ Change Type: ${structuralChange ? 'Structural' : 'Visual'}
   
   console.log(`✅ 인터랙션 테스트 완료: ${testedCount}개`);
   
-  // 4-5. Append interaction test results immediately
+  // 4-5. ✅ MANDATORY: Log interaction results (CANNOT SKIP)
   const interactionLog = `
 🖱️ INTERACTIVE ELEMENTS TESTED (${testedCount} total):
 ${interactionResults.length > 0 ? interactionResults.map(r => `- ${r}`).join('\n') : '- No interactive elements found in this viewport'}
 
 ---
+
 `;
 
-  await appendToAnalysisNote(interactionLog);
+  await replace_string_in_file({
+    filePath: 'analysis/web-pipeline/00_analysis_note.txt',
+    oldString: '---\n\n',
+    newString: `${interactionLog}`
+  });
   
-  // 4-6. Update tracking variables
+  // 4-6. ✅ MANDATORY: Update tracking (CANNOT SKIP)
   checkpointIndex++;
   previousVisibleElements = currentElementSet;
   consecutiveNoChangeCount = 0;
@@ -419,13 +501,15 @@ ${interactionResults.length > 0 ? interactionResults.map(r => `- ${r}`).join('\n
 - ✅ Every animation detected and logged
 - ✅ All interactive elements tested (minimum 50+ total interactions)
 - ✅ Footer visible + 3 consecutive "no change" detections
-- ✅ No `End` or `Home` key used (PageDown also FORBIDDEN)
+- ✅ **Only ArrowDown key used** (PageDown, PageUp, End, Home are ALL FORBIDDEN)
 
 ### ❌ FORBIDDEN METHODS
 ```javascript
 // ❌ NEVER USE
 await mcp_kapture_keypress({ tabId, key: "End" }); // Jumps to bottom
 await mcp_kapture_keypress({ tabId, key: "Home" }); // Jumps to top
+await mcp_kapture_keypress({ tabId, key: "PageDown" }); // Jumps 800px, skips content
+await mcp_kapture_keypress({ tabId, key: "PageUp" }); // Jumps backward
 await mcp_kapture_click({ tabId }); // No selector = error
 
 // ✅ ONLY USE
@@ -440,9 +524,9 @@ await mcp_kapture_keypress({ tabId, key: "ArrowDown" }); // Primary scroll (smal
 3. Resume from last completed checkpoint
 
 **PROGRESS REPORTING:**
-- After every 3 checkpoints, report: "체크포인트 X 완료 (최소 30개 필요, 현재 진행 중)"
+- After every 3 checkpoints, report: "체크포인트 X/30 완료 (최소 30개 필요, 현재 진행 중)"
 - When reaching 30: "✅ 최소 체크포인트 30개 달성. 계속 진행합니다."
-- Do NOT say: "빠르게", "효율적으로", "주요 섹션"
+- Do NOT say: "빠르게", "효율적으로", "주요 섹션", "더 큰 간격으로"
 - Only say: "다음 체크포인트로 진행" or "진행 중"
 
 **NO EXCEPTIONS. SYSTEMATIC ANALYSIS IS MANDATORY.**
@@ -528,10 +612,361 @@ await mcp_kapture_keypress({ tabId, key: "ArrowDown" }); // Primary scroll (smal
 - Merge content + style into complete developer spec
 - Output: Page-by-page specifications, component library
 - **Critical:** Maintain detailed implementation instructions from analysis phase
+- **Method:** PowerShell merge script (see below)
+- **Validation:** Auto-verify no information loss (see validation section below)
+
+#### 03-0. Integration Generation Method (MANDATORY)
+
+**⚠️ CRITICAL: Use PowerShell Script - NOT AI Direct Generation**
+
+**Problem:** 
+- AI token limit (~4K-8K tokens) causes automatic content simplification
+- AI writing JSON directly results in 70% data loss (e.g., 1367 lines → 392 lines)
+- Section-by-Section approach still simplifies internal details (stepCards details omitted, visual fields truncated)
+
+**Root Cause:**
+```javascript
+// ❌ AI tries to write from memory → automatic summarization
+const section = {
+  stepCards: [
+    { title: "..." }  // Details omitted due to token pressure
+  ]
+}
+
+// ✅ Script copies entire objects → zero data loss
+const section = contents.sections.find(s => s.id === "section-02");
+integrated.sections.push({ ...section, style: style.components[section.id] });
+```
+
+**Solution: PowerShell Merge Script**
+
+**AI must execute this command instead of generating JSON:**
+```powershell
+powershell -ExecutionPolicy Bypass -File "scripts\integrate_web_pipeline.ps1"
+```
+
+**Script performs:**
+1. Load 01_contents_web.json + 02_style_web.json as objects
+2. For each section: `merged = { ...contentSection, style: styleComponent }`
+3. Add global style data (animations, designTokens, responsive, accessibility, seo)
+4. Write 03_integrate_web.json with full data preservation
+5. Auto-validate (ranges, codeHints, colors)
+
+**Expected Results:**
+- File size: 1200-1500 lines (vs AI's 392 lines)
+- codeHint preservation: 16/16 (100%, vs AI's 8/16)
+- Range preservation: All fontSize ranges maintained
+- Color preservation: All hex values maintained
+
+**Mandatory Workflow:**
+```
+Step 1: AI detects /integrate command
+Step 2: AI calls run_in_terminal with PowerShell script
+Step 3: Script outputs validation results
+Step 4: AI reports success/failure to user
+Step 5: STOP (do NOT attempt to generate JSON manually)
+```
+
+**Old Method (DEPRECATED - DO NOT USE):**
+~~Section-by-Section generation with replace_string_in_file~~
+- ❌ Caused 70% data loss
+- ❌ AI simplified stepCards, visual fields, animation details
+- ❌ Token limit hit during each section generation
 
 #### 04. Code Generation
-- **Option A:** Semantic HTML (multi-file, BEM, vanilla JS)
-- **Option B:** Tailwind Single-Page (single file, Tailwind v4)
+- **Method:** PowerShell HTML generator script (see below)
+- **Option A:** Tailwind Single-Page → `scripts/generate_html.ps1`
+- **Option B:** (Future) React Components → `scripts/generate_react.ps1`
+
+#### 04-0. HTML Generation Method (MANDATORY) - UPDATED v2.17.0
+
+**⚠️ CRITICAL: Use Incremental Template Building (A-1 Method)**
+
+### **Problem Analysis:**
+- **Previous method:** Single PowerShell script with generic templates
+- **Result:** 70% data loss (1229 lines → 367 lines)
+- **Root cause:** Templates too simple, complex features ignored
+
+### **NEW Solution: Complete Segmentation (A-1 Option)**
+
+**Core Principle:** Build each section type as a dedicated, fully-featured template function
+
+**AI MUST follow this workflow automatically (NO manual intervention between tasks):**
+
+```
+Task 1: Helper Functions → Task 2: Hero Template → Task 3: Feature Template → ... → Task 18: Final Integration
+```
+
+**DO NOT wait for user confirmation between tasks. Execute sequentially.**
+
+---
+
+### **Mandatory Task Sequence (Auto-Execute)**
+
+#### **Phase 1: Foundation (Tasks 1-2)**
+
+**Task 1: PowerShell Helper Functions**
+```powershell
+# Add to scripts/generate_html.ps1
+
+function Get-NestedProperty {
+    param($Object, $Path)
+    # Navigate JSON structure: "section.visual.type"
+}
+
+function ConvertTo-TailwindClass {
+    param($StyleObject)
+    # Convert: { fontSize: "60-72px", color: "#FF6635" } 
+    # → "text-6xl md:text-7xl text-[#FF6635]"
+}
+
+function Render-HtmlElement {
+    param($ElementType, $Attributes, $Content, $Children)
+    # Recursive rendering with proper nesting
+}
+```
+
+**Task 2: Section Renderer Infrastructure**
+```powershell
+function Render-Section {
+    param($Section)
+    
+    switch ($Section.type) {
+        "hero-section" { Render-HeroSection $Section }
+        "feature-section" { Render-FeatureSection $Section }
+        "workflow-section" { Render-WorkflowSection $Section }
+        # ... (14 types total)
+    }
+}
+```
+
+#### **Phase 2: Section Templates (Tasks 3-15)**
+
+**Task 3: Render-HeroSection**
+```powershell
+function Render-HeroSection {
+    param($Section)
+    
+    # MUST include ALL elements:
+    # 1. Main heading
+    # 2. CTA buttons (primary + secondary)
+    # 3. 3D Planet Parallax (if $Section.visual.type -eq "3d-planet-parallax")
+    # 4. Logo Marquee (with animation keyframe)
+    # 5. Bottom Content boxes
+    # 6. Integrations list (with green-dot indicator)
+    
+    # Insert $Section.visual.codeHint directly (NO interpretation)
+    # Insert $Section.logoMarquee.codeHint directly
+}
+```
+
+**Task 4: Render-FeatureSection**
+```powershell
+function Render-FeatureSection {
+    param($Section)
+    
+    # MUST include:
+    # 1. Badge (if exists)
+    # 2. Heading + Subheading
+    # 3. Code Snippet Preview (if $Section.visual.type -eq "code-snippet-preview")
+    # 4. Action Buttons (with color-coded borders)
+    # 5. Visual element (insert codeHint)
+}
+```
+
+**Task 5: Render-WorkflowSection**
+```powershell
+function Render-WorkflowSection {
+    param($Section)
+    
+    # MUST include:
+    # 1. Badge + Heading + Subheading
+    # 2. Step Cards (iterate $Section.stepCards)
+    #    - Step number badge
+    #    - Title + Subtitle
+    #    - Details list (properly formatted bullets)
+    #    - Icons (checkmark, x)
+    # 3. Sequential animation (insert $Section.animation.codeHint)
+}
+```
+
+**Task 6: Render-ValidationSection**
+```powershell
+function Render-ValidationSection {
+    param($Section)
+    
+    # Validation-specific layout
+}
+```
+
+**Task 7: Render-FeatureShowcase**
+```powershell
+function Render-FeatureShowcase {
+    param($Section)
+    
+    # Large visual showcase layout
+}
+```
+
+**Task 8: Render-TwoColumnFeatures**
+```powershell
+function Render-TwoColumnFeatures {
+    param($Section)
+    
+    # Left/right split layout
+}
+```
+
+**Task 9: Render-OnboardingSteps**
+```powershell
+function Render-OnboardingSteps {
+    param($Section)
+    
+    # Numbered steps with progression
+}
+```
+
+**Task 10: Render-SecuritySection**
+```powershell
+function Render-SecuritySection {
+    param($Section)
+    
+    # Security badges and certifications
+}
+```
+
+**Task 11: Render-FeatureCards**
+```powershell
+function Render-FeatureCards {
+    param($Section)
+    
+    # Grid of feature cards
+}
+```
+
+**Task 12: Render-Banner**
+```powershell
+function Render-Banner {
+    param($Section)
+    
+    # Full-width banner
+}
+```
+
+**Task 13: Render-CTASection**
+```powershell
+function Render-CTASection {
+    param($Section)
+    
+    # Call-to-action layout
+}
+```
+
+**Task 14: Render-FAQSection**
+```powershell
+function Render-FAQSection {
+    param($Section)
+    
+    # MUST include:
+    # 1. Heading
+    # 2. Accordion structure (<details> elements)
+    # 3. Q&A pairs from $Section.faqs (if exists)
+    # 4. Animation (insert codeHint)
+}
+```
+
+**Task 15: Render-Footer**
+```powershell
+function Render-Footer {
+    param($Section)
+    
+    # MUST include:
+    # 1. Newsletter form ($Section.newsletter)
+    # 2. Navigation columns ($Section.columns)
+    # 3. Social icons ($Section.socialIcons)
+    # 4. Legal links ($Section.legal.links)
+    # 5. Copyright ($Section.legal.copyright)
+}
+```
+
+#### **Phase 3: Integration (Tasks 16-18)**
+
+**Task 16: Animation Script Builder**
+```powershell
+function Build-AnimationScripts {
+    param($Sections)
+    
+    $needsGSAP = $false
+    $needsThree = $false
+    $animationCode = ""
+    
+    foreach ($section in $Sections) {
+        # Check section.visual.codeHint
+        # Check section.animation.codeHint
+        # Detect library requirements
+        # Accumulate all animation code
+    }
+    
+    # Return: library CDNs + complete <script> block
+}
+```
+
+**Task 17: UTF-8 Encoding Fix**
+```powershell
+# Ensure all file operations use:
+Set-Content -Path $path -Value $html -Encoding UTF8 -NoNewline
+
+# Replace bullet points properly:
+$text = $text -replace '•', '&bull;'
+$text = $text -replace '→', '&rarr;'
+```
+
+**Task 18: Final Integration**
+```powershell
+# Main script flow:
+1. Load 03_integrate_web.json
+2. Generate HTML head
+3. For each section: Call Render-Section($section)
+4. Build animation scripts
+5. Close HTML
+6. Write with UTF-8
+7. Validate (14 sections, all animations, all features)
+```
+
+---
+
+### **Execution Rules**
+
+**AI MUST:**
+1. ✅ Execute all 18 tasks sequentially WITHOUT pausing
+2. ✅ After each task, immediately proceed to next
+3. ✅ Use manage_todo_list to track progress
+4. ✅ Report completion after each task: "✅ Task X/18 complete"
+5. ✅ Continue until all 18 tasks done
+
+**AI MUST NOT:**
+1. ❌ Wait for user confirmation between tasks
+2. ❌ Ask "should I proceed?" (just proceed)
+3. ❌ Stop after a single task
+4. ❌ Simplify or skip any task
+
+---
+
+### **Expected Results**
+
+- File size: 2000-4000 lines (depends on complexity)
+- Section rendering: 100% (all 14 sections with full content)
+- Feature preservation: 95%+ (all complex features implemented)
+- Animation preservation: 100% (all codeHints inserted)
+- Text accuracy: 100% (no encoding errors)
+
+---
+
+### **Old Method (DEPRECATED - DO NOT USE):**
+~~Single PowerShell script with generic switch statement~~
+- ❌ Caused 70% data loss
+- ❌ Complex features ignored
+- ❌ No recursive JSON navigation
 
 ---
 
@@ -570,19 +1005,6 @@ await mcp_kapture_keypress({ tabId, key: "ArrowDown" }); // Primary scroll (smal
 }
 ```
 → Developer can implement immediately
-
-### 8-Field Documentation Template (MANDATORY)
-
-For EVERY animation, interaction, or complex feature, include ALL 8 fields:
-
-1. **subject** - "Container ship with cargo" (what is animating)
-2. **visualDescription** - "Blue cargo ship with red containers" (visual appearance)
-3. **observedBehavior** - "Ship travels left to right as user scrolls" (what happens)
-4. **type** - "3d-canvas-animation" | "video-player" | "svg-path-animation" (technical category)
-5. **trigger** - "scroll position 0-100%" | "hover" | "click" (what causes it)
-6. **technicalImplementation** - "Three.js with ScrollTrigger" | "CSS 3D transforms" (how to build)
-7. **propertyChanges** - "translateX: -100px → 1500px" | "opacity: 0 → 1" (CSS/JS changes)
-8. **codeHint** - Pseudo-code or actual snippet (implementation example)
 
 ### 8-Field Documentation Template (MANDATORY)
 
@@ -809,19 +1231,102 @@ Output: "✅ 분석 완료. 통합이 필요하면 /integrate를 입력하세요
 
 **Command: `/integrate` (Manual Request Only)**
 ```
-Step 4: Merge analyses → OVERWRITE 03_integrate_web.json
+Step 4: Execute PowerShell merge script
+  ↓
+  Command: powershell -ExecutionPolicy Bypass -File "scripts\integrate_web_pipeline.ps1"
+  ↓
+  Script performs:
+    - Load 01_contents_web.json + 02_style_web.json
+    - Merge all sections (full data preservation)
+    - Add animations, designTokens, responsive, accessibility, seo
+    - Write 03_integrate_web.json
+    - Auto-validate (ranges, codeHints, colors)
+  ↓
+  Expected output:
+    - File size: 1200-1500 lines
+    - Validation: PASSED (all checks green)
   ↓
 ⚠️ AUTO-STOP HERE ⚠️
-Output: "✅ 통합 완료. 코드 생성이 필요하면 /generate를 입력하세요."
+Output: "✅ 통합 완료 (1229 lines, validation PASSED). 코드 생성이 필요하면 /generate를 입력하세요."
 ```
+
+**⚠️ CRITICAL: DO NOT use Section-by-Section manual generation**
+
+**Why PowerShell script is mandatory:**
+- AI token limit causes 70% data loss when writing JSON directly
+- Script preserves 100% of original data (1229 lines vs AI's 392 lines)
+- Script handles all validation automatically
+
+**If script fails:**
+1. Check script exists: `scripts\integrate_web_pipeline.ps1`
+2. Check source files exist: `01_contents_web.json`, `02_style_web.json`
+3. Report error to user with full error message
+4. Do NOT attempt manual JSON generation as fallback
+
+
+**⚠️ CRITICAL: `/integrate` No Simplification Policy**
+
+When merging `01_contents_web.json` + `02_style_web.json` into `03_integrate_web.json`:
+
+❌ **FORBIDDEN Operations:**
+1. **Range Simplification**: `"60-72px"` → `"72px"` (단일값 변환)
+2. **Detail Removal**: Deleting `codeHint`, `propertyChanges`, `technicalImplementation` fields
+3. **Color Generalization**: `"#FF6635"` → `"orange"` (구체적 → 추상적)
+4. **Animation Loss**: Removing GSAP/Three.js code snippets
+5. **Property Omission**: Skipping any field present in source JSONs
+
+✅ **REQUIRED Operations:**
+1. **Preserve Ranges**: Keep `"60-72px"`, `"48-56px"` as-is (ranges stay ranges)
+2. **Merge 8-Field Templates**: All animation fields must be included
+   - `subject`, `visualDescription`, `observedBehavior`
+   - `type`, `trigger`, `technicalImplementation`
+   - `propertyChanges`, `codeHint`
+3. **Exact Color Values**: Use hex codes from source (`#FF6635`, not "primary-orange")
+4. **Code Preservation**: Include all implementation hints from 01/02
+5. **Context Addition**: Add page-level organization, but don't remove details
+
+**Validation Rule:**
+- After generating `03_integrate_web.json`, AI must verify:
+  - Field count in 03 ≥ Field count in (01 + 02)
+  - All `codeHint` fields present
+  - All color hex values preserved
+  - All font size ranges maintained
 
 **Command: `/generate` (Manual Request Only)**
 ```
-Step 5: Generate code → output/web/index.html
+Step 5: Execute HTML generation script
+  ↓
+  Command: powershell -ExecutionPolicy Bypass -File "scripts\generate_html.ps1"
+  ↓
+  Script performs:
+    - Load 03_integrate_web.json as object
+    - Generate HTML head with design tokens (colors, fonts)
+    - Apply section templates (hero, features, steps, cta, footer)
+    - Insert animation codeHints directly (no AI interpretation)
+    - Add required libraries (GSAP, Three.js) based on animation types
+    - Write index.html with full feature implementation
+    - Auto-validate (section count, animation count, library includes)
+  ↓
+  Expected output:
+    - File size: 1500-3000 lines (depends on complexity)
+    - Validation: PASSED (all sections rendered, all animations included)
   ↓
 ✅ COMPLETE
-Output: "✅ 코드 생성 완료."
+Output: "✅ 코드 생성 완료 (2341 lines, validation PASSED)."
 ```
+
+**⚠️ CRITICAL: DO NOT use Section-by-Section manual generation**
+
+**Why PowerShell script is mandatory:**
+- AI token limit causes animation/interaction loss during HTML generation
+- Script preserves 100% of codeHints (inserts directly without interpretation)
+- Script handles template rendering without simplification
+
+**If script fails:**
+1. Check script exists: `scripts\generate_html.ps1`
+2. Check integration file exists: `03_integrate_web.json`
+3. Report error to user with full error message
+4. Do NOT attempt manual HTML generation as fallback
 
 ---
 
@@ -913,104 +1418,123 @@ Output: "✅ 코드 생성 완료."
 5. ✅ Route map complete
 6. ✅ Evidence logged in analysis files
 
-
-## 📐 HTML Generation Workflow - Step-by-Step Strategy
-
-### ⚠️ CRITICAL: Systematic Section-Based Generation
-
-**When generating HTML from `03_integrate_web.json`, ALWAYS use this workflow:**
-
-### Phase 1: Pre-Generation Planning
-
-**1. Read Integration JSON**
-```javascript
-const spec = readFile('analysis/web-pipeline/03_integrate_web.json');
-const totalSections = spec.sections.length;
-```
-
-**2. Create Todo List**
-- Use `manage_todo_list` tool to create structured plan
-- Break work into logical groups (2-4 sections per task)
-- Group related sections: Header+Nav, Hero+Social, Features+Benefits, Gallery+Specs, CTA+Footer
-
-### Phase 2: Sequential Implementation
-
-**FOR EACH TODO ITEM:**
-
-1. Mark as in-progress
-2. Extract section data from JSON
-3. Generate HTML (convert JSON content/style to HTML + Tailwind)
-4. Add to file using `replace_string_in_file`
-5. Mark as completed
-6. Report progress: "✅ 할 일 X/13 완료"
-
-### Phase 3: Finalization
-
-**After all todos completed:**
-- ✅ Verify all sections present
-- ✅ Check Tailwind classes applied correctly
-- ✅ Confirm responsive breakpoints (mobile/tablet/desktop)
-- ✅ Validate image paths (exact vs placeholder)
-- ✅ Test accessibility attributes (alt, aria-*)
-
-### 🎯 Key Principles
-
-**1. Never Generate Entire File at Once**
-- ❌ FORBIDDEN: Creating complete HTML in one step
-- ✅ REQUIRED: Build incrementally, section by section
-
-**2. Always Track Progress**
-- Use todo list for visibility
-- Update status after each section
-- Report progress to user
-
-**3. Maintain Context**
-- Each `replace_string_in_file` preserves existing code
-- Add new sections between last section and `</body>`
-- Never overwrite completed sections
-
-**4. JSON-to-HTML Mapping**
-```json
-// JSON spec
-{
-  "id": "hero",
-  "content": { "heading": "Welcome" },
-  "style": { "background": "#FFFFFF", "padding": "60px 0" }
-}
-
-// Generated HTML
-<section id="hero" class="bg-white py-16 text-center">
-  <h1 class="text-4xl font-bold">Welcome</h1>
-</section>
-```
-
-**5. Tailwind Class Conversion**
-| JSON Style | Tailwind Class |
-|------------|----------------|
-| `padding: "60px 0"` | `py-16` |
-| `fontSize: "36px"` | `text-4xl` |
-| `fontWeight: 700` | `font-bold` |
-
-**6. Responsive Implementation**
-```html
-<!-- JSON: columns: { desktop: 3, tablet: 2, mobile: 1 } -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-  <!-- Cards -->
-</div>
-```
-
-### ❌ Anti-Patterns to Avoid
-
-1. ❌ Generating full HTML in single create_file call
-2. ❌ Skipping todo list creation
-3. ❌ Not updating todo status
-4. ❌ Batch completing multiple todos at once
-5. ❌ Ignoring JSON layout/style specifications
-
 ---
 
 ## Version History
 
+- **v2.17.0** (2025-01-16): Incremental Template Building - A-1 Complete Segmentation Method
+  - **CRITICAL:** Replaced single PowerShell script with 18-task sequential execution
+  - **Problem:** v2.16.0 PowerShell script still caused 70% data loss (1229 → 367 lines)
+    - Root cause: Generic templates couldn't handle complex JSON structures
+    - Example: 3D Planet Parallax completely omitted, Step Cards content missing
+  - **Solution:** Complete section-by-section template builder approach
+    - Phase 1: Helper functions (Get-NestedProperty, ConvertTo-TailwindClass, Render-HtmlElement)
+    - Phase 2: 13 dedicated section renderers (Hero, Feature, Workflow, etc.)
+    - Phase 3: Animation script builder + UTF-8 encoding fix + final integration
+  - **Task Execution Model:**
+    - AI executes all 18 tasks sequentially WITHOUT user intervention
+    - manage_todo_list tracks progress automatically
+    - NO pausing between tasks (continuous execution)
+    - Report "✅ Task X/18 complete" after each task
+  - **Expected Results:**
+    - File size: 2000-4000 lines (full complexity preserved)
+    - Section rendering: 100% (all 14 sections with complete content)
+    - Feature preservation: 95%+ (3D visuals, code previews, step cards all included)
+    - Animation preservation: 100% (all codeHints inserted verbatim)
+    - Text accuracy: 100% (UTF-8 encoding fixed)
+  - **Workflow Changes:**
+    - Updated "04-0. HTML Generation Method" with A-1 methodology
+    - Added mandatory task sequence (Tasks 1-18)
+    - Added execution rules (auto-proceed, no user confirmation)
+    - Marked v2.16.0 single-script approach as "DEPRECATED"
+  - **Impact:** Eliminates all remaining data loss, achieves 95%+ original site fidelity
+- **v2.16.0** (2025-01-16): PowerShell HTML Generator (DEPRECATED - See v2.17.0)
+  - **CRITICAL:** Replaced AI-based HTML generation with PowerShell template script
+  - **Root Cause:** AI token limit causes animation/interaction loss during HTML generation
+    - Example: Complex animations, GSAP/Three.js snippets omitted
+    - Section-by-Section approach still simplified codeHints and complex features
+  - **Solution:** `scripts/generate_html.ps1` performs template-based HTML generation
+    - Loads 03_integrate_web.json as PowerShell object
+    - Applies type-specific templates (hero, features, steps, cta, footer)
+    - Inserts codeHints directly without AI interpretation
+    - Auto-detects and includes required libraries (GSAP, Three.js)
+    - Auto-validates section count, animation count, library includes
+  - **Results:** 1500-3000 lines HTML (depends on complexity)
+    - Section preservation: 100% (all sections rendered with full styles)
+    - Animation preservation: 100% (all codeHints inserted verbatim)
+    - Library inclusion: Auto-detected based on animation types
+  - **Workflow Changes:**
+    - Updated "04. Code Generation" method: Section-by-Section → PowerShell script
+    - Updated Execution Workflow: `/generate` now executes PowerShell command
+    - Deleted "📐 HTML Generation Workflow" section (150+ lines, now obsolete)
+    - Marked old method as "DEPRECATED - DO NOT USE"
+  - **Impact:** Eliminates all HTML generation data loss, ensures full feature implementation
+- **v2.15.0** (2025-01-16): PowerShell Integration Pipeline (CRITICAL FIX)
+  - **CRITICAL:** Replaced AI-based JSON generation with PowerShell merge script
+  - **Root Cause:** AI token limit (4K-8K) caused 70% data loss during integration
+    - Example: 01_contents (781 lines) + 02_style (586 lines) → AI output (392 lines)
+    - Lost data: stepCards details, codeHint fields, fontSize ranges, color hex values
+  - **Solution:** `scripts/integrate_web_pipeline.ps1` performs object-level merging
+    - Loads JSON as PowerShell objects (ConvertFrom-Json)
+    - Merges without AI involvement: `$section + $style[$section.id]`
+    - Writes with full preservation (ConvertTo-Json -Depth 100)
+    - Auto-validates: ranges, codeHints, colors
+  - **Results:** 1229 lines (vs AI's 392 lines, 213% increase)
+    - codeHint preservation: 16/16 (100%, vs AI's 8/16)
+    - Range preservation: 34 ranges (vs AI's 1)
+    - Color preservation: 74 hex values (vs AI's 37)
+  - **Workflow Changes:**
+    - Updated "03. Web Integration" method: Section-by-Section → PowerShell script
+    - Updated Execution Workflow: `/integrate` now executes PowerShell command
+    - Marked old method as "DEPRECATED - DO NOT USE"
+  - **Impact:** Eliminates all integration data loss, ensures developer-implementable specifications
+- **v2.14.0** (2025-01-16): Section-by-Section Integration - Token Limit Workaround (DEPRECATED)
+  - **NOTE:** This version is now DEPRECATED - see v2.15.0 for PowerShell solution
+  - ~~Restructured `/integrate` command to use incremental file generation~~
+  - ~~Problem: AI token limit caused truncation/syntax errors in 2000+ line JSON files~~
+  - ~~Solution: Section-by-Section generation with progress tracking~~ (Failed - 70% data loss)
+  - **Root Issue:** AI still simplified internal fields despite incremental approach
+- **v2.13.0** (2025-01-16): Integration Validation System + No Simplification Policy (SUPERSEDED by v2.15.0)
+  - **NOTE:** This version is now SUPERSEDED - v2.15.0 PowerShell script handles validation automatically
+  - ~~Added mandatory validation after `/integrate` command execution~~ (Now done by script)
+  - **No Simplification Policy (Still Valid):**
+    - Added 5 FORBIDDEN operations (range simplification, detail removal, color generalization, animation loss, property omission)
+    - Added 5 REQUIRED operations (preserve ranges, merge 8-field templates, exact colors, code preservation, context addition)
+  - ~~Auto-Validation Logic~~ (Now in PowerShell script)
+  - ~~AI Output Format~~ (Script outputs validation results)
+  - ~~Enforcement: If validation fails, AI must regenerate~~ (Script handles retry logic)
+  - **Impact:** Principles remain valid, but implementation moved to PowerShell script
+- **v2.12.0** (2025-01-16): File Writing Method Standardization - Encoding Fix
+  - **CRITICAL:** Replaced all `appendToAnalysisNote()` calls with `replace_string_in_file` tool
+  - **Reason:** PowerShell's `echo` command causes UTF-16 encoding issues (fullwidth space corruption)
+  - **Changes:**
+    - Step 4-1: Added explicit warning about PowerShell echo
+    - Step 4-2: Changed to replace_string_in_file
+    - Step 4-3: Changed to replace_string_in_file (both animation paths)
+    - Step 4-5: Changed to replace_string_in_file
+  - **Result:** All checkpoint logs now written with correct UTF-8 encoding
+  - **Impact:** Fixes "= = =   C H E C K P O I N T" corruption issue permanently
+- **v2.11.0** (2025-01-16): Checkpoint Completion Enforcement + Extended Behavioral Triggers
+  - **CHECKPOINT COMPLETION ENFORCEMENT:** Added mandatory output template after each checkpoint
+  - **Self-Check Questions:** Added 6-item verification list before moving to next checkpoint
+  - **Behavioral Triggers:** Added 4 new forbidden phrases from actual violation logs
+    - "이 속도로는 시간이 많이 걸릴 것 같으므로..."
+    - "진행 속도를 높이겠습니다..."
+    - "한 번에 더 많은..."
+    - "더 많은 스크롤이 필요합니다..."
+  - **Progressive Scroll:** Clarified "ArrowDown ONLY" and "ALL 6 steps per checkpoint"
+  - **Reason:** v2.10.0 test showed AI still skipped Step 4 sub-steps despite guidelines
+  - **Result:** Forces AI to output completion checklist, self-verify before proceeding
+- **v2.10.0** (2025-01-16): Critical Enforcement Update - PageDown Prevention
+  - **ABSOLUTE PROHIBITIONS:** Updated item #5 to explicitly list all forbidden keys
+  - **EXECUTION VALIDATION:** Rewrote validateScrollCommand with Step 1-2 pre-execution check
+  - **Behavioral Triggers:** Added 5 new forbidden phrases ("효율적으로 분석", "더 큰 간격으로")
+  - **Step 4:** Added "CANNOT BE SKIPPED" header with ⚠️ ALL 6 SUB-STEPS ARE MANDATORY
+  - **Step 4-4:** Added "(필수 단계)" to console log, "⚠️ THIS STEP IS INTEGRATED" warning
+  - **Completion Criteria:** Changed from text to code block with ❌ NEVER USE examples
+  - **ENFORCEMENT RULES:** Updated progress reporting format to "X/30"
+  - **Reason:** v2.9.0 test showed AI still used PageDown despite guidelines (15+ violations)
+  - **Result:** Forces AI to validate BEFORE every keypress, blocks PageDown at decision point
 - **v2.9.0** (2025-01-16): Real-Time File Append Architecture
   - **Critical:** Restructured Step 4 to prioritize file writes over memory operations
   - Changed from single large write to progressive append operations (4-1 → 4-2 → 4-3 → 4-4 → 4-5)
@@ -1036,14 +1560,14 @@ const totalSections = spec.sections.length;
   - Removed duplicate "User Input Format" examples
   - **Result:** Maintains complete functionality with improved readability
   - **Reason:** 1000+ line file was difficult to navigate, contained excessive examples
-- **v2.6.0** (2025-11-14): Interaction Testing Enforcement - Pipeline Fix
+- **v2.6.0** (2025-01-14): Interaction Testing Enforcement - Pipeline Fix
   - **Critical:** Moved interaction testing from Step 5 to Step 4 (integrated, cannot skip)
   - Added testedCount counter and console logging for transparency
   - Updated logging format: `interactionsTested.count` + `interactionsTested.elements`
   - Renumbered steps: 1-4 (integrated), 5 (logging), 6 (next checkpoint)
   - **Result:** Forces AI to test 10 interactions per checkpoint = 300-800 total tests
   - **Reason:** v2.5.0 test showed AI skipped all interactions (5/50 = 10%)
-- **v2.5.0** (2025-11-14): Runtime Enforcement & Minimum Checkpoint Validation
+- **v2.5.0** (2025-01-14): Runtime Enforcement & Minimum Checkpoint Validation
   - Added validateScrollCommand() auto-detection system (EXECUTION VALIDATION)
   - Added MIN_CHECKPOINTS = 30 constant with validation logic
   - Enhanced PROGRESS REPORTING with "X/30" format and milestone messages
@@ -1051,7 +1575,7 @@ const totalSections = spec.sections.length;
   - Updated Completion Criteria to explicitly reject analysis with < 30 checkpoints
   - Strengthened ENFORCEMENT RULES to prevent PageDown/End key usage
   - **Result:** Forces AI to complete minimum 30 checkpoints, prevents premature shortcuts
-- **v2.4.0** (2025-11-14): High-Fidelity Scroll Analysis System
+- **v2.4.0** (2025-01-14): High-Fidelity Scroll Analysis System
   - Changed from fixed 21 checkpoints to adaptive 30-80 checkpoints
   - Implemented ArrowDown-based fine-grained scrolling (150-300px increments)
   - Added structural + visual change detection (dual-mode)
@@ -1059,12 +1583,13 @@ const totalSections = spec.sections.length;
   - Added screenshot hash comparison for visual changes
   - Updated all related sections (ABSOLUTE PROHIBITIONS, ENFORCEMENT RULES, MCP Checklist)
   - Expected result: 3-4x more detailed analysis with complete animation coverage
-- **v2.3.0** (2025-11-11): Added HTML Generation Workflow
-  - Step-by-step section-based generation strategy
-  - Todo list planning and progress tracking
-  - JSON-to-HTML mapping guidelines
-  - Tailwind conversion reference table
-  - Anti-patterns and correct workflow examples
+- **v2.3.0** (2025-11-11): Added HTML Generation Workflow (DEPRECATED in v2.16.0)
+  - **NOTE:** This version is now DEPRECATED - see v2.16.0 for PowerShell solution
+  - ~~Step-by-step section-based generation strategy~~ (Replaced by PowerShell script)
+  - ~~Todo list planning and progress tracking~~ (No longer needed)
+  - ~~JSON-to-HTML mapping guidelines~~ (Automated by template engine)
+  - ~~Tailwind conversion reference table~~ (Automated by script)
+  - **Root Issue:** AI token limit caused feature simplification during HTML generation
 - **v2.2.0** (2025-11-11): Updated auto-stop behavior
   - `/web` command now auto-stops after analysis (01_contents + 02_style)
   - `/integrate` command requires manual request

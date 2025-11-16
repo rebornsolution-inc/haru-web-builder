@@ -1,0 +1,1229 @@
+﻿{
+    "seo":  {
+                "title":  "TensorStax - Data infrastructure that builds itself",
+                "description":  "Self-healing data pipelines with automated validation, instant testing, and zero guesswork. TensorStax generates structured plans tailored to your infrastructure.",
+                "favicon":  "/favicon.ico",
+                "ogImage":  "/images/og-image.jpg",
+                "keywords":  "data infrastructure, AI data pipelines, automated testing, dbt, Airflow, data engineering"
+            },
+    "sections":  [
+                     {
+                         "style":  {
+                                       "background":  "#000000",
+                                       "heading":  {
+                                                       "fontSize":  "60-72px",
+                                                       "fontWeight":  700,
+                                                       "color":  "#FFFFFF",
+                                                       "lineHeight":  1.2
+                                                   },
+                                       "buttons":  {
+                                                       "primary":  {
+                                                                       "background":  "#FFFFFF",
+                                                                       "color":  "#000000",
+                                                                       "fontSize":  "14-16px",
+                                                                       "fontWeight":  600,
+                                                                       "padding":  "16px 32px",
+                                                                       "borderRadius":  "8px"
+                                                                   },
+                                                       "secondary":  {
+                                                                         "background":  "#FF6635",
+                                                                         "color":  "#FFFFFF",
+                                                                         "fontSize":  "14-16px",
+                                                                         "fontWeight":  600,
+                                                                         "padding":  "16px 32px",
+                                                                         "borderRadius":  "8px"
+                                                                     }
+                                                   },
+                                       "planet":  {
+                                                      "type":  "3d-visual",
+                                                      "position":  "left-side",
+                                                      "size":  "40-60% of viewport width",
+                                                      "parallaxMultiplier":  "0.6-0.7"
+                                                  }
+                                   },
+                         "bottomContent":  [
+                                               {
+                                                   "type":  "box",
+                                                   "heading":  "INTRODUCING TENSORSTAX",
+                                                   "description":  "Platform introduction content"
+                                               },
+                                               {
+                                                   "type":  "box",
+                                                   "heading":  "TRUSTED BY DATA LEADERS",
+                                                   "description":  "Trust indicators"
+                                               }
+                                           ],
+                         "id":  "hero",
+                         "type":  "hero-section",
+                         "integrationsList":  {
+                                                  "title":  "Active Integrations",
+                                                  "count":  5,
+                                                  "items":  [
+                                                                "Integration 1",
+                                                                "Integration 2",
+                                                                "Integration 3",
+                                                                "Integration 4",
+                                                                "Integration 5"
+                                                            ],
+                                                  "indicator":  "green-dot"
+                                              },
+                         "heading":  {
+                                         "text":  "Data infrastructure that builds itself",
+                                         "fontSize":  "60-72px",
+                                         "fontWeight":  700,
+                                         "color":  "#FFFFFF"
+                                     },
+                         "logoMarquee":  {
+                                             "type":  "horizontal-scroll-animation",
+                                             "subject":  "Logo marquee with 10 company logos",
+                                             "visualDescription":  "Row of technology partner logos: dbt, Airflow, GitHub, GitLab, Spark, Snowflake, Databricks, AWS, Google Cloud, Azure",
+                                             "observedBehavior":  "Continuous horizontal scroll from right to left, seamless loop with duplicated content",
+                                             "technicalImplementation":  "CSS animation with transform translateX",
+                                             "propertyChanges":  "translateX continuous movement (-50% to 0%), duration: ~17s",
+                                             "codeHint":  "animation: marquee 17s linear infinite; @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); }}"
+                                         },
+                         "cta":  [
+                                     {
+                                         "text":  "WAITLIST",
+                                         "type":  "primary",
+                                         "style":  "white-background"
+                                     },
+                                     {
+                                         "text":  "BOOK A DEMO",
+                                         "type":  "secondary",
+                                         "style":  "orange-background",
+                                         "color":  "#FF6635"
+                                     }
+                                 ],
+                         "visual":  {
+                                        "type":  "3d-planet-parallax",
+                                        "subject":  "Red-orange planet with blue atmospheric edge lighting",
+                                        "visualDescription":  "Large 3D-rendered planet/sphere with red-orange surface texture and blue atmospheric glow on edges, positioned on left side",
+                                        "observedBehavior":  "Parallax scroll effect - moves slower than page scroll (approximately 0.6x scroll speed), creating depth illusion. Visible from hero through Section 03",
+                                        "technicalImplementation":  "GSAP ScrollTrigger with scrub parameter",
+                                        "propertyChanges":  "translateY with scroll multiplier \u003c 1.0, scrub: 1.5",
+                                        "codeHint":  "gsap.to(\u0027.planet-sphere\u0027, { y: 100, scrollTrigger: { trigger: \u0027.hero-section\u0027, start: \u0027top top\u0027, end: \u0027bottom top\u0027, scrub: 1.5 }})"
+                                    }
+                     },
+                     {
+                         "actionButtons":  [
+                                               {
+                                                   "text":  "Require Approval",
+                                                   "icon":  "checkmark",
+                                                   "color":  "green"
+                                               },
+                                               {
+                                                   "text":  "Active Connections",
+                                                   "icon":  "connection",
+                                                   "color":  "blue"
+                                               },
+                                               {
+                                                   "text":  "Contact 5 Roles",
+                                                   "icon":  "user",
+                                                   "color":  "orange"
+                                               }
+                                           ],
+                         "subheading":  "Start by expressing your intent, whether it\u0027s a new dbt model, an Airflow DAG, or a full ETL flow, or pull in tickets from your project tracking tools.",
+                         "type":  "feature-section",
+                         "id":  "section-01",
+                         "heading":  "Describe what you want. Or pull in tickets",
+                         "badge":  "01.",
+                         "visual":  {
+                                        "type":  "code-snippet-preview",
+                                        "subject":  "dbt SFDC Account Source Model code snippet",
+                                        "visualDescription":  "Dark code editor-style box showing SQL code with title \u0027dbt SFDC Account Source Model\u0027, blue chevron icon for execution",
+                                        "observedBehavior":  "Code box fades in and slides up (translateY: 20px ??0px) as user scrolls into section",
+                                        "technicalImplementation":  "GSAP ScrollTrigger with opacity + translateY animation",
+                                        "propertyChanges":  "opacity: 0 ??1, translateY: 20px ??0px over ~0.6s duration",
+                                        "codeHint":  "gsap.from(\u0027.code-snippet\u0027, { opacity: 0, y: 20, duration: 0.6, scrollTrigger: { trigger: \u0027.code-snippet\u0027, start: \u0027top 80%\u0027 }})"
+                                    }
+                     },
+                     {
+                         "animation":  {
+                                           "subject":  "Step cards with sequential reveal",
+                                           "visualDescription":  "Three horizontal cards showing workflow steps with orange numbered badges \u0027Step 1/2/3\u0027",
+                                           "observedBehavior":  "Cards fade in sequentially from left to right with stagger animation",
+                                           "technicalImplementation":  "GSAP stagger animation with opacity + translateY",
+                                           "propertyChanges":  "Each card: opacity: 0 ??1, translateY: 40px ??0px, stagger: 0.15s delay",
+                                           "codeHint":  "gsap.from(\u0027.step-card\u0027, { opacity: 0, y: 40, duration: 0.7, stagger: 0.15, scrollTrigger: { trigger: \u0027.step-cards-container\u0027, start: \u0027top 70%\u0027 }})"
+                                       },
+                         "subheading":  "TensorStax generates a structured plan tailored to your infrastructure, schemas and custom rules you\u0027ve defined",
+                         "type":  "workflow-section",
+                         "id":  "section-02",
+                         "stepCards":  [
+                                           {
+                                               "step":  "1",
+                                               "title":  "Update dim_customer dbt Model",
+                                               "subtitle":  "Finalize and publish the model",
+                                               "details":  [
+                                                               "marts/dim_customer.sql to join with STRIPE_SUBSCRIPTIONS",
+                                                               "Add new fields: subscription_tier, mrr_value with proper type casting and null handling",
+                                                               "Update model materialization to incremental with unique key=\u0027customer_id\u0027"
+                                                           ],
+                                               "icons":  [
+                                                             "checkmark",
+                                                             "x"
+                                                         ]
+                                           },
+                                           {
+                                               "step":  "2",
+                                               "title":  "Add Data Quality Tests",
+                                               "subtitle":  "Custom test for mrr_value \u003e= 0",
+                                               "details":  [
+                                                               "Create models/marts/schema.yml tests:",
+                                                               "Custom test for mrr_value \u003e= 0",
+                                                               "accepted_values test for subscription_tier: [\u0027basic\u0027]"
+                                                           ],
+                                               "icons":  [
+                                                             "checkmark",
+                                                             "x"
+                                                         ]
+                                           },
+                                           {
+                                               "step":  "3",
+                                               "title":  "Create Airflow DAG for dim_customer.sql",
+                                               "subtitle":  "Make a PR for updated DAG",
+                                               "details":  [
+                                                               "Verify DAG runs successfully",
+                                                               "Make a PR for updated DAG"
+                                                           ],
+                                               "icons":  [
+                                                             "checkmark",
+                                                             "x"
+                                                         ]
+                                           }
+                                       ],
+                         "heading":  "TensorStax plans it",
+                         "badge":  "02."
+                     },
+                     {
+                         "codeComparison":  {
+                                                "type":  "side-by-side-code-panels",
+                                                "subject":  "TensorStax-generated vs manual code comparison",
+                                                "visualDescription":  "Two-column code view showing YAML dbt configuration (left) and Python Airflow DAG code (right)",
+                                                "leftPanel":  {
+                                                                  "title":  "Generated by TensorStax",
+                                                                  "codeType":  "YAML",
+                                                                  "backgroundColor":  "#3A2E2B",
+                                                                  "content":  "dbt configuration with test definitions"
+                                                              },
+                                                "rightPanel":  {
+                                                                   "title":  "Generated in X%",
+                                                                   "codeType":  "Python",
+                                                                   "backgroundColor":  "#1A1A1A",
+                                                                   "content":  "Airflow DAG with BashOperator tasks for dbt run and test",
+                                                                   "loadingIndicator":  {
+                                                                                            "text":  "GENERATING...",
+                                                                                            "animation":  "ellipsis-cycling",
+                                                                                            "color":  "#FF6635"
+                                                                                        }
+                                                               },
+                                                "observedBehavior":  "Code panels fade in and slide up as user scrolls into view. Loading indicator cycles through dots.",
+                                                "technicalImplementation":  "GSAP fade-in + translateY animation for code panels, CSS animation for loading dots",
+                                                "propertyChanges":  "opacity: 0 ??1, translateY: 30px ??0px over ~0.7s",
+                                                "codeHint":  "gsap.from(\u0027.code-comparison-panel\u0027, { opacity: 0, y: 30, duration: 0.7, scrollTrigger: { trigger: \u0027.code-comparison\u0027, start: \u0027top 75%\u0027 }})"
+                                            },
+                         "subheading":  "Automated data ingestion, transformation, and orchestration using Agent and Airflow",
+                         "type":  "feature-section",
+                         "id":  "section-03",
+                         "verificationText":  "TensorStax verifies all pipelines by dry running them against your data, this ensures you know whether or not the generated pipeline will work in production or not.",
+                         "heading":  "Pipeline generated in seconds",
+                         "badge":  "03."
+                     },
+                     {
+                         "animation":  {
+                                           "subject":  "Validation cards with stagger animation",
+                                           "visualDescription":  "Two dark cards with colored icons (teal Airflow logo, red X for DBT), bullet lists with green checkmarks",
+                                           "observedBehavior":  "Cards fade in with stagger delay, then bullet points reveal one-by-one within each card",
+                                           "technicalImplementation":  "GSAP ScrollTrigger with stagger for cards, then stagger for bullet points",
+                                           "propertyChanges":  "Cards - opacity: 0 ??1, translateY: 40px ??0px, stagger: 0.15s. Bullets - opacity: 0 ??1, translateX: -20px ??0px, stagger: 0.1s",
+                                           "codeHint":  "gsap.from(\u0027.verification-card\u0027, { opacity: 0, y: 40, duration: 0.7, stagger: 0.15 }); gsap.from(\u0027.verification-card .bullet-item\u0027, { opacity: 0, x: -20, duration: 0.5, stagger: 0.1 })"
+                                       },
+                         "validationCards":  [
+                                                 {
+                                                     "title":  "Airflow DAG Dry Run",
+                                                     "icon":  "airflow-logo",
+                                                     "iconColor":  "#00C7B7",
+                                                     "description":  "In-memory replica of target Snowflake table created.",
+                                                     "checkpoints":  [
+                                                                         "Simulates insert into",
+                                                                         "All steps succeeded in dry run",
+                                                                         "Upstream tasks resolved",
+                                                                         "No live infra hit"
+                                                                     ]
+                                                 },
+                                                 {
+                                                     "title":  "DBT Model Validation",
+                                                     "icon":  "x-icon",
+                                                     "iconColor":  "#EF4444",
+                                                     "description":  "Model preview against warehouse snapshot",
+                                                     "checkpoints":  [
+                                                                         "Returns rows from",
+                                                                         "All dbt tests passed",
+                                                                         "p/6 schema tests validated",
+                                                                         "No production data queried"
+                                                                     ]
+                                                 }
+                                             ],
+                         "subheading":  "TensorStax verifies all pipelines by dry running them against your data, this ensures you know whether or not the generated pipeline will work in production or not.",
+                         "type":  "validation-section",
+                         "id":  "section-04",
+                         "heading":  "All outputs are always verified",
+                         "badge":  "04."
+                     },
+                     {
+                         "animation":  {
+                                           "subject":  "Section heading + feature cards stagger reveal",
+                                           "visualDescription":  "Two-line heading (orange + white), orange pixelated grid icons on sides, two feature cards below",
+                                           "observedBehavior":  "Heading lines appear with stagger (0.2s between lines), grid patterns fade in, then cards appear with stagger (0.15s delay)",
+                                           "technicalImplementation":  "GSAP ScrollTrigger with stagger for text lines and cards",
+                                           "propertyChanges":  "Heading lines - opacity: 0 ??1, translateY: 30px ??0px, stagger: 0.2s. Grid patterns - opacity: 0 ??1, scale: 0.8 ??1. Cards - opacity: 0 ??1, translateY: 40px ??0px, stagger: 0.15s",
+                                           "codeHint":  "gsap.from(\u0027.section-05-heading-line\u0027, { opacity: 0, y: 30, stagger: 0.2 }); gsap.from(\u0027.decorative-grid\u0027, { opacity: 0, scale: 0.8, duration: 0.5 }); gsap.from(\u0027.feature-card\u0027, { opacity: 0, y: 40, stagger: 0.15 })"
+                                       },
+                         "subheading":  "Your Data Stack, Supercharged",
+                         "type":  "feature-showcase",
+                         "id":  "section-05",
+                         "decorativeElements":  [
+                                                    {
+                                                        "type":  "orange-grid-pattern",
+                                                        "position":  "left-side",
+                                                        "distance":  "100px-from-edge"
+                                                    },
+                                                    {
+                                                        "type":  "orange-grid-pattern",
+                                                        "position":  "right-side",
+                                                        "distance":  "100px-from-edge"
+                                                    }
+                                                ],
+                         "heading":  {
+                                         "line1":  {
+                                                       "text":  "The agentic",
+                                                       "color":  "#FF6635"
+                                                   },
+                                         "line2":  {
+                                                       "text":  "data OS",
+                                                       "color":  "#FFFFFF"
+                                                   }
+                                     },
+                         "featureCards":  [
+                                              {
+                                                  "label":  "(AUTOPHIX + GIT INTEGRATION)",
+                                                  "title":  "SELF-HEALING PIPELINES",
+                                                  "description":  "Detects issues, suggests fixes, and automatically creates GitHub pull requests to patch failing code and pipelines.",
+                                                  "visual":  {
+                                                                 "type":  "code-snippet",
+                                                                 "command":  "/pipeline",
+                                                                 "error":  "confMisMatchError",
+                                                                 "lines":  20
+                                                             }
+                                              },
+                                              {
+                                                  "label":  "(AUTO CODE COMPLETION \u0026 VALIDATION)",
+                                                  "title":  "GENERATE DATA MODELS, TESTS, PIPELINES ON YOUR INFRASTRUCTURE",
+                                                  "description":  "Automatically generate tests, assertions, and new dbt models with strong schema typing and performance patterns.",
+                                                  "visual":  {
+                                                                 "type":  "ui-badges",
+                                                                 "badges":  [
+                                                                                {
+                                                                                    "text":  "SQL",
+                                                                                    "status":  "active",
+                                                                                    "icon":  "checkmark-green"
+                                                                                },
+                                                                                {
+                                                                                    "text":  "Tests",
+                                                                                    "status":  "inactive"
+                                                                                }
+                                                                            ],
+                                                                 "buttons":  [
+                                                                                 {
+                                                                                     "text":  "+AGENT",
+                                                                                     "color":  "#FF6635"
+                                                                                 }
+                                                                             ]
+                                                             }
+                                              }
+                                          ]
+                     },
+                     {
+                         "features":  [
+                                          {
+                                              "title":  "COMPILER LAYER",
+                                              "description":  "Agent generates missing code blocks, validates syntax and DAG structure, and runs dry-runs to ensure correctness before deployment.",
+                                              "visual":  {
+                                                             "type":  "before-after-validation",
+                                                             "command":  "/compiler layer",
+                                                             "beforeState":  {
+                                                                                 "errors":  [
+                                                                                                {
+                                                                                                    "field":  "schedule",
+                                                                                                    "status":  "\u003cmissing\u003e",
+                                                                                                    "color":  "red"
+                                                                                                },
+                                                                                                {
+                                                                                                    "field":  "destination",
+                                                                                                    "status":  "\u003cmissing\u003e",
+                                                                                                    "color":  "red"
+                                                                                                }
+                                                                                            ]
+                                                                             },
+                                                             "afterState":  {
+                                                                                "fixes":  [
+                                                                                              {
+                                                                                                  "label":  "SCHEDULE FILLED",
+                                                                                                  "icon":  "green-checkmark",
+                                                                                                  "value":  "daily at 9am",
+                                                                                                  "color":  "orange"
+                                                                                              },
+                                                                                              {
+                                                                                                  "label":  "DESTINATION FILLED",
+                                                                                                  "icon":  "green-checkmark",
+                                                                                                  "value":  "Snowflake",
+                                                                                                  "color":  "orange"
+                                                                                              }
+                                                                                          ]
+                                                                            }
+                                                         },
+                                              "animation":  {
+                                                                "subject":  "Validation state transition (error ??success)",
+                                                                "visualDescription":  "Error state (red X 횞 2 + \u003cmissing\u003e) transforms to success state (red X + green checkmarks + filled values in orange)",
+                                                                "observedBehavior":  "Before/after states shown vertically, suggesting auto-fix animation where Agent fills missing fields",
+                                                                "technicalImplementation":  "GSAP timeline animating icon swap, text color change, content replacement",
+                                                                "propertyChanges":  "icon transform/opacity transition, text color red ??orange, content innerHTML replacement",
+                                                                "codeHint":  "gsap.timeline().to(\u0027.error-icon\u0027, { opacity: 0 }).to(\u0027.success-icon\u0027, { opacity: 1 }).to(\u0027.value\u0027, { color: \u0027#FF6635\u0027, innerHTML: \u0027daily at 9am\u0027 })"
+                                                            }
+                                          },
+                                          {
+                                              "title":  "DATA OS \u0026 OVERAVAILTY",
+                                              "description":  "Manage your pipelines across all of your tools in one centralized location.",
+                                              "visual":  {
+                                                             "type":  "interface-mockup",
+                                                             "command":  "/data-os",
+                                                             "sidebar":  {
+                                                                             "tabs":  [
+                                                                                          {
+                                                                                              "text":  "DATA",
+                                                                                              "selected":  true
+                                                                                          },
+                                                                                          {
+                                                                                              "text":  "MODELS",
+                                                                                              "icon":  "red-x",
+                                                                                              "label":  "dbt"
+                                                                                          }
+                                                                                      ]
+                                                                         },
+                                                             "mainPanel":  {
+                                                                               "header":  "dbt mdel: customer.sql",
+                                                                               "dataStructure":  [
+                                                                                                     "dim_cmc",
+                                                                                                     "orders_baz",
+                                                                                                     "CX_WOP",
+                                                                                                     "stg (43)",
+                                                                                                     "dim_order_id",
+                                                                                                     "price (int)",
+                                                                                                     "guest_bring (?int?)"
+                                                                                                 ],
+                                                                               "liveDataPreview":  {
+                                                                                                       "source":  "ingestion_customers (dbt_bigquery)",
+                                                                                                       "fields":  [
+                                                                                                                      "price (int)",
+                                                                                                                      "guest_bring (?int?)"
+                                                                                                                  ]
+                                                                                                   }
+                                                                           }
+                                                         }
+                                          }
+                                      ],
+                         "id":  "section-06",
+                         "type":  "two-column-features",
+                         "animation":  {
+                                           "subject":  "Section 06 entry with stagger between left/right features",
+                                           "visualDescription":  "Two feature sections with titles, descriptions, and interface mockups showing validation/error states",
+                                           "observedBehavior":  "Sections faded in as user scrolled past Section 05 bottom, stagger delay between left/right sections",
+                                           "technicalImplementation":  "GSAP ScrollTrigger with stagger",
+                                           "propertyChanges":  "opacity: 0 ??1, translateY: 40px ??0px, stagger delay ~0.15-0.2s",
+                                           "codeHint":  "gsap.from(\u0027.section-06 .feature\u0027, { opacity: 0, y: 40, stagger: 0.15, scrollTrigger: { trigger: \u0027.section-06\u0027, start: \u0027top 70%\u0027 }})"
+                                       }
+                     },
+                     {
+                         "heading":  "Getting started is easy",
+                         "steps":  [
+                                       {
+                                           "number":  "1",
+                                           "label":  "CONNECT DATA",
+                                           "title":  "CONNECT YOUR DATA",
+                                           "bullets":  [
+                                                           "Choose your source: Snowflake, PostgreSQL, S3, etc.",
+                                                           "Configure access permissions."
+                                                       ],
+                                           "visual":  {
+                                                          "type":  "data-source-modal",
+                                                          "title":  "Choose Your Data Source",
+                                                          "sources":  [
+                                                                          {
+                                                                              "name":  "Snowflake",
+                                                                              "color":  "blue"
+                                                                          },
+                                                                          {
+                                                                              "name":  "PostgreSQL",
+                                                                              "color":  "blue"
+                                                                          },
+                                                                          {
+                                                                              "name":  "MySQL",
+                                                                              "color":  "orange"
+                                                                          },
+                                                                          {
+                                                                              "name":  "MongoDB",
+                                                                              "color":  "green"
+                                                                          },
+                                                                          {
+                                                                              "name":  "AWS S3",
+                                                                              "color":  "orange"
+                                                                          },
+                                                                          {
+                                                                              "name":  "Databricks",
+                                                                              "color":  "red"
+                                                                          }
+                                                                      ]
+                                                      }
+                                       },
+                                       {
+                                           "number":  "2",
+                                           "label":  "DEFINE SCHEMA",
+                                           "title":  "DEFINE YOUR SCHEMA",
+                                           "bullets":  [
+                                                           "Map tables and join keys.",
+                                                           "Set primary logic for transformations."
+                                                       ],
+                                           "visual":  {
+                                                          "type":  "context-configuration-interface",
+                                                          "tabs":  [
+                                                                       "Database Name",
+                                                                       "View Schema"
+                                                                   ],
+                                                          "labels":  [
+                                                                         "ORDERS SHIPPED",
+                                                                         "SALES COMPLETED",
+                                                                         "NEW_CUSTOMERS"
+                                                                     ],
+                                                          "dataTable":  {
+                                                                            "section":  "ADVENTURE WORKS",
+                                                                            "rows":  [
+                                                                                         "CUSTOMER",
+                                                                                         "PRODUCT",
+                                                                                         "SALESPERSON",
+                                                                                         "COUNTRYREGIONCU RRENCY",
+                                                                                         "CURRENCYR ATE",
+                                                                                         "SALESORDERDETAIL"
+                                                                                     ]
+                                                                        }
+                                                      }
+                                       },
+                                       {
+                                           "number":  "3",
+                                           "label":  "IMPROVE AGENT",
+                                           "title":  "CALL IN THE AGENT",
+                                           "bullets":  [
+                                                           "Agent reads your draft.",
+                                                           "Rewrites, optimizes, and suggests changes.",
+                                                           "Explains decisions contextually."
+                                                       ],
+                                           "visual":  {
+                                                          "type":  "code-editor-with-audit",
+                                                          "codeEditor":  {
+                                                                             "lines":  21,
+                                                                             "language":  "SQL",
+                                                                             "errorMarkers":  true,
+                                                                             "content":  "Complex SELECT query with CTEs, DISTINCT operations, date/time columns"
+                                                                         },
+                                                          "sidebar":  {
+                                                                          "prompts":  [
+                                                                                          "What is the purpose of business question for the last qr...",
+                                                                                          "Let me know your requirements",
+                                                                                          "Link you orders in"
+                                                                                      ],
+                                                                          "suggestions":  {
+                                                                                              "title":  "Rewrites in Fluent Script",
+                                                                                              "items":  [
+
+                                                                                                        ]
+                                                                                          }
+                                                                      },
+                                                          "auditTable":  {
+                                                                             "title":  "All Audit Preview",
+                                                                             "columns":  [
+                                                                                             "OWNER_NO",
+                                                                                             "CUSTOMER_NO",
+                                                                                             "ANALYSIS_DATE",
+                                                                                             "ORDER_DATE_2",
+                                                                                             "CREATE_DATE",
+                                                                                             "SALES_DATE",
+                                                                                             "STATUS_CODE",
+                                                                                             "ADV_AMOUNT"
+                                                                                         ],
+                                                                             "rows":  "Sample data rows"
+                                                                         }
+                                                      }
+                                       }
+                                   ],
+                         "id":  "section-07",
+                         "type":  "onboarding-steps",
+                         "animation":  {
+                                           "subject":  "Section 07 entry with stagger",
+                                           "visualDescription":  "Heading, 3-step badges, button, interface panel",
+                                           "observedBehavior":  "Section faded in with stagger between elements (heading ??step 1 ??step 2 ??step 3 ??button ??panel)",
+                                           "technicalImplementation":  "GSAP ScrollTrigger with stagger",
+                                           "propertyChanges":  "opacity: 0 ??1, translateY: 40px ??0px, stagger delay ~0.1-0.15s",
+                                           "codeHint":  "gsap.from(\u0027.section-07 \u003e *\u0027, { opacity: 0, y: 40, stagger: 0.12, scrollTrigger: { trigger: \u0027.section-07\u0027, start: \u0027top 70%\u0027 }})"
+                                       }
+                     },
+                     {
+                         "visual":  {
+                                        "type":  "3d-city-visualization",
+                                        "subject":  "Orange security panel + 3D city visualization with parallax depth",
+                                        "visualDescription":  "Left panel with bright orange background (#FF6635) containing security heading and descriptive text. Right panel shows dark 3D rendered city scene with tall buildings (skyscrapers with detailed facades), lit windows creating orange/amber glow pattern, street view perspective looking down urban corridor between buildings, atmospheric fog/haze effect in distance",
+                                        "observedBehavior":  "Panel fades in with translateY (30px??px) on scroll entry. City scene has subtle parallax depth effect (buildings at different layers move at slightly different speeds during scroll - near buildings faster, far buildings slower). Window lights have subtle glow/bloom effect creating warm ambiance. Camera perspective suggests slight rotation during scroll",
+                                        "technicalImplementation":  "GSAP ScrollTrigger for panel animation with stagger effect for text and labels. City scene likely Three.js or CSS 3D transforms for multi-layer parallax depth. CSS box-shadow or filter:blur for window glow effect. Possible camera rotation animation tied to scroll progress",
+                                        "propertyChanges":  "Left panel - opacity: 0??, translateY: 30px??px, duration: 0.8s. Feature labels - stagger delay 0.1s between each. City scene - near layer translateZ: 0??50px, far layer translateZ: 0??150px, camera rotation: 0??deg, scrub: 2",
+                                        "codeHint":  "// Panel animation\ngsap.from(\u0027.security-panel\u0027, { opacity: 0, y: 30, duration: 0.8, scrollTrigger: { trigger: \u0027.security-section\u0027, start: \u0027top 70%\u0027 }});\n\n// Feature labels stagger\ngsap.from(\u0027.security-feature\u0027, { opacity: 0, x: -20, duration: 0.6, stagger: 0.1, scrollTrigger: { trigger: \u0027.security-section\u0027, start: \u0027top 65%\u0027 }});\n\n// City parallax with multiple layers\ngsap.to(\u0027.city-buildings-near\u0027, { z: -50, rotationY: 1, scrollTrigger: { trigger: \u0027.security-section\u0027, scrub: 2, start: \u0027top bottom\u0027, end: \u0027bottom top\u0027 }});\ngsap.to(\u0027.city-buildings-far\u0027, { z: -150, rotationY: 2, scrollTrigger: { trigger: \u0027.security-section\u0027, scrub: 2, start: \u0027top bottom\u0027, end: \u0027bottom top\u0027 }})"
+                                    },
+                         "heading":  "Built-in security and compliance",
+                         "features":  [
+                                          {
+                                              "label":  "SECURE CONNECTIONS",
+                                              "description":  "encrypted credentials/OAuth/token-based access"
+                                          },
+                                          {
+                                              "label":  "COMPLIANCE-READY",
+                                              "description":  "SOC TYPE 2"
+                                          },
+                                          {
+                                              "label":  "NO LIVE INFRA HIT",
+                                              "description":  "incremental model validations run safely in memory"
+                                          }
+                                      ],
+                         "id":  "section-08",
+                         "type":  "security-section"
+                     },
+                     {
+                         "heading":  {
+                                         "line1":  "Built for modern",
+                                         "line2":  "data teams",
+                                         "line2Color":  "#FF6635"
+                                     },
+                         "animation":  {
+                                           "subject":  "Heading + feature cards stagger reveal",
+                                           "visualDescription":  "White \u0027Built for modern\u0027 + orange \u0027data teams\u0027, two feature cards below",
+                                           "observedBehavior":  "Split-text heading animation, cards slide up with stagger (0.2s delay)",
+                                           "technicalImplementation":  "GSAP SplitType + ScrollTrigger with stagger",
+                                           "propertyChanges":  "Words opacity: 0??, cards translateY: 60px??px",
+                                           "codeHint":  "SplitType + gsap.from with stagger plugin"
+                                       },
+                         "id":  "section-09",
+                         "type":  "feature-cards-section",
+                         "cards":  [
+                                       {
+                                           "title":  "Cloud Execution",
+                                           "visual":  {
+                                                          "type":  "screenshot",
+                                                          "subject":  "Daft Explorer UI screenshot",
+                                                          "description":  "Dark terminal with file tree, SQL REPL tab showing \u0027schema_snapshot\u0027 table with 8 columns: id/run_id/data_date/schema_json/valid_from/valid_to/created_at/updated_at, data rows with red error indicators",
+                                                          "badge":  "Daft Explorer",
+                                                          "badgeColor":  "#FF6635"
+                                                      }
+                                       },
+                                       {
+                                           "title":  "Modeling and Testing",
+                                           "visual":  {
+                                                          "type":  "diagram",
+                                                          "subject":  "Flow diagram",
+                                                          "description":  "Flow diagram showing connected nodes (file tree on left, multiple colored boxes with labels and connecting lines on right)"
+                                                      }
+                                       }
+                                   ]
+                     },
+                     {
+                         "animation":  {
+                                           "subject":  "Brown validation section entry with text reveal",
+                                           "visualDescription":  "Dark brown/copper gradient background section with white uppercase text centered",
+                                           "observedBehavior":  "Section slides up into view (translateY: 100px??px). Text fades in with character-by-character reveal effect (typewriter style) or word-by-word stagger (0.05s between words). Background has subtle gradient shift animation (copper to brown back to copper, 3s cycle)",
+                                           "technicalImplementation":  "GSAP ScrollTrigger for section slide-up, SplitType for text reveal, CSS gradient animation or GSAP for background color shift",
+                                           "propertyChanges":  "Section - opacity: 0??, translateY: 100px??px, duration: 0.8s. Text words - opacity: 0??, stagger: 0.05s, duration: 0.4s per word. Background gradient - color shift with 3s ease-in-out loop",
+                                           "codeHint":  "gsap.from(\u0027.validation-section\u0027, { opacity: 0, y: 100, duration: 0.8 }); const text = new SplitType(\u0027.validation-text\u0027, { types: \u0027words\u0027 }); gsap.from(text.words, { opacity: 0, stagger: 0.05, duration: 0.4 }); gsap.to(\u0027.validation-section\u0027, { background: \u0027linear-gradient(90deg, #8B5A3C 0%, #A67C52 50%, #8B5A3C 100%)\u0027, duration: 3, repeat: -1, yoyo: true })"
+                                       },
+                         "textColor":  "#FFFFFF",
+                         "id":  "validation-banner",
+                         "text":  "AUTOMATED VALIDATION, INSTANT TESTING, ZERO GUESSWORK.",
+                         "type":  "text-banner",
+                         "background":  "#8B5A3C"
+                     },
+                     {
+                         "animation":  {
+                                           "subject":  "Mars landscape CTA section with parallax + text reveal",
+                                           "observedBehavior":  "Background image has slow parallax scroll effect (moves 30% slower than scroll speed, creating depth illusion). Heading fades in and slides from left (translateX: -50px??px). Subheading follows with 0.2s delay, also sliding from left. Button scales up from 0.9 to 1 with 0.4s delay. Badge fades in from 0 opacity. Atmospheric haze has subtle animated glow/pulse effect (2.5s cycle)",
+                                           "technicalImplementation":  "GSAP ScrollTrigger with scrub for background parallax, timeline for text stagger sequence, CSS keyframe animation or GSAP for haze pulse effect",
+                                           "propertyChanges":  "Background - translateY: 0??30% (relative to scroll progress, scrub: 1.5). Heading - opacity: 0??, translateX: -50px??px, duration: 0.8s. Subheading - opacity: 0??, translateX: -50px??px, duration: 0.8s, delay: 0.2s. Button - opacity: 0??, scale: 0.9??, duration: 0.6s, delay: 0.4s. Badge - opacity: 0??, duration: 0.5s. Haze - opacity: 0.3??.6, blur: 20px??0px, 2.5s cycle",
+                                           "codeHint":  "gsap.to(\u0027.mars-background\u0027, { yPercent: -30, ease: \u0027none\u0027, scrollTrigger: { trigger: \u0027.cta-section\u0027, start: \u0027top bottom\u0027, end: \u0027bottom top\u0027, scrub: 1.5 }}); const tl = gsap.timeline({ scrollTrigger: { trigger: \u0027.cta-section\u0027, start: \u0027top 70%\u0027 }}); tl.from(\u0027.cta-heading\u0027, { opacity: 0, x: -50, duration: 0.8 }).from(\u0027.cta-subheading\u0027, { opacity: 0, x: -50, duration: 0.8 }, \u0027-=0.6\u0027).from(\u0027.cta-button\u0027, { opacity: 0, scale: 0.9, duration: 0.6 }, \u0027-=0.4\u0027).from(\u0027.cta-badge\u0027, { opacity: 0, duration: 0.5 }, \u0027-=0.3\u0027); gsap.to(\u0027.mars-haze\u0027, { opacity: 0.6, filter: \u0027blur(30px)\u0027, duration: 2.5, repeat: -1, yoyo: true })"
+                                       },
+                         "subheading":  "Validated before you deploy",
+                         "type":  "hero-cta",
+                         "id":  "cta-section",
+                         "background":  {
+                                            "type":  "mars-landscape-image",
+                                            "subject":  "Mars landscape CTA section with parallax",
+                                            "visualDescription":  "Dramatic Mars-like desert landscape with orange-brown terrain, scattered rocky formations creating silhouettes, distant mountain range on horizon, atmospheric haze/dust creating depth",
+                                            "gradient":  "dark brown #4A3428 at top to lighter orange-brown #8B5A3C at horizon"
+                                        },
+                         "subheadingColor":  "#FF6635",
+                         "heading":  "Pipelines that fix themselves.",
+                         "badge":  {
+                                       "text":  "AUTOMATED VALIDATION, INSTANT TESTING, ZERO GUESSWORK.",
+                                       "position":  "top-right"
+                                   },
+                         "cta":  {
+                                     "text":  "REQUEST A DEMO",
+                                     "icon":  "right-arrow",
+                                     "color":  "#FF6635"
+                                 }
+                     },
+                     {
+                         "heading":  "Frequently asked questions",
+                         "items":  [
+                                       {
+                                           "question":  "How is TensorStax different from other pipeline management tools?",
+                                           "answer":  "[Answer content to be populated]"
+                                       },
+                                       {
+                                           "question":  "Does TensorStax store or access my raw data?",
+                                           "answer":  "[Answer content to be populated]"
+                                       },
+                                       {
+                                           "question":  "Can TensorStax be deployed in my own cloud?",
+                                           "answer":  "[Answer content to be populated]"
+                                       },
+                                       {
+                                           "question":  "Is TensorStax compliant with enterprise security standards?",
+                                           "answer":  "[Answer content to be populated]"
+                                       },
+                                       {
+                                           "question":  "What data platforms does TensorStax support?",
+                                           "answer":  "[Answer content to be populated]"
+                                       }
+                                   ],
+                         "id":  "faq-section",
+                         "type":  "faq-accordion",
+                         "animation":  {
+                                           "subject":  "Heading + all accordion items stagger",
+                                           "visualDescription":  "White \u0027Frequently asked questions\u0027 heading top-left, 5 FAQ items stacked below with white plus icons",
+                                           "observedBehavior":  "Heading fades in first, then accordion items with 0.15s stagger. Plus icons rotate 0deg (hover likely rotates to 45deg for X)",
+                                           "technicalImplementation":  "GSAP ScrollTrigger with timeline for heading ??items sequence",
+                                           "propertyChanges":  "Heading - opacity: 0??, y: 30px??px, duration: 0.7s. Items - stagger: 0.15s after heading. Icons - rotate: 0deg??5deg on click",
+                                           "codeHint":  "const tl = gsap.timeline({ scrollTrigger: { trigger: \u0027.faq-section\u0027, start: \u0027top 70%\u0027 }}); tl.from(\u0027.faq-heading\u0027, { opacity: 0, y: 30, duration: 0.7 }).from(\u0027.faq-item\u0027, { opacity: 0, y: 20, stagger: 0.15, duration: 0.6 }, \u0027-=0.3\u0027)"
+                                       }
+                     },
+                     {
+                         "animation":  {
+                                           "subject":  "Footer section fade-in",
+                                           "visualDescription":  "Bright orange footer with black text/elements, newsletter form on left, navigation links on right, social icons top-right, logo and legal links at bottom",
+                                           "observedBehavior":  "Footer fades in as whole section. Form elements appear with slight delay (0.2s). Nav links stagger from top to bottom (0.1s each). Social icons fade in together",
+                                           "technicalImplementation":  "GSAP ScrollTrigger for section, timeline for element sequence",
+                                           "propertyChanges":  "Section - opacity: 0??, duration: 0.6s. Form - delay: 0.2s. Nav links - stagger: 0.1s. Social icons - delay: 0.4s",
+                                           "codeHint":  "const tl = gsap.timeline({ scrollTrigger: { trigger: \u0027footer\u0027, start: \u0027top 80%\u0027 }}); tl.from(\u0027footer\u0027, { opacity: 0, duration: 0.6 }).from(\u0027.newsletter-form\u0027, { opacity: 0, x: -20, duration: 0.5 }, \u0027-=0.4\u0027).from(\u0027.footer-nav a\u0027, { opacity: 0, y: 10, stagger: 0.1, duration: 0.4 }, \u0027-=0.3\u0027).from(\u0027.social-icons a\u0027, { opacity: 0, scale: 0.8, stagger: 0.05, duration: 0.3 }, \u0027-=0.2\u0027)"
+                                       },
+                         "id":  "footer",
+                         "type":  "footer",
+                         "legal":  {
+                                       "logo":  {
+                                                    "text":  "TENSORSTAX",
+                                                    "color":  "#000000"
+                                                },
+                                       "links":  [
+                                                     {
+                                                         "text":  "LEGALS",
+                                                         "url":  "#"
+                                                     },
+                                                     {
+                                                         "text":  "PRIVACY POLICY",
+                                                         "url":  "#"
+                                                     },
+                                                     {
+                                                         "text":  "TERMS OF USE",
+                                                         "url":  "#"
+                                                     }
+                                                 ],
+                                       "copyright":  "TENSORSTAX 2025"
+                                   },
+                         "background":  "#FF6635",
+                         "newsletter":  {
+                                            "emailInput":  {
+                                                               "placeholder":  "Enter your email",
+                                                               "backgroundColor":  "#000000",
+                                                               "textColor":  "#FFFFFF"
+                                                           },
+                                            "submitButton":  {
+                                                                 "text":  "SUBMIT",
+                                                                 "backgroundColor":  "#000000",
+                                                                 "textColor":  "#FFFFFF"
+                                                             }
+                                        },
+                         "social":  {
+                                        "icons":  [
+                                                      {
+                                                          "platform":  "LinkedIn",
+                                                          "icon":  "linkedin-black"
+                                                      },
+                                                      {
+                                                          "platform":  "Twitter/X",
+                                                          "icon":  "x-black"
+                                                      },
+                                                      {
+                                                          "platform":  "GitHub",
+                                                          "icon":  "github-black"
+                                                      }
+                                                  ]
+                                    },
+                         "style":  {
+                                       "background":  "#FF6635",
+                                       "padding":  "60-80px",
+                                       "color":  "#000000",
+                                       "newsletter":  {
+                                                          "input":  {
+                                                                        "background":  "#000000",
+                                                                        "color":  "#FFFFFF",
+                                                                        "fontSize":  "14px",
+                                                                        "padding":  "12px 16px",
+                                                                        "borderRadius":  "8px"
+                                                                    },
+                                                          "button":  {
+                                                                         "background":  "#000000",
+                                                                         "color":  "#FFFFFF",
+                                                                         "fontSize":  "14px",
+                                                                         "fontWeight":  600,
+                                                                         "padding":  "12px 24px",
+                                                                         "borderRadius":  "8px"
+                                                                     }
+                                                      },
+                                       "navigation":  {
+                                                          "fontSize":  "16px",
+                                                          "fontWeight":  600,
+                                                          "color":  "#000000",
+                                                          "spacing":  "12-16px"
+                                                      },
+                                       "legal":  {
+                                                     "fontSize":  "12px",
+                                                     "color":  "#000000"
+                                                 }
+                                   },
+                         "navigation":  {
+                                            "links":  [
+                                                          {
+                                                              "text":  "BLOG",
+                                                              "url":  "#"
+                                                          },
+                                                          {
+                                                              "text":  "CHANGELOG",
+                                                              "url":  "#"
+                                                          },
+                                                          {
+                                                              "text":  "CAREERS",
+                                                              "url":  "#"
+                                                          },
+                                                          {
+                                                              "text":  "BOOK A DEMO",
+                                                              "url":  "#"
+                                                          }
+                                                      ]
+                                        }
+                     }
+                 ],
+    "responsive":  {
+                       "breakpoints":  {
+                                           "mobile":  "375px",
+                                           "tablet":  "768px",
+                                           "desktop":  "1440px",
+                                           "large":  "1920px"
+                                       },
+                       "adaptations":  {
+                                           "hero":  {
+                                                        "mobile":  {
+                                                                       "headingFontSize":  "36-48px",
+                                                                       "planetSize":  "80% width",
+                                                                       "buttonWidth":  "100%"
+                                                                   },
+                                                        "tablet":  {
+                                                                       "headingFontSize":  "48-60px",
+                                                                       "planetSize":  "60% width"
+                                                                   },
+                                                        "desktop":  {
+                                                                        "headingFontSize":  "60-72px",
+                                                                        "planetSize":  "40-60% width"
+                                                                    }
+                                                    },
+                                           "grid":  {
+                                                        "mobile":  {
+                                                                       "columns":  1,
+                                                                       "gap":  "16px"
+                                                                   },
+                                                        "tablet":  {
+                                                                       "columns":  2,
+                                                                       "gap":  "24px"
+                                                                   },
+                                                        "desktop":  {
+                                                                        "columns":  3,
+                                                                        "gap":  "24-28px"
+                                                                    }
+                                                    },
+                                           "spacing":  {
+                                                           "mobile":  {
+                                                                          "sectionVertical":  "40-60px",
+                                                                          "sectionHorizontal":  "5%"
+                                                                      },
+                                                           "tablet":  {
+                                                                          "sectionVertical":  "60-80px",
+                                                                          "sectionHorizontal":  "8%"
+                                                                      },
+                                                           "desktop":  {
+                                                                           "sectionVertical":  "80-120px",
+                                                                           "sectionHorizontal":  "10%"
+                                                                       }
+                                                       }
+                                       }
+                   },
+    "designTokens":  {
+                         "colors":  {
+                                        "primary":  {
+                                                        "orange":  "#FF6635",
+                                                        "orangeHover":  "#FF7A4D"
+                                                    },
+                                        "background":  {
+                                                           "black":  "#000000",
+                                                           "darkGray":  "#1A1A1A",
+                                                           "darkBrown":  "#3A2E2B",
+                                                           "lightGray":  "#0D0D0D",
+                                                           "copper":  "#8B5A3C",
+                                                           "copperLight":  "#A67C52",
+                                                           "marsBrown":  "#4A3428"
+                                                       },
+                                        "text":  {
+                                                     "white":  "#FFFFFF",
+                                                     "lightGray":  "#CCCCCC",
+                                                     "mediumGray":  "#B0B0B0",
+                                                     "darkGray":  "#808080",
+                                                     "bodyGray":  "#A0A0A0"
+                                                 },
+                                        "accent":  {
+                                                       "green":  "#00C853",
+                                                       "teal":  "#00C7B7",
+                                                       "blue":  "#3B82F6",
+                                                       "red":  "#FF0000",
+                                                       "errorRed":  "#EF4444"
+                                                   },
+                                        "semantic":  {
+                                                         "success":  "#00C853",
+                                                         "error":  "#FF0000",
+                                                         "warning":  "#FF6635",
+                                                         "info":  "#3B82F6"
+                                                     }
+                                    },
+                         "typography":  {
+                                            "fontFamilies":  {
+                                                                 "heading":  "Sans-serif (likely \u0027Inter\u0027 or \u0027Noto Sans\u0027)",
+                                                                 "body":  "Sans-serif",
+                                                                 "mono":  "Consolas, \u0027SF Mono\u0027, monospace"
+                                                             },
+                                            "fontSizes":  {
+                                                              "heroHeading":  "60-72px",
+                                                              "largeHeading":  "48-60px",
+                                                              "sectionHeading":  "48-56px",
+                                                              "mediumHeading":  "24-36px",
+                                                              "cardTitle":  "18-20px",
+                                                              "body":  "14-16px",
+                                                              "bodyLarge":  "16-18px",
+                                                              "small":  "12-14px",
+                                                              "caption":  "11-13px",
+                                                              "code":  "13-14px",
+                                                              "codeSmall":  "11-12px"
+                                                          },
+                                            "fontWeights":  {
+                                                                "regular":  400,
+                                                                "medium":  500,
+                                                                "semiBold":  600,
+                                                                "bold":  700
+                                                            },
+                                            "lineHeights":  {
+                                                                "tight":  1.2,
+                                                                "normal":  1.4,
+                                                                "relaxed":  1.5,
+                                                                "loose":  1.6
+                                                            },
+                                            "letterSpacing":  {
+                                                                  "tight":  "-0.02em",
+                                                                  "normal":  "0",
+                                                                  "wide":  "0.05em",
+                                                                  "wider":  "0.1em"
+                                                              }
+                                        },
+                         "spacing":  {
+                                         "section":  {
+                                                         "vertical":  "80-120px",
+                                                         "horizontal":  "10%"
+                                                     },
+                                         "card":  {
+                                                      "padding":  "24-32px",
+                                                      "gap":  "24-28px"
+                                                  },
+                                         "header":  {
+                                                        "height":  "60-80px",
+                                                        "padding":  "16-20px"
+                                                    },
+                                         "footer":  {
+                                                        "padding":  "60-80px"
+                                                    },
+                                         "elements":  {
+                                                          "small":  "8-12px",
+                                                          "medium":  "16-24px",
+                                                          "large":  "32-40px",
+                                                          "xlarge":  "60-80px"
+                                                      }
+                                     },
+                         "borderRadius":  {
+                                              "small":  "4px",
+                                              "medium":  "8px",
+                                              "large":  "12px",
+                                              "badge":  "16px"
+                                          },
+                         "shadows":  {
+                                         "card":  "0 4px 12px rgba(0, 0, 0, 0.3)",
+                                         "button":  "0 2px 8px rgba(255, 102, 53, 0.4)",
+                                         "glow":  "0 0 20px rgba(255, 102, 53, 0.6)"
+                                     }
+                     },
+    "metadata":  {
+                     "sourceFiles":  [
+                                         "01_contents_web.json",
+                                         "02_style_web.json"
+                                     ],
+                     "projectName":  "TensorStax - Data infrastructure that builds itself",
+                     "generatedAt":  "2025-11-16T22:12:03Z",
+                     "description":  "Self-healing data pipelines with automated validation, instant testing, and zero guesswork. TensorStax generates structured plans tailored to your infrastructure.",
+                     "url":  "https://www.tensorstax.com/"
+                 },
+    "accessibility":  {
+                          "contrast":  {
+                                           "textOnBlack":  "WCAG AA compliant (4.5:1+)",
+                                           "textOnOrange":  "WCAG AA compliant (4.5:1+)",
+                                           "whiteOnOrange":  "High contrast (7:1+)"
+                                       },
+                          "focusStates":  {
+                                              "buttons":  "2px solid #3B82F6 outline with 2px offset",
+                                              "links":  "2px solid #3B82F6 outline",
+                                              "inputs":  "2px solid #FF6635 outline"
+                                          },
+                          "keyboardNavigation":  {
+                                                     "enabled":  true,
+                                                     "skipToContent":  true,
+                                                     "accordionToggle":  "Enter/Space key"
+                                                 },
+                          "aria":  {
+                                       "headings":  "proper hierarchy (h1 ??h2 ??h3)",
+                                       "buttons":  "aria-label for icon-only buttons",
+                                       "accordions":  "aria-expanded state tracking",
+                                       "navigation":  "aria-current for active page"
+                                   }
+                      },
+    "animations":  {
+                       "parallax":  {
+                                        "planetSphere":  {
+                                                             "type":  "scroll-based",
+                                                             "trigger":  "hero-section",
+                                                             "scrollRange":  "top-to-bottom",
+                                                             "scrubDuration":  1.5,
+                                                             "propertyChanges":  "translateY with scroll multiplier 0.6-0.7"
+                                                         },
+                                        "marsBackground":  {
+                                                               "type":  "scroll-based",
+                                                               "trigger":  "cta-section",
+                                                               "scrollRange":  "top-bottom to bottom-top",
+                                                               "scrubDuration":  1.5,
+                                                               "propertyChanges":  "translateY: 0% to -30%"
+                                                           },
+                                        "cityBuildings":  {
+                                                              "type":  "multi-layer-parallax",
+                                                              "nearLayer":  "translateZ: 0 to -50px, rotationY: 0 to 1deg",
+                                                              "farLayer":  "translateZ: 0 to -150px, rotationY: 0 to 2deg",
+                                                              "scrubDuration":  2
+                                                          }
+                                    },
+                       "fadeIn":  {
+                                      "sectionHeading":  {
+                                                             "opacity":  "0 to 1",
+                                                             "translateY":  "30px to 0px",
+                                                             "duration":  "0.8s",
+                                                             "trigger":  "section enters 60-70% viewport"
+                                                         },
+                                      "cards":  {
+                                                    "opacity":  "0 to 1",
+                                                    "translateY":  "40px to 0px",
+                                                    "duration":  "0.7s",
+                                                    "stagger":  "0.15s",
+                                                    "trigger":  "cards enter 70-80% viewport"
+                                                },
+                                      "bullets":  {
+                                                      "opacity":  "0 to 1",
+                                                      "translateX":  "-20px to 0px",
+                                                      "duration":  "0.5s",
+                                                      "stagger":  "0.1s"
+                                                  }
+                                  },
+                       "stagger":  {
+                                       "headingWords":  {
+                                                            "opacity":  "0 to 1",
+                                                            "translateY":  "20px to 0px",
+                                                            "stagger":  "0.1s per word",
+                                                            "duration":  "0.6s"
+                                                        },
+                                       "stepCards":  {
+                                                         "opacity":  "0 to 1",
+                                                         "translateY":  "40px to 0px",
+                                                         "stagger":  "0.15s",
+                                                         "duration":  "0.7s"
+                                                     },
+                                       "navLinks":  {
+                                                        "opacity":  "0 to 1",
+                                                        "translateY":  "10px to 0px",
+                                                        "stagger":  "0.1s",
+                                                        "duration":  "0.4s"
+                                                    }
+                                   },
+                       "scale":  {
+                                     "badge":  {
+                                                   "opacity":  "0 to 1",
+                                                   "scale":  "0.8 to 1",
+                                                   "duration":  "0.5s"
+                                               },
+                                     "button":  {
+                                                    "opacity":  "0 to 1",
+                                                    "scale":  "0.9 to 1",
+                                                    "duration":  "0.6s"
+                                                },
+                                     "socialIcons":  {
+                                                         "opacity":  "0 to 1",
+                                                         "scale":  "0.8 to 1",
+                                                         "stagger":  "0.05s",
+                                                         "duration":  "0.3s"
+                                                     }
+                                 },
+                       "marquee":  {
+                                       "logoScroll":  {
+                                                          "type":  "infinite-horizontal-scroll",
+                                                          "direction":  "right-to-left",
+                                                          "speed":  "17s",
+                                                          "easing":  "linear",
+                                                          "propertyChanges":  "translateX(-50%)"
+                                                      }
+                                   },
+                       "loading":  {
+                                       "generatingDots":  {
+                                                              "type":  "ellipsis-cycling",
+                                                              "states":  [
+                                                                             ".",
+                                                                             "..",
+                                                                             "..."
+                                                                         ],
+                                                              "duration":  "1.2-1.5s",
+                                                              "repeat":  "infinite"
+                                                          }
+                                   },
+                       "glow":  {
+                                    "cityWindowLights":  {
+                                                             "type":  "pulse",
+                                                             "opacity":  "0.3 to 0.6",
+                                                             "blur":  "20px to 30px",
+                                                             "duration":  "2.5s",
+                                                             "repeat":  "infinite",
+                                                             "yoyo":  true
+                                                         },
+                                    "marsHaze":  {
+                                                     "type":  "pulse",
+                                                     "opacity":  "0.3 to 0.6",
+                                                     "blur":  "20px to 30px",
+                                                     "duration":  "2.5s",
+                                                     "repeat":  "infinite",
+                                                     "yoyo":  true
+                                                 }
+                                },
+                       "backgroundGradient":  {
+                                                  "validationBanner":  {
+                                                                           "type":  "gradient-shift",
+                                                                           "colors":  "linear-gradient(90deg, #8B5A3C 0%, #A67C52 50%, #8B5A3C 100%)",
+                                                                           "duration":  "3s",
+                                                                           "repeat":  "infinite",
+                                                                           "yoyo":  true,
+                                                                           "easing":  "sine.inOut"
+                                                                       }
+                                              },
+                       "accordionToggle":  {
+                                               "icon":  {
+                                                            "property":  "rotate",
+                                                            "from":  "0deg",
+                                                            "to":  "45deg",
+                                                            "duration":  "0.3s",
+                                                            "easing":  "ease-in-out"
+                                                        },
+                                               "content":  {
+                                                               "property":  "height",
+                                                               "from":  "0",
+                                                               "to":  "auto",
+                                                               "duration":  "0.4s",
+                                                               "easing":  "ease-out"
+                                                           }
+                                           },
+                       "screenshot":  {
+                                          "featureCardVisual":  {
+                                                                    "opacity":  "0 to 1",
+                                                                    "scale":  "0.95 to 1",
+                                                                    "duration":  "0.6s",
+                                                                    "delay":  "0.3s after card appears"
+                                                                }
+                                      },
+                       "diagramNodes":  {
+                                            "staggerReveal":  {
+                                                                  "opacity":  "0 to 1",
+                                                                  "translateX":  "-20px to 0px",
+                                                                  "stagger":  "0.1s",
+                                                                  "duration":  "0.5s",
+                                                                  "direction":  "left-to-right"
+                                                              }
+                                        },
+                       "textReveal":  {
+                                          "typewriter":  {
+                                                             "type":  "character-by-character",
+                                                             "stagger":  "0.05s per character",
+                                                             "duration":  "0.4s per word"
+                                                         },
+                                          "wordStagger":  {
+                                                              "type":  "word-by-word",
+                                                              "stagger":  "0.05s per word",
+                                                              "duration":  "0.4s per word"
+                                                          }
+                                      },
+                       "validationTransition":  {
+                                                    "errorToSuccess":  {
+                                                                           "iconSwap":  {
+                                                                                            "errorIcon":  "opacity: 1 to 0",
+                                                                                            "successIcon":  "opacity: 0 to 1",
+                                                                                            "duration":  "0.3s"
+                                                                                        },
+                                                                           "textColorChange":  {
+                                                                                                   "from":  "#FF0000",
+                                                                                                   "to":  "#FF6635",
+                                                                                                   "duration":  "0.4s"
+                                                                                               },
+                                                                           "contentReplacement":  {
+                                                                                                      "from":  "\u003cmissing\u003e",
+                                                                                                      "to":  "actual value",
+                                                                                                      "duration":  "0.5s"
+                                                                                                  }
+                                                                       }
+                                                }
+                   }
+}

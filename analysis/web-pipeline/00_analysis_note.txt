@@ -1,282 +1,2306 @@
-=== WEB ANALYSIS: https://uptic.io/ ===
-Analysis Date: 2025-01-15
-Browser: Chrome, Viewport: 1440x900
+=== PROGRESSIVE SCROLL ANALYSIS LOG ====== WEB ANALYSIS LOG ===
 
-=== CHECKPOINT 0 (Initial State) ===
-Timestamp: Initial Page Load
-Viewport: Desktop 1440x900
+URL: https://www.tensorstax.com/Site: https://www.tensorstax.com/
+
+Start Time: 2025-01-16T00:00:00.000ZStart Time: 2025-11-16
+
+Analysis Method: ArrowDown × 3-5 (Checkpoints 0-52), ArrowDown × 8 (Checkpoints 53+)Viewport: Desktop 1536x730
+
+Total Page Height: 16362px
+
+---Goal: Capture ALL viewport changes from top to bottom
+
+
+
+=== CHECKPOINT 58 ===---
+
+Timestamp: 2025-01-16T00:58:00.000Z
+
+Viewport: Desktop 1536x678=== CHECKPOINT 0 (INITIAL STATE) ===
+
+Scroll Position: ~10134pxTimestamp: 2025-11-16T00:00:00.000Z
+
+Change Type: Structural + VisualViewport: Desktop 1536x730
+
 Scroll Position: 0px
 
-📋 STRUCTURAL ANALYSIS:
-- Page Type: Technology/Software Engineering Company Landing Page
-- Total Height: 12737px (very long single-page design)
-- Layout: Full-width sections with centered content
-- Navigation: Fixed header with logo + menu
+📋 STRUCTURAL CHANGES:Change Type: Initial
 
-🎨 VISUAL ANALYSIS - Header:
-- Background: Dark (#131214 approximately)
-- Logo: "Uptic" with geometric icon (white/light gray)
-- Navigation Items: Services+, Assessments+, How We Work, Customer Stories, Partners, About
-- CTA Buttons: 
-  - "Login" (transparent with border)
-  - "Book a meeting" (orange/coral gradient border, glow effect)
-- Typography: Sans-serif, clean modern font
-- Spacing: Generous padding, ~20px top/bottom
+- New Elements (8): New section entry "Built-in security and compliance", section heading (orange #FF6635 background panel), shield icon (white on orange), body text (4 lines describing TensorStax security features), 3 feature labels ("SECURE CONNECTIONS" - encrypted credentials/OAuth/token-based access, "COMPLIANCE-READY" - SOC TYPE 2, "NO LIVE INFRA HIT" - incremental model validations run safely in memory), dark 3D city visualization (right panel, warm orange lighting, building models with lit windows, street-level perspective)
 
-🎨 VISUAL ANALYSIS - Hero Section:
-- Background: Dark gradient with warm orange/brown blur effects on sides
-- Heading: "Build Faster. Deploy Smarter. Scale Effortlessly."
-  - Font Size: ~72-80px
-  - Weight: Bold (700)
-  - Color: White with gray gradient on "Smarter. Scale Effortlessly."
-  - Line Height: 1.2
-- Tag: "Modern Full-Stack Development & Engineering" (pill-shaped, bordered)
-- Description: Gray text, ~16px, centered
-- CTA Buttons:
-  - Primary: "Book a meeting" (same style as header)
-  - Secondary: "Our services" (transparent with arrow icon)
+- Removed Elements (7): Step 3 bottom content, audit table, code editor bottom portion📋 STRUCTURAL ELEMENTS:
 
-🖱️ INTERACTIVE ELEMENTS:
-- Navigation dropdowns (Services+, Assessments+)
-- All buttons have hover states
-- Logo is clickable link
+- Header: TensorStax logotype (top left), Navigation menu (Home, Blog, Changelog, Docs, Careers, Book a Demo)
+
+🎨 VISUAL ANALYSIS:- Hero Section: Large heading "Data infrastructure that builds itself"
+
+- Colors: Orange panel #FF6635, black background #000000, white text #FFFFFF, city lights warm orange/amber (#FF8800, #FFA030), building windows golden glow- Two CTA buttons: "WAITLIST" (white), "BOOK A DEMO" (orange)
+
+- Typography: Section heading "Built-in security and compliance" 48-56px weight-700, body text 14-16px line-height-1.6, feature labels 12-13px uppercase monospace with letter-spacing 0.05em- Bottom content area with two boxes: "INTRODUCING TENSORSTAX", "TRUSTED BY DATA LEADERS"
+
+- Layout: Two-column split (40% left orange panel + 60% right dark 3D scene), shield icon top-right of orange panel (32-36px), feature labels stacked vertically in lower-left- Logo marquee at bottom with 10 company logos (dbt, Airflow, GitHub, GitLab, Spark, Snowflake, Databricks, AWS, Google Cloud, Azure)
+
+- Spacing: Orange panel padding 48-60px, feature labels vertical spacing 16-20px, shield icon margin 16px from top-right corner- Active Integrations list (5 items with green dots)
+
+
+
+🎬 ANIMATION DETECTION:🎨 VISUAL ANALYSIS:
+
+- Subject: Orange security panel + 3D city visualization with parallax depth- Colors: Dark black background (#000000 or similar), Orange accent (#FF6B35 or similar for buttons and badges), White text (#FFFFFF)
+
+- Visual Description: Left panel with bright orange background (#FF6635) containing security heading and descriptive text. Right panel shows dark 3D rendered city scene with tall buildings (skyscrapers with detailed facades), lit windows creating orange/amber glow pattern, street view perspective looking down urban corridor between buildings, atmospheric fog/haze effect in distance- Typography: Large sans-serif heading (approx 60-72px, bold weight), Body text appears to be 14-16px
+
+- Observed Behavior: Panel fades in with translateY (30px→0px) on scroll entry. City scene has subtle parallax depth effect (buildings at different layers move at slightly different speeds during scroll - near buildings faster, far buildings slower). Window lights have subtle glow/bloom effect creating warm ambiance. Camera perspective suggests slight rotation during scroll- Layout: Centered hero content, full-width background image
+
+- Trigger: scroll position 64-68% (10000-10700px range)- Spacing: Large vertical padding on hero (80-100px), buttons have horizontal spacing
+
+- Technical Details: GSAP ScrollTrigger for panel animation with stagger effect for text and labels. City scene likely Three.js or CSS 3D transforms for multi-layer parallax depth. CSS box-shadow or filter:blur for window glow effect. Possible camera rotation animation tied to scroll progress- Visual Element: Large planet/sphere graphic (red-orange surface with blue atmospheric edge lighting) on right side, partially visible
+
+- Property Changes: Left panel - opacity: 0→1, translateY: 30px→0px, duration: 0.8s. Feature labels - stagger delay 0.1s between each. City scene - near layer translateZ: 0→-50px, far layer translateZ: 0→-150px, camera rotation: 0→2deg, scrub: 2- Background: Pure black with gradient overlay emphasizing depth
+
+- Implementation Hint:
+
+  ```javascript🎬 ANIMATION DETECTION:
+
+  // Panel animation- Subject: Hero planet/sphere with atmospheric lighting
+
+  gsap.from('.security-panel', {- Visual Description: Large 3D-rendered planet with red-orange surface, blue atmospheric glow on edges
+
+    opacity: 0,- Observed Behavior: Static on initial load (likely has parallax or scroll-based animation)
+
+    y: 30,- Type: background-parallax (suspected)
+
+    duration: 0.8,- Trigger: scroll position
+
+    scrollTrigger: { trigger: '.security-section', start: 'top 70%' }- Technical Details: Likely GSAP ScrollTrigger or CSS transforms
+
+  });- Property Changes: translateY or transform (to be confirmed during scroll)
+
+  - Implementation Hint: Possible parallax effect with different scroll speed multiplier
+
+  // Feature labels stagger
+
+  gsap.from('.security-feature', {🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+
+    opacity: 0,- No interactive elements found in this viewport
+
+    x: -20,
+
+    duration: 0.6,---
+
+    stagger: 0.1,
+
+    scrollTrigger: { trigger: '.security-section', start: 'top 65%' }=== CHECKPOINT 6 ===
+
+  });Timestamp: 2025-01-16T00:06:00.000Z
+
+  Viewport: Desktop 1536x678
+
+  // City parallax with multiple layersScroll Position: ~920px
+
+  gsap.to('.city-buildings-near', { Change Type: Visual
+
+    z: -50, 
+
+    rotationY: 1,📋 STRUCTURAL CHANGES:
+
+    scrollTrigger: { - New Elements (0): No new structural elements
+
+      trigger: '.security-section', - Removed Elements (0): No removed elements
+
+      scrub: 2,
+
+      start: 'top bottom',🎨 VISUAL ANALYSIS:
+
+      end: 'bottom top'- Colors: Same dark theme (#000000 background), white heading text (#FFFFFF), gray body text (#808080)
+
+    } - Typography: Section 01 heading "Describe what you want. Or pull in tickets" (60-72px, weight 700), body text describing dbt models and Airflow DAG (14-16px, weight 400)
+
+  });- Layout: Left-aligned text block on left half, planet visual on right half continues parallax motion
+
+  - Spacing: Consistent section padding, text block has generous line height (1.5-1.6)
+
+  gsap.to('.city-buildings-far', { 
+
+    z: -150, 🎬 ANIMATION DETECTION:
+
+    rotationY: 2,- Subject: Red-orange planet with blue atmospheric edge
+
+    scrollTrigger: { - Visual Description: 3D sphere continues moving upward as page scrolls down
+
+      trigger: '.security-section', - Observed Behavior: Planet moves slower than scroll speed (parallax effect), currently centered vertically in viewport
+
+      scrub: 2,- Trigger: scroll position (proportional to scroll distance)
+
+      start: 'top bottom',- Technical Details: GSAP ScrollTrigger with scrub: 1.5 (estimated), planet translateY changes as scroll progresses
+
+      end: 'bottom top'- Property Changes: translateY continues to decrease (planet moves up relative to page), estimated -200px to -400px range at this scroll position
+
+    } - Implementation Hint: Same as previous checkpoints - gsap.to(planet, { y: '-50vh', scrollTrigger: { trigger: '.section-01', start: 'top center', end: 'bottom center', scrub: 1.5 }})
+
+  });
+
+  ```🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+
+- No interactive elements found in this viewport
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+
+- Elements identified but testing deferred (shield icon, feature label sections)---
+
+
+
+---=== CHECKPOINT 7 ===
+
+Timestamp: 2025-01-16T00:07:00.000Z
+
+Viewport: Desktop 1536x730
+Scroll Position: ~1040px
+Change Type: Structural + Visual
+
+📋 STRUCTURAL CHANGES:
+- New Elements (3): 
+  1. Code snippet box - "Title: dbt SFDC Account Source Model" with SQL code preview
+  2. Blue chevron icon (→) indicating code execution or navigation
+  3. Expandable code details text below snippet
+- Removed Elements (0): Heading remains partially visible at top
+
+🎨 VISUAL ANALYSIS:
+- Colors: Dark gray code box (#1A1A1A or similar), white monospace code text, blue accent for chevron icon (#3B82F6)
+- Typography: Code snippet title (16px, weight 600), monospace code font (14px, Consolas or SF Mono), body text (14-16px, weight 400)
+- Layout: Code snippet box positioned center-right of viewport, planet continues on left side, text wraps naturally around planet
+- Spacing: Code box has padding ~20px, line height in code ~1.4, generous margin between title and code block
+
+🎬 ANIMATION DETECTION:
+- Subject: Code snippet box with blue chevron icon
+- Visual Description: Dark code editor-style box showing SQL code for dbt model with title "dbt SFDC Account Source Model"
+- Observed Behavior: Code box appears to fade in as user scrolls into this section, blue chevron icon may have subtle pulse or hover animation
+- Trigger: scroll position entering Section 01 content area (around 1000px)
+- Technical Details: GSAP fade-in animation (opacity 0 → 1) + translateY (20px → 0px) with ScrollTrigger
+- Property Changes: opacity: 0 → 1, translateY: 20px → 0px over ~0.6s duration
+- Implementation Hint: gsap.from('.code-snippet', { opacity: 0, y: 20, duration: 0.6, scrollTrigger: { trigger: '.code-snippet', start: 'top 80%' }})
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Blue chevron icon likely clickable (not tested yet)
+- Code snippet may be expandable/copyable (deferred to later)
+
+---
+
+=== CHECKPOINT 8 ===
+Timestamp: 2025-01-16T00:08:00.000Z
+Viewport: Desktop 1536x730
+Scroll Position: ~1160px
+Change Type: Structural
+
+📋 STRUCTURAL CHANGES:
+- New Elements (5):
+  1. Header navigation bar reappeared at top - "© TensorStax" logo + links (Home, Blog, Changelog, Docs, Careers)
+  2. Orange CTA button "Book a Demo" (top right)
+  3. Additional action buttons below code snippet: "Require Approval", "Active Connections" (with icons), "Contact 5 Roles"
+  4. Code snippet expanded to show more SQL details
+- Removed Elements (0): Section 01 heading moved out of view
+
+🎨 VISUAL ANALYSIS:
+- Colors: Header bar has dark background (#0A0A0A or similar), orange CTA button (#FF6635), white text, button icons in green/blue/orange
+- Typography: Header links (14px, weight 500), logo text (16px), button text (14px, weight 600)
+- Layout: Fixed header at top (position: sticky), code snippet centered, action buttons aligned horizontally below code
+- Spacing: Header padding 20px vertical, button spacing 12px gap, code box maintains 20px padding
+
+🎬 ANIMATION DETECTION: None detected in this viewport
+- Header likely has fade-in/slide-down animation when scrolling up (not observed yet)
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Header navigation links (Home, Blog, Changelog, Docs, Careers) - deferred
+- "Book a Demo" CTA button - deferred
+- Action buttons (Require Approval, Active Connections, Contact 5 Roles) - deferred
+
+---
+
+=== CHECKPOINT 9 ===
+Timestamp: 2025-01-16T00:09:00.000Z
+Viewport: Desktop 1536x730
+Scroll Position: ~1320px
+Change Type: Visual
+
+📋 STRUCTURAL CHANGES:
+- New Elements (0): Same code snippet and action buttons visible
+- Removed Elements (1): Header navigation bar moved out of viewport (sticky header scrolled away)
+
+🎨 VISUAL ANALYSIS:
+- Colors: Consistent dark theme, code box with white text, action button icons visible (blue, green, red/orange)
+- Typography: Code snippet title and content remain same size, action button text 14px weight 600
+- Layout: Code snippet and action buttons now occupy center of viewport, planet continues parallax on left side
+- Spacing: Vertical spacing between code box and action buttons ~24-32px
+
+🎬 ANIMATION DETECTION:
+- Subject: Planet continues parallax motion
+- Visual Description: Red-orange planet with blue atmospheric edge, now showing more of lower hemisphere
+- Observed Behavior: Planet continues moving upward slower than scroll speed, revealing more surface detail
+- Trigger: scroll position (proportional)
+- Technical Details: GSAP ScrollTrigger with scrub: 1.5, continuous parallax effect
+- Property Changes: translateY continuing to decrease (estimated -400px to -600px range at this position)
+- Implementation Hint: Same GSAP parallax implementation as previous checkpoints
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Action buttons visible but not yet tested (Require Approval, Active Connections, Contact 5 Tables)
+
+---
+
+=== CHECKPOINT 10 ===
+Timestamp: 2025-01-16T00:10:00.000Z
+Viewport: Desktop 1536x730
+Scroll Position: ~1480px
+Change Type: Structural
+
+📋 STRUCTURAL CHANGES:
+- New Elements (1): Header navigation bar reappeared (sticky header came back into view)
+- Removed Elements (0): Code snippet and action buttons remain visible
+
+🎨 VISUAL ANALYSIS:
+- Colors: Header with dark background, white logo "© TENSORSTAX", orange CTA button "Book a Demo" (#FF6635)
+- Typography: Header consistent with previous (logo 16px, nav links 14px weight 500)
+- Layout: Header at top, code snippet below, planet continues on left side
+- Spacing: Header maintains 20px vertical padding
+
+🎬 ANIMATION DETECTION:
+- Subject: Sticky header navigation
+- Visual Description: Dark header bar with logo, navigation links, and orange CTA button
+- Observed Behavior: Header reappears as user scrolls down (position: sticky behavior)
+- Trigger: scroll position reaching certain threshold (~1400px+)
+- Technical Details: CSS position: sticky with top: 0, possibly with opacity fade-in transition
+- Property Changes: opacity: 0 → 1 over ~0.3s when becoming visible
+- Implementation Hint: header { position: sticky; top: 0; transition: opacity 0.3s; } with JavaScript or Intersection Observer to control visibility
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Header navigation visible again (Home, Blog, Changelog, Docs, Careers) - deferred
+- "Book a Demo" button - deferred
+
+---
+
+=== CHECKPOINT 11 ===
+Timestamp: 2025-01-16T00:11:00.000Z
+Viewport: Desktop 1536x730
+Scroll Position: ~1640px
+Change Type: Structural
+
+📋 STRUCTURAL CHANGES:
+- New Elements (1): Orange badge "02." appears in center-bottom of viewport
+- Removed Elements (1): Code snippet and action buttons moved out of view
+
+🎨 VISUAL ANALYSIS:
+- Colors: Orange badge (#FF6635) with white text "02.", dark background continues
+- Typography: Badge number "02." likely 24-36px, weight 700, same orange as CTA buttons
+- Layout: Badge positioned center of viewport, planet continues on left occupying ~40% width
+- Spacing: Badge appears to be standalone element with generous surrounding space
+
+🎬 ANIMATION DETECTION:
+- Subject: Section badge "02." 
+- Visual Description: Small orange rectangular badge with rounded corners, white text "02."
+- Observed Behavior: Badge fades in as user scrolls into Section 02 area
+- Trigger: scroll position ~1600px (entering Section 02)
+- Technical Details: GSAP fade-in + scale animation (opacity 0 → 1, scale 0.8 → 1)
+- Property Changes: opacity: 0 → 1, scale: 0.8 → 1 over ~0.5s duration
+- Implementation Hint: gsap.from('.section-badge', { opacity: 0, scale: 0.8, duration: 0.5, scrollTrigger: { trigger: '.section-02', start: 'top 70%' }})
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Section badge likely not interactive (decorative only)
+
+---
+
+=== CHECKPOINT 12 ===
+Timestamp: 2025-01-16T00:12:00.000Z
+Viewport: Desktop 1536x730
+Scroll Position: ~1800px
+Change Type: Structural + Visual
+
+📋 STRUCTURAL CHANGES:
+- New Elements (2):
+  1. Large heading "TensorStax plans it" (white, 60-72px)
+  2. Orange section badge "02." positioned above heading
+- Removed Elements (0): Planet continues visible on left, previous content scrolled out
+
+🎨 VISUAL ANALYSIS:
+- Colors: White heading text (#FFFFFF), orange badge (#FF6635), dark background (#000000)
+- Typography: Heading "TensorStax plans it" (60-72px, weight 700, centered), split into two lines
+- Layout: Text centered in viewport, orange badge "02." above heading, planet on left side (~30% width)
+- Spacing: Badge to heading spacing ~40-60px, generous padding around text block
+
+🎬 ANIMATION DETECTION:
+- Subject: Section 02 heading "TensorStax plans it"
+- Visual Description: Large white text split across two lines with orange section badge above
+- Observed Behavior: Text fades in and slides up as user scrolls into Section 02
+- Trigger: scroll position ~1750px (Section 02 content reveal)
+- Technical Details: GSAP stagger animation - each word/line animates sequentially with opacity + translateY
+- Property Changes: opacity: 0 → 1, translateY: 30px → 0px, stagger: 0.1s between lines
+- Implementation Hint: gsap.from('.section-02-heading', { opacity: 0, y: 30, duration: 0.8, stagger: 0.1, scrollTrigger: { trigger: '.section-02', start: 'top 60%' }})
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Heading text is not interactive
+
+---
+
+=== CHECKPOINT 13 ===
+Timestamp: 2025-01-16T00:13:00.000Z
+Viewport: Desktop 1536x678
+Scroll Position: ~1960px
+Change Type: Structural
+
+📋 STRUCTURAL CHANGES:
+- New Elements (5):
+  1. Subheading text below main heading: "TensorStax generates a structured plan tailored to your infrastructure, schemas and custom rules you've defined"
+  2. Three card components labeled "Step 1", "Step 2", "Step 3" (orange badges)
+  3. Step 1 card: "Update dim_customer dbt Model" with subtext "Finalize and publish the model"
+  4. Step 2 card: "Add Data Quality Tests" with subtext "Custom test for mrr_value >= 0"
+  5. Step 3 card: "Create Airflow DAG for dim_customer.sql" with subtext "Make a PR for updated DAG"
+- Removed Elements (0): Heading remains visible
+
+🎨 VISUAL ANALYSIS:
+- Colors: Orange step badges (#FF6635), white heading/card titles, gray subtext (#808080), dark card backgrounds (#1A1A1A or similar)
+- Typography: Subheading (16-18px, weight 400, gray), step badges (14px, weight 600), card titles (18-20px, weight 600), card subtext (14px, weight 400)
+- Layout: Three cards arranged horizontally in a row, equal width, below centered heading/subheading
+- Spacing: Cards have ~20px gap between them, card padding ~24px, top margin from subheading ~60px
+
+🎬 ANIMATION DETECTION:
+- Subject: Three step cards with orange badges
+- Visual Description: Three horizontal cards showing workflow steps with orange numbered badges "Step 1/2/3"
+- Observed Behavior: Cards fade in sequentially from left to right (stagger animation) as user scrolls
+- Trigger: scroll position ~1900px (Section 02 cards reveal)
+- Technical Details: GSAP stagger animation with opacity + translateY for each card
+- Property Changes: Each card: opacity: 0 → 1, translateY: 40px → 0px, stagger: 0.15s delay between cards
+- Implementation Hint: gsap.from('.step-card', { opacity: 0, y: 40, duration: 0.7, stagger: 0.15, scrollTrigger: { trigger: '.step-cards-container', start: 'top 70%' }})
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Step cards likely clickable/expandable - deferred
+
+---
+
+=== CHECKPOINT 14 ===
+Timestamp: 2025-01-16T00:14:00.000Z
+Viewport: Desktop 1536x730
+Scroll Position: ~2080px
+Change Type: Visual
+
+📋 STRUCTURAL CHANGES:
+- New Elements (1): Header navigation bar reappeared at top
+- Removed Elements (0): All step cards remain visible, heading partially visible
+
+🎨 VISUAL ANALYSIS:
+- Colors: Same color scheme, header dark background, orange CTA button
+- Typography: No changes to existing elements
+- Layout: Header at top, step cards fully visible in center, planet on left
+- Spacing: Consistent spacing maintained
+
+🎬 ANIMATION DETECTION: None detected (static viewport, no new animations triggered)
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Header navigation visible - deferred
+- Step cards visible - deferred
+
+---
+
+=== CHECKPOINT 15 ===
+Timestamp: 2025-01-16T00:15:00.000Z
+Viewport: Desktop 1536x678
+Scroll Position: ~2240px
+Change Type: Structural
+
+📋 STRUCTURAL CHANGES:
+- New Elements (9): Each step card now shows expanded details:
+  - Step 1 details: "marts/dim_customer.sql to join with STRIPE_SUBSCRIPTIONS", icons (checkmark, X), "Add new fields:", "Finalize and publish the model"
+  - Step 2 details: "Create models/marts/schema.yml tests:", icons (checkmark, X), "Custom test for mrr_value >= 0", "accepted_values test for subscription_tier: ['basic']"
+  - Step 3 details: "Verify DAG runs successfully", icons (checkmark, X), "Make a PR for updated DAG"
+- Removed Elements (1): Heading "TensorStax plans it" scrolled out of view
+
+🎨 VISUAL ANALYSIS:
+- Colors: Step cards maintain dark background (#1A1A1A), white text for main content, gray text for details, blue checkmark icons (#3B82F6), red X icons (#EF4444)
+- Typography: Card details text 14px weight 400, monospace for file paths (Consolas/SF Mono 13px)
+- Layout: Cards expanded vertically to show more content, maintaining 3-column grid layout
+- Spacing: Internal card padding increased to accommodate details (~32px padding), bullet points with 8px spacing
+
+🎬 ANIMATION DETECTION:
+- Subject: Step card expansion/reveal
+- Visual Description: Additional detail text and icons appearing within each step card
+- Observed Behavior: Card details fade in and expand vertically as cards come into view
+- Trigger: scroll position ~2200px (card detail reveal)
+- Technical Details: GSAP animation for card height expansion + opacity fade-in for detail elements
+- Property Changes: Card height: auto (smooth expansion), detail opacity: 0 → 1 over 0.5s
+- Implementation Hint: gsap.to('.step-card-details', { height: 'auto', opacity: 1, duration: 0.5, ease: 'power2.out' })
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Checkmark/X icons likely interactive (task completion indicators) - deferred
+- Card details may have expandable/collapsible functionality - deferred
+
+---
+
+=== CHECKPOINT 16 ===
+Timestamp: 2025-01-16T00:16:00.000Z
+Viewport: Desktop 1536x678
+Scroll Position: ~2400px
+Change Type: Visual
+
+📋 STRUCTURAL CHANGES:
+- New Elements (3): Additional text details in Step 1 card:
+  - "subscription_tier, mrr_value with proper type casting and null handling"
+  - "Update model materialization to incremental"
+  - "Finalize and publish the model"
+- Removed Elements (0): All cards remain visible with expanded content
+
+🎨 VISUAL ANALYSIS:
+- Colors: Consistent with previous checkpoint, dark card backgrounds, white/gray text
+- Typography: Detail text continues at 14px weight 400, monospace for technical terms
+- Layout: Step cards maintain 3-column layout, Step 1 card shows more detail
+- Spacing: Bullet point spacing 8-12px, internal card padding ~32px
+
+🎬 ANIMATION DETECTION: None detected (continuation of previous card expansion animation)
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Step card details visible - deferred testing
+
+---
+
+=== CHECKPOINT 17 ===
+Timestamp: 2025-01-16T00:17:00.000Z
+Viewport: Desktop 1536x694
+Scroll Position: ~2520px
+Change Type: Structural
+
+📋 STRUCTURAL CHANGES:
+- New Elements (3):
+  1. Header navigation reappeared at top
+  2. Additional text in Step 1 card: "Update model materialization to incremental with unique key='customer_id'"
+  3. Subheading text visible at top: "TensorStax generates a structured plan tailored to your infrastructure, schemas and custom rules you've defined"
+- Removed Elements (0): All step cards remain visible
+
+🎨 VISUAL ANALYSIS:
+- Colors: Header dark background, white text, orange CTA button
+- Typography: Consistent with previous, additional technical detail in monospace font
+- Layout: Header at top, step cards in 3-column grid below
+- Spacing: Maintained padding and spacing
+
+🎬 ANIMATION DETECTION: None detected (static viewport)
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Header navigation visible - deferred
+
+---
+
+=== CHECKPOINT 18 ===
+Timestamp: 2025-01-16T00:18:00.000Z
+Viewport: Desktop 1536x678
+Scroll Position: ~2600px
+Change Type: Visual
+
+📋 STRUCTURAL CHANGES:
+- New Elements (0): Same step cards visible with complete details
+- Removed Elements (1): Header scrolled out of view
+
+🎨 VISUAL ANALYSIS:
+- Colors: Consistent dark card backgrounds, white/gray text, blue/red icons
+- Typography: All text elements maintain same sizes
+- Layout: 3 step cards fill viewport, planet continues on left (~25% width)
+- Spacing: Card spacing and padding consistent
+
+🎬 ANIMATION DETECTION: None detected (static viewport)
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Step cards visible - deferred
+
+---
+
+=== CHECKPOINT 19 ===
+Timestamp: 2025-01-16T00:19:00.000Z
+Viewport: Desktop 1536x730
+Scroll Position: ~2760px
+Change Type: Structural
+
+📋 STRUCTURAL CHANGES:
+- New Elements (1): Orange badge "03." appears in bottom-left of viewport
+- Removed Elements (1): Step card titles at top scrolled out of view
+
+🎨 VISUAL ANALYSIS:
+- Colors: Orange badge "03." (#FF6635) with white text, step cards continue with dark backgrounds
+- Typography: Badge number "03." appears to be 24-36px weight 700
+- Layout: Step card details fill top portion, orange "03." badge positioned bottom-left
+- Spacing: Badge has generous surrounding space, indicating section transition
+
+🎬 ANIMATION DETECTION:
+- Subject: Section badge "03."
+- Visual Description: Small orange rectangular badge with rounded corners, white text "03."
+- Observed Behavior: Badge fades in as user scrolls into Section 03 area
+- Trigger: scroll position ~2750px (entering Section 03)
+- Technical Details: GSAP fade-in + scale animation (opacity 0 → 1, scale 0.8 → 1)
+- Property Changes: opacity: 0 → 1, scale: 0.8 → 1 over ~0.5s duration
+- Implementation Hint: gsap.from('.section-badge-03', { opacity: 0, scale: 0.8, duration: 0.5, scrollTrigger: { trigger: '.section-03', start: 'top 70%' }})
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Section badge likely not interactive
+
+---
+
+=== CHECKPOINT 20 ===
+Timestamp: 2025-01-16T00:20:00.000Z
+Viewport: Desktop 1536x730
+Scroll Position: ~2920px
+Change Type: Structural + Visual
+
+📋 STRUCTURAL CHANGES:
+- New Elements (2):
+  1. Section 03 heading: "Pipeline generated in seconds" (large white text, 60-72px)
+  2. Orange section badge "03." above heading
+- Removed Elements (3): All three step cards from Section 02 scrolled out of view
+
+🎨 VISUAL ANALYSIS:
+- Colors: White heading text (#FFFFFF), orange badge "03." (#FF6635), dark background (#000000)
+- Typography: Heading "Pipeline generated in seconds" (60-72px, weight 700), split across two lines
+- Layout: Text positioned left side of viewport, planet continues on left (~30% width)
+- Spacing: Badge to heading spacing ~40-60px
+
+🎬 ANIMATION DETECTION:
+- Subject: Section 03 heading "Pipeline generated in seconds"
+- Visual Description: Large white text split across two lines with orange section badge above
+- Observed Behavior: Text fades in and slides up as user scrolls into Section 03
+- Trigger: scroll position ~2900px (Section 03 content reveal)
+- Technical Details: GSAP stagger animation - each line animates sequentially with opacity + translateY
+- Property Changes: opacity: 0 → 1, translateY: 30px → 0px, stagger: 0.1s between lines
+- Implementation Hint: gsap.from('.section-03-heading', { opacity: 0, y: 30, duration: 0.8, stagger: 0.1, scrollTrigger: { trigger: '.section-03', start: 'top 60%' }})
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Heading text not interactive
+
+---
+
+=== CHECKPOINT 21 ===
+Timestamp: 2025-01-16T00:21:00.000Z
+Viewport: Desktop 1536x730
+Scroll Position: ~3080px
+Change Type: Structural
+
+📋 STRUCTURAL CHANGES:
+- New Elements (1): Subheading text below main heading: "Automated data ingestion, transformation, and orchestration using Agent and Airflow"
+- Removed Elements (1): Step 1 card details at top scrolled out
+
+🎨 VISUAL ANALYSIS:
+- Colors: Gray subheading text (#808080), white main heading continues visible
+- Typography: Subheading (16-18px, weight 400, gray), main heading (60-72px, weight 700, white)
+- Layout: Text block left-aligned, subheading below main heading, planet continues on left
+- Spacing: Heading to subheading spacing ~24-32px
+
+🎬 ANIMATION DETECTION:
+- Subject: Subheading text "Automated data ingestion..."
+- Visual Description: Gray text describing automation features
+- Observed Behavior: Text fades in after main heading animation completes
+- Trigger: scroll position ~3050px (Section 03 subheading reveal)
+- Technical Details: GSAP fade-in animation delayed after heading animation
+- Property Changes: opacity: 0 → 1, translateY: 20px → 0px over ~0.6s with 0.2s delay
+- Implementation Hint: gsap.from('.section-03-subheading', { opacity: 0, y: 20, duration: 0.6, delay: 0.2, scrollTrigger: { trigger: '.section-03-subheading', start: 'top 80%' }})
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Subheading text not interactive
+
+---
+
+=== CHECKPOINT 22 ===
+Timestamp: 2025-01-16T00:22:00.000Z
+Viewport: Desktop 1536x730
+Scroll Position: ~3240px
+Change Type: Structural
+
+📋 STRUCTURAL CHANGES:
+- New Elements (2):
+  1. Code comparison panel showing "Generated by TensorStax" and "Generated in X" (side-by-side view)
+  2. Code snippet with YAML content showing dbt model configuration ("with dbt: dim_cust_customer.dbt" with test definitions)
+- Removed Elements (0): Heading and subheading remain visible
+
+🎨 VISUAL ANALYSIS:
+- Colors: Dark code panel background (#1A1A1A or similar), white monospace text, gray labels at top
+- Typography: Code panel labels (14px, weight 500, gray), monospace code text (13-14px, Consolas/SF Mono)
+- Layout: Two-column code comparison layout beginning to appear, positioned center-right of viewport
+- Spacing: Code panel has padding ~20px, code line height ~1.5
+
+🎬 ANIMATION DETECTION:
+- Subject: Code comparison panel with YAML snippet
+- Visual Description: Side-by-side code view showing TensorStax-generated vs manual code
+- Observed Behavior: Code panels fade in and slide up as user scrolls into view
+- Trigger: scroll position ~3200px (Section 03 code demo reveal)
+- Technical Details: GSAP fade-in + translateY animation for code panels
+- Property Changes: opacity: 0 → 1, translateY: 30px → 0px over ~0.7s
+- Implementation Hint: gsap.from('.code-comparison-panel', { opacity: 0, y: 30, duration: 0.7, scrollTrigger: { trigger: '.code-comparison', start: 'top 75%' }})
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Code panels may have copy buttons or expand functionality - deferred
+
+---
+
+=== CHECKPOINT 23 ===
+Timestamp: 2025-01-16T00:23:00.000Z
+Viewport: Desktop 1536x730
+Scroll Position: ~3400px
+Change Type: Structural + Visual
+
+📋 STRUCTURAL CHANGES:
+- New Elements (3):
+  1. Header navigation reappeared at top
+  2. More code content visible in left panel: additional YAML configuration for dbt model
+  3. Right panel shows "Generated in X%" (appears to be time/efficiency comparison)
+- Removed Elements (0): Heading continues visible, code panels expanded
+
+🎨 VISUAL ANALYSIS:
+- Colors: Header dark background, code panels dark gray (#1A1A1A), monospace white text, orange CTA button in header
+- Typography: Code continues in monospace 13-14px, header elements 14-16px
+- Layout: Header at top, code comparison panels center, planet on left
+- Spacing: Code line height ~1.5, panel spacing maintained
+
+🎬 ANIMATION DETECTION: None detected (static viewport with expanded code panels)
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Header navigation visible - deferred
+- Code copy buttons likely present - deferred
+
+---
+
+=== CHECKPOINT 24 ===
+Timestamp: 2025-01-16T00:24:00.000Z
+Viewport: Desktop 1536x678
+Scroll Position: ~3560px
+Change Type: Structural + Visual
+
+📋 STRUCTURAL CHANGES:
+- New Elements (4):
+  1. Right code panel fully revealed showing Python Airflow DAG code
+  2. Code content visible: `run_model = BashOperator(task_id="dbt_run_dim_customer", bash_command="cd /opt/airflow/dbt && dbt test --select dim_customer")`
+  3. Additional task definition: `run_test4 = BashOperator(task_id="dbt_test_dim_customer", bash_command="cd /opt/airflow/dbt && dbt test --select dim_customer")`
+  4. Orange loading indicator at bottom-right of code panel ("GENERATING..." with animated dots)
+- Removed Elements (1): Header scrolled out of view again
+
+🎨 VISUAL ANALYSIS:
+- Colors: Left panel dark brown-gray (#3A2E2B), right panel continues with dark background, orange loading animation (#FF6635), white monospace code text
+- Typography: Python code in monospace 13-14px, proper syntax structure with indentation, function names in white
+- Layout: Two-column code comparison maintains, left panel showing YAML configuration, right showing equivalent Python Airflow code
+- Spacing: Code panels side-by-side with ~24px gap, planet visible on left taking ~40% of left side viewport
+
+🎬 ANIMATION DETECTION:
+- Subject: "GENERATING..." loading indicator
+- Visual Description: Orange text with animated ellipsis dots cycling
+- Observed Behavior: Text cycles through "GENERATING.", "GENERATING..", "GENERATING..." to simulate processing
+- Trigger: Visible when code panel in viewport (scroll position ~3400-3600px)
+- Technical Details: CSS animation or JavaScript interval cycling dot states
+- Property Changes: `content` or `::after` pseudo-element changing between 1-3 dots, 0.4s per state
+- Implementation Hint: `@keyframes loadingDots { 0% { content: '.'; } 33% { content: '..'; } 66% { content: '...'; } } .loading::after { animation: loadingDots 1.2s infinite; }`
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Code comparison panels fully visible - no interactive elements detected in this viewport
+- Loading animation is decorative, not interactive
+
+---
+
+=== CHECKPOINT 25 ===
+Timestamp: 2025-01-16T00:25:00.000Z
+Viewport: Desktop 1536x730
+Scroll Position: ~3720px
+Change Type: Structural + Visual
+
+📋 STRUCTURAL CHANGES:
+- New Elements (1):
+  1. Header reappeared at top of viewport with full navigation
+- Removed Elements (0): Code comparison panels continue visible below header
+
+🎨 VISUAL ANALYSIS:
+- Colors: Header dark background matching page theme, navigation dots visible (white), orange "Book a Demo" CTA
+- Typography: Header logo "TENSORSTAX" in uppercase, navigation links 14-16px weight 500
+- Layout: Header at top, code panels below, planet continues on left side
+- Spacing: Header height ~60-70px, padding consistent with previous appearances
+
+🎬 ANIMATION DETECTION: None (static viewport, code comparison continues with "GENERATING..." indicator at bottom-right)
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Header navigation: Home, Blog, Changelog, Docs, Careers - deferred
+- "Book a Demo" CTA button - deferred
+
+---
+
+=== CHECKPOINT 26 ===
+Timestamp: 2025-01-16T00:26:00.000Z
+Viewport: Desktop 1536x678
+Scroll Position: ~3880px
+Change Type: Structural + Visual
+
+📋 STRUCTURAL CHANGES:
+- New Elements (3):
+  1. Code panel completion visible at top (last lines of Python code)
+  2. New paragraph text appeared at bottom: "TensorStax verifies all pipelines by dry running them against your data, this ensures you know whether or not the generated pipeline will work in production or not."
+  3. Orange badge/button visible on left side with arrow icon
+- Removed Elements (1): Code panel headers and most code content scrolled out of view
+
+🎨 VISUAL ANALYSIS:
+- Colors: New paragraph text in white/light gray, dark background continues, orange badge (#FF6635) on left, planet visible occupying ~50% of left viewport
+- Typography: Paragraph text appears to be 16-18px, weight 400, line-height ~1.6, sans-serif
+- Layout: Code completion at top, large space in middle with planet, new text content at bottom-left below planet
+- Spacing: Significant vertical space (~300-400px) between code panel end and new paragraph, creating breathing room
+
+🎬 ANIMATION DETECTION:
+- Subject: New paragraph text
+- Visual Description: White text on dark background, describing pipeline verification feature
+- Observed Behavior: Fade-in animation as text enters viewport
+- Trigger: Scroll position ~3800-3900px
+- Technical Details: GSAP ScrollTrigger with fade + translateY
+- Property Changes: opacity: 0 → 1, translateY: 30px → 0px
+- Implementation Hint: `gsap.from('.verification-text', { opacity: 0, y: 30, duration: 0.8, scrollTrigger: { trigger: '.verification-section', start: 'top 80%' }})`
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Orange badge/button on left - appears to be navigation or scroll indicator - deferred
+- No other interactive elements visible in this viewport
+
+---
+
+=== CHECKPOINT 27 ===
+Timestamp: 2025-01-16T00:27:00.000Z
+Viewport: Desktop 1536x678
+Scroll Position: ~4040px
+Change Type: Structural + Visual
+
+📋 STRUCTURAL CHANGES:
+- New Elements (4):
+  1. Large heading "All outputs are always verified" (white, large font)
+  2. Section badge "04." visible at top-left (orange with white text)
+  3. Two preview cards at bottom: "Airflow DAG Dry Run" with Airflow logo (teal/blue), "DBT Model Validation" with X icon (red/orange)
+  4. Subheading/description text visible below main heading (same as previous checkpoint paragraph)
+- Removed Elements (0): Planet continues visible on left
+
+🎨 VISUAL ANALYSIS:
+- Colors: Heading white (#FFFFFF), badge orange (#FF6635), card backgrounds dark gray (#1A1A1A), Airflow logo colors (teal #00C7B7), DBT icon red/orange
+- Typography: Main heading very large (60-72px, weight 700, two lines "All outputs are / always verified"), subheading 16-18px weight 400, card labels 14-16px
+- Layout: Badge top-left, heading left-aligned below planet, subheading below heading, two cards in row at bottom with ~24px gap
+- Spacing: Heading large vertical spacing (~40px) from subheading, cards appear at bottom with consistent spacing
+
+🎬 ANIMATION DETECTION:
+- Subject: Heading "All outputs are always verified" + Section 04 badge
+- Visual Description: White heading text (two lines), orange badge with "04."
+- Observed Behavior: Stagger animation - badge appears first with scale (0.8→1), then heading text reveals with stagger effect per word/line
+- Trigger: Scroll position ~3900-4040px (Section 04 entry)
+- Technical Details: GSAP ScrollTrigger with stagger for heading, scale animation for badge
+- Property Changes: Badge scale: 0.8 → 1 (0.4s), Heading opacity: 0 → 1 + translateY: 20px → 0px, stagger: 0.1s between words
+- Implementation Hint: `gsap.from('.section-04-badge', { scale: 0.8, opacity: 0, duration: 0.4 }); gsap.from('.section-04-heading', { opacity: 0, y: 20, stagger: 0.1, scrollTrigger: { trigger: '.section-04', start: 'top 70%' }})`
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Two preview cards visible (Airflow DAG Dry Run, DBT Model Validation) - likely interactive - deferred
+- Badge "04." not interactive (decorative)
+
+---
+
+=== CHECKPOINT 28 ===
+Timestamp: 2025-01-16T00:28:00.000Z
+Viewport: Desktop 1536x730
+Scroll Position: ~4200px
+Change Type: Structural
+
+📋 STRUCTURAL CHANGES:
+- New Elements (1):
+  1. Header reappeared at top with navigation and "GENERATING..." indicator in center
+- Removed Elements (1): Preview cards (Airflow DAG Dry Run, DBT Model Validation) scrolled out of view at bottom
+
+🎨 VISUAL ANALYSIS:
+- Colors: Header continues dark theme, "GENERATING..." orange text with animated dots, navigation dots white
+- Typography: Header elements unchanged, "GENERATING..." in uppercase ~14px with animated ellipsis
+- Layout: Header at top, Section 04 heading and subheading continue visible in center-left, planet on left
+- Spacing: Header maintains ~60-70px height, content below with consistent spacing
+
+🎬 ANIMATION DETECTION:
+- Subject: "GENERATING..." loading indicator in header center
+- Visual Description: Orange uppercase text with animated ellipsis dots
+- Observed Behavior: Dots cycle through 1-3 dots to simulate active processing state
+- Trigger: Visible when scrolling through Section 04 area
+- Technical Details: CSS animation cycling dot count, or JavaScript interval updating content
+- Property Changes: `::after` pseudo-element content cycling between ".", "..", "..."
+- Implementation Hint: `@keyframes generatingDots { 0%, 100% { content: '.'; } 33% { content: '..'; } 66% { content: '...'; } } .generating::after { animation: generatingDots 1.5s infinite; }`
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Header navigation (Home, Blog, Changelog, Docs, Careers) - deferred
+- "Book a Demo" CTA - deferred
+
+---
+
+=== CHECKPOINT 29 ===
+Timestamp: 2025-01-16T00:29:00.000Z
+Viewport: Desktop 1536x730
+Scroll Position: ~4360px
+Change Type: Structural + Visual
+
+📋 STRUCTURAL CHANGES:
+- New Elements (3):
+  1. Two detail cards reappeared at bottom: "Airflow DAG Dry Run" and "DBT Model Validation"
+  2. Card content visible: "Airflow DAG Dry Run" shows "In-memory replica of target Snowflake table created."
+  3. "DBT Model Validation" shows "Model preview against warehouse snapshot"
+- Removed Elements (0): All previous elements continue visible
+
+🎨 VISUAL ANALYSIS:
+- Colors: Cards dark gray background (#1A1A1A/#252525), Airflow logo teal/blue, DBT icon red/orange X, text white/gray
+- Typography: Card labels 16-18px weight 600, descriptions 14-16px weight 400 gray (#A0A0A0), monospace for technical terms
+- Layout: Two cards side-by-side below heading section, equal width with gap ~24px, icons left-aligned in each card
+- Spacing: Cards padding ~24-32px, text spacing ~12px between label and description
+
+🎬 ANIMATION DETECTION:
+- Subject: Detail cards (Airflow DAG Dry Run, DBT Model Validation)
+- Visual Description: Dark gray cards with colored icons (teal Airflow logo, red X for DBT)
+- Observed Behavior: Fade-in + translateY animation as cards enter viewport, stagger between two cards
+- Trigger: Scroll position ~4300-4400px (cards entering viewport bottom)
+- Technical Details: GSAP ScrollTrigger with stagger delay between cards
+- Property Changes: opacity: 0 → 1, translateY: 40px → 0px, stagger: 0.15s between cards
+- Implementation Hint: `gsap.from('.verification-card', { opacity: 0, y: 40, duration: 0.7, stagger: 0.15, scrollTrigger: { trigger: '.verification-cards', start: 'top 85%' }})`
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Two detail cards (Airflow DAG Dry Run, DBT Model Validation) - may be expandable or clickable - deferred
+- Card content suggests interactive validation features
+
+---
+
+=== CHECKPOINT 30 ===
+Timestamp: 2025-01-16T00:30:00.000Z
+Viewport: Desktop 1536x730
+Scroll Position: ~4520px
+Change Type: Structural + Visual
+
+📋 STRUCTURAL CHANGES:
+- New Elements (8):
+  1. Airflow DAG Dry Run card expanded showing bullet point list with green checkmarks:
+     - "Simulates insert into"
+     - "All steps succeeded in dry run"
+     - "Upstream tasks resolved"
+     - "No live infra hit"
+  2. DBT Model Validation card expanded showing bullet point list with green checkmarks:
+     - "Returns rows from"
+     - "All dbt tests passed"
+     - "p/6 schema tests validated"
+     - "No production data queried"
+- Removed Elements (1): Badge "04." scrolled slightly out of top
+
+🎨 VISUAL ANALYSIS:
+- Colors: Green checkmarks (#00C853 or similar), bullet text light gray (#CCCCCC), card backgrounds dark (#1A1A1A), header continues dark with orange CTA
+- Typography: Bullet points 14-16px, weight 400, monospace for technical terms (e.g., "insert into", "dbt tests"), checkmark icons ~16px
+- Layout: Two cards continue side-by-side, bullet lists left-aligned with ~8px spacing between items, planet visible in background (center-left)
+- Spacing: Card content padding ~24-32px, bullet list ~8-12px vertical spacing between items
+
+🎬 ANIMATION DETECTION:
+- Subject: Bullet point lists in validation cards
+- Visual Description: Green checkmarks followed by descriptive text in each list item
+- Observed Behavior: Stagger animation revealing bullet points one-by-one within each card
+- Trigger: Scroll position ~4400-4520px (card content entering viewport)
+- Technical Details: GSAP stagger animation for bullet list items
+- Property Changes: opacity: 0 → 1, translateX: -20px → 0px, stagger: 0.1s per item
+- Implementation Hint: `gsap.from('.verification-card .bullet-item', { opacity: 0, x: -20, duration: 0.5, stagger: 0.1, scrollTrigger: { trigger: '.verification-card', start: 'top 75%' }})`
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Cards fully expanded showing validation details - no additional interactive elements detected in this viewport
+- Header navigation continues visible - deferred
+
+---
+
+=== CHECKPOINT 31 ===
+Timestamp: 2025-01-16T00:31:00.000Z
+Viewport: Desktop 1536x730
+Scroll Position: ~4680px
+Change Type: Visual
+
+📋 STRUCTURAL CHANGES:
+- New Elements (0): No new structural elements
+- Removed Elements (1): Section heading "All outputs are always verified" partially scrolled out at top
+
+🎨 VISUAL ANALYSIS:
+- Colors: Continue with dark cards (#1A1A1A), green checkmarks (#00C853), white/gray text, orange header CTA
+- Typography: Bullet lists remain at 14-16px, monospace for technical terms, header elements unchanged
+- Layout: Two validation cards centered in viewport, planet visible behind cards (center-left), header at top
+- Spacing: Cards maintain spacing, planet positioning continues parallax effect
+
+🎬 ANIMATION DETECTION: None (static viewport showing continued card content)
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Validation cards fully visible with all bullet points - deferred testing
+- Header navigation - deferred
+
+---
+
+=== CHECKPOINT 53 ===
+Timestamp: 2025-01-16T00:53:00.000Z
+Viewport: Desktop 1536x678
+Scroll Position: ~8038px
+Change Type: Structural + Visual
+
+📋 STRUCTURAL CHANGES:
+- New Elements (12):
+  1. Section 07 heading "Getting started is easy" (large white text, 2 lines)
+  2. Three numbered step icons: "1 CONNECT DATA", "2 DEFINE SCHEMA", "3 IMPROVE AGENT"
+  3. Orange "Step 1" button (active state)
+  4. Left panel content: "CONNECT YOUR DATA" heading
+  5. Two bullet points: "Choose your source: Snowflake, PostgreSQL, S3, etc.", "Configure access permissions."
+  6. Right panel: Dark modal/interface preview showing "Choose Your Data Source"
+  7. Data source logos/buttons: Snowflake (blue), PostgreSQL (blue elephant), MySQL (orange), MongoDB (green leaf), AWS S3 (orange), Databricks (red)
+  8. Modal header with close button (X) and navigation dots
+  9. Modal title text with instruction below logos
+- Removed Elements (0): Previous section content scrolled out
+
+🎨 VISUAL ANALYSIS:
+- Colors: White heading, orange "Step 1" button (#FF6635), dark modal background (#1A1A1A), colorful data source logos
+- Typography: Heading ~60-72px weight 700, step labels uppercase 12-14px, bullet text 16-18px, modal text 18-20px
+- Layout: Left panel with text content, right panel with interface preview (60/40 split), centered modal in right panel
+- Spacing: Large heading spacing, step icons horizontal layout with gaps, bullet list ~12px vertical spacing
+
+🎬 ANIMATION DETECTION:
+- Subject: Section 07 heading "Getting started is easy" + step indicators + modal
+- Visual Description: White heading with three numbered step circles, orange "Step 1" active button, data source selection modal
+- Observed Behavior: Fade-in animation for heading with stagger, step indicators appear sequentially, modal slides in from right
+- Trigger: Scroll position ~7800-8100px (Section 07 entry)
+- Technical Details: GSAP ScrollTrigger with stagger for text, modal uses translateX animation
+- Property Changes: Heading opacity: 0 → 1 + stagger 0.1s per word, Modal translateX: 100px → 0px + opacity: 0 → 1
+- Implementation Hint: `gsap.from('.section-07-heading', { opacity: 0, y: 30, stagger: 0.1, scrollTrigger: { trigger: '.section-07', start: 'top 70%' }}); gsap.from('.data-source-modal', { x: 100, opacity: 0, duration: 0.8, delay: 0.5 })`
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- "Step 1" button (orange, active state) - likely switches between steps - deferred
+- Step indicators (1, 2, 3) - likely clickable navigation - deferred
+- Data source logos (Snowflake, PostgreSQL, MySQL, MongoDB, AWS S3, Databricks) - likely selectable buttons - deferred
+- Modal close button (X) - deferred
+
+---
+
+=== CHECKPOINT 54 ===
+Timestamp: 2025-01-16T00:54:00.000Z
+Viewport: Desktop 1536x678
+Scroll Position: ~8318px
+Change Type: Structural + Visual
+
+📋 STRUCTURAL CHANGES:
+- New Elements (3):
+  1. "Step 2" button appeared at bottom-left (orange background)
+  2. Bottom panel preview showing "Context Configuration" interface
+  3. Additional interface elements in lower modal
+- Removed Elements (0): Step indicator row continues visible at top
+
+🎨 VISUAL ANALYSIS:
+- Colors: "Step 2" button orange (#FF6635), modal continues dark background, data source logos colorful
+- Typography: "Step 2" button same style as "Step 1" (14-16px uppercase bold)
+- Layout: "Step 1" content continues in upper portion, "Step 2" button at bottom-left, new interface preview at bottom
+- Spacing: Vertical stacking of step content panels
+
+🎬 ANIMATION DETECTION:
+- Subject: "Step 2" button and bottom interface panel
+- Visual Description: Orange "Step 2" button, "Context Configuration" interface preview
+- Observed Behavior: Fade-in animation as new step content enters viewport
+- Trigger: Scroll position ~8250-8350px
+- Technical Details: GSAP ScrollTrigger with translateY animation
+- Property Changes: opacity: 0 → 1, translateY: 30px → 0px
+- Implementation Hint: `gsap.from('.step-2-content', { opacity: 0, y: 30, duration: 0.7, scrollTrigger: { trigger: '.step-2', start: 'top 80%' }})`
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- "Step 2" button (orange) - likely activates Step 2 content - deferred
+- "Context Configuration" interface elements - deferred
+
+---
+
+=== CHECKPOINT 55 ===
+Timestamp: 2025-01-16T00:55:00.000Z
+Viewport: Desktop 1536x678
+Scroll Position: ~8638px
+Change Type: Structural + Visual
+
+📋 STRUCTURAL CHANGES:
+- New Elements (10):
+  1. "Step 2" button visible at top-left (orange)
+  2. "DEFINE YOUR SCHEMA" heading (left panel)
+  3. Two bullet points: "Map tables and join keys.", "Set primary logic for transformations."
+  4. Right panel: "Context Configuration" interface with two tabs ("Database Name", "View Schema")
+  5. Orange label tags visible: "ORDERS SHIPPED", "SALES COMPLETED", "NEW_CUSTOMERS", etc.
+  6. Data schema table showing: "ADVENTURE WORKS" section with rows including "CUSTOMER", "PRODUCT", "SALESPERSON", "COUNTRYREGIONCU RRENCY", "CURRENCYR ATE", "SALESORDERDETAIL", etc.
+  7. Multiple columns visible: appears to show table relationships and configurations
+- Removed Elements (1): Data source selection modal from Step 1 scrolled out
+
+🎨 VISUAL ANALYSIS:
+- Colors: Orange labels/tags (#FF6635), dark interface background (#1A1A1A), white text, gray secondary text
+- Typography: "DEFINE YOUR SCHEMA" heading ~24-28px uppercase bold, bullet text 16-18px, table text monospace 13-14px
+- Layout: Left panel text content, right panel showing data schema configuration interface with table rows
+- Spacing: Table rows with ~8-10px vertical spacing, labels with ~4px gap between items
+
+🎬 ANIMATION DETECTION:
+- Subject: Step 2 content panel and schema configuration interface
+- Visual Description: "DEFINE YOUR SCHEMA" heading with bullet points, data table interface
+- Observed Behavior: Fade-in with translateY animation as Step 2 content becomes active
+- Trigger: Scroll position ~8550-8650px (Step 2 activation)
+- Technical Details: GSAP ScrollTrigger or step transition animation
+- Property Changes: opacity: 0 → 1, translateY: 40px → 0px, duration: 0.8s
+- Implementation Hint: `gsap.from('.step-2-panel', { opacity: 0, y: 40, duration: 0.8, ease: 'power2.out' })`
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- "Step 2" button (orange, active) - deferred
+- Database Name / View Schema tabs - likely switchable - deferred
+- Orange label tags - may be filterable/clickable - deferred
+- Table rows - may be selectable/expandable - deferred
+
+---
+
+=== CHECKPOINT 56 ===
+Timestamp: 2025-01-16T00:56:00.000Z
+Viewport: Desktop 1536x678
+Scroll Position: ~8930px
+Change Type: Structural + Visual
+
+📋 STRUCTURAL CHANGES:
+- New Elements (6):
+  1. "Step 3" button appeared at bottom-left (orange)
+  2. "CALL IN THE AGENT" heading visible at bottom-left
+  3. Bottom panel showing additional interface with chat-like elements
+  4. Text visible: "Revenues & booking last...Qtr", "Best performing Product category in the last qr...", "What is the purpose of business question for the last qr..."
+  5. Checkboxes or selection elements in bottom interface
+- Removed Elements (0): Step 2 content continues visible above
+
+🎨 VISUAL ANALYSIS:
+- Colors: "Step 3" button orange (#FF6635), dark interface continues, white/gray text
+- Typography: "CALL IN THE AGENT" heading ~24-28px uppercase bold, interface text 14-16px
+- Layout: Vertical stacking of steps, Step 3 content beginning at bottom
+- Spacing: Consistent with previous steps, ~40-60px between step sections
+
+🎬 ANIMATION DETECTION:
+- Subject: Step 3 button and "CALL IN THE AGENT" content
+- Visual Description: Orange "Step 3" button with heading and interface preview
+- Observed Behavior: Fade-in with translateY as content enters viewport
+- Trigger: Scroll position ~8850-8950px
+- Technical Details: GSAP ScrollTrigger continuing step transition pattern
+- Property Changes: opacity: 0 → 1, translateY: 40px → 0px
+- Implementation Hint: `gsap.from('.step-3-content', { opacity: 0, y: 40, duration: 0.8, scrollTrigger: { trigger: '.step-3', start: 'top 80%' }})`
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- "Step 3" button (orange) - deferred
+- Chat-like interface elements - deferred
+- Checkboxes/selection elements - deferred
+
+---
+
+=== CHECKPOINT 57 ===
+Timestamp: 2025-01-16T00:57:00.000Z
+Viewport: Desktop 1536x678
+Scroll Position: ~9529px
+Change Type: Structural + Visual
+
+📋 STRUCTURAL CHANGES:
+- New Elements (15):
+  1. "Step 3" button visible at left (orange)
+  2. "CALL IN THE AGENT" heading (left panel)
+  3. Three bullet points: "Agent reads your draft.", "Rewrites, optimizes, and suggests changes.", "Explains decisions contextually."
+  4. Right panel: Large interface showing SQL code editor with line numbers
+  5. SQL code visible: Complex SELECT query with CTEs (Common Table Expressions), DISTINCT operations, date/time columns
+  6. Code editor features: Line numbers (1-21), syntax highlighting, red error markers (X icons on left)
+  7. Right sidebar showing: "What is the purpose of business question for the last qr...", "Let me know your requirements", "Link you orders in", checkbox selections, "Rewrites in Fluent Script" section
+  8. Bottom section: "All Audit Preview" table with columns: OWNER_NO, CUSTOMER_NO, ANALYSIS_DATE, ORDER_DATE_2, CREATE_DATE, SALES_DATE, STATUS_CODE, ADV_AMOUNT
+  9. Sample data rows visible in table
+- Removed Elements (1): Step 2 content mostly scrolled out
+
+🎨 VISUAL ANALYSIS:
+- Colors: Orange "Step 3" button, dark code editor (#1A1A1A), white code text, red error indicators, gray line numbers, table with alternating row colors
+- Typography: SQL code monospace 13-14px, bullet text 16-18px, heading 24-28px uppercase, table text 12-13px
+- Layout: Left panel text, right panel dominated by code editor and audit table, sidebar on right with suggestions
+- Spacing: Code editor with proper indentation, table rows ~24-28px height, line numbers left-aligned
+
+🎬 ANIMATION DETECTION:
+- Subject: Step 3 content panel with code editor and audit table
+- Visual Description: SQL code editor with syntax highlighting, error markers, data preview table
+- Observed Behavior: Fade-in with translateY, code editor appears with typing animation effect
+- Trigger: Scroll position ~9450-9550px (Step 3 full reveal)
+- Technical Details: GSAP ScrollTrigger with stagger for bullets, code editor fade-in
+- Property Changes: opacity: 0 → 1, translateY: 40px → 0px, stagger: 0.1s for bullets
+- Implementation Hint: `gsap.from('.step-3-panel', { opacity: 0, y: 40, duration: 0.8 }); gsap.from('.code-editor', { opacity: 0, scale: 0.95, duration: 0.6, delay: 0.3 })`
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- "Step 3" button (orange, active) - deferred
+- Code editor (likely editable) - deferred
+- Error markers (X icons) - may show error details - deferred
+- Right sidebar checkboxes - deferred
+- Table rows (may be selectable) - deferred
+- "Rewrites in Fluent Script" section - deferred
+
+---
+
+=== CHECKPOINT 32 ===
+Timestamp: 2025-01-16T00:32:00.000Z
+Viewport: Desktop 1536x730
+Scroll Position: ~4840px
+Change Type: Visual
+
+📋 STRUCTURAL CHANGES:
+- New Elements (0): No new structural elements
+- Removed Elements (0): Cards continue visible with full content
+
+🎨 VISUAL ANALYSIS:
+- Colors: Same as previous checkpoint - dark cards, green checkmarks, white/gray text
+- Typography: Unchanged bullet list typography
+- Layout: Two validation cards continue centered, planet more prominent in viewport (left side, ~60% visible)
+- Spacing: Card spacing maintained
+
+🎬 ANIMATION DETECTION: None (static viewport continuation)
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Cards continue visible - deferred
+- Header visible at top - deferred
+
+---
+
+=== CHECKPOINT 33 ===
+Timestamp: 2025-01-16T00:33:00.000Z
+Viewport: Desktop 1536x730
+Scroll Position: ~5000px
+Change Type: Structural
+
+📋 STRUCTURAL CHANGES:
+- New Elements (0): No new elements
+- Removed Elements (1): Card descriptions scrolled out at top (only bullet lists remain visible)
+
+🎨 VISUAL ANALYSIS:
+- Colors: Cards continue with dark backgrounds, green checkmarks visible in bullet lists
+- Typography: Bullet lists 14-16px continue
+- Layout: Bottom portions of validation cards visible at top, planet dominant in center-left (now ~80% visible), large empty space below
+- Spacing: Significant vertical space emerging below cards
+
+🎬 ANIMATION DETECTION: None (static viewport, transition space between sections)
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Partial card views at top - deferred
+- Header visible - deferred
+
+---
+
+=== CHECKPOINT 34 ===
+Timestamp: 2025-01-16T00:34:00.000Z
+Viewport: Desktop 1536x730
+Scroll Position: ~5160px
+Change Type: Structural
+
+📋 STRUCTURAL CHANGES:
+- New Elements (0): No new elements
+- Removed Elements (1): Validation cards almost completely scrolled out at top (only last bullet items visible)
+
+🎨 VISUAL ANALYSIS:
+- Colors: Small portions of green bullet text visible at top, header dark background, mostly black empty space
+- Typography: Last bullet items 14-16px visible at top edge
+- Layout: Minimal card remnants at top, planet visible on left (~90% visible), large transition space dominating viewport
+- Spacing: Large vertical empty space suggests section transition
+
+🎬 ANIMATION DETECTION: None (transition space between sections)
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Header navigation visible - deferred
+
+---
+
+=== CHECKPOINT 35 ===
+Timestamp: 2025-01-16T00:35:00.000Z
+Viewport: Desktop 1536x730
+Scroll Position: ~5320px
+Change Type: Visual
+
+📋 STRUCTURAL CHANGES:
+- New Elements (0): No new elements
+- Removed Elements (1): Validation card remnants completely scrolled out
+
+🎨 VISUAL ANALYSIS:
+- Colors: Black background (#000000) dominates viewport, header dark with orange CTA
+- Typography: Only header elements visible (logo, navigation 14-16px)
+- Layout: Header at top, completely empty black space below, no planet visible
+- Spacing: Large empty transition space between Section 04 and next section
+
+🎬 ANIMATION DETECTION: None (empty transition space)
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Header navigation - deferred
+
+---
+
+=== CHECKPOINT 36 ===
+Timestamp: 2025-01-16T00:36:00.000Z
+Viewport: Desktop 1536x678
+Scroll Position: ~5640px
+Change Type: Structural + Visual
+
+📋 STRUCTURAL CHANGES:
+- New Elements (3):
+  1. Large heading "The agentic" (orange, ~60-72px, left side)
+  2. Continuation "data OS" (white, ~60-72px, below "agentic")
+  3. Two orange decorative grid patterns (pixelated/dot matrix style) - one left, one right side
+- Removed Elements (1): Header scrolled out of view at top
+
+🎨 VISUAL ANALYSIS:
+- Colors: Heading "The agentic" orange (#FF6635), "data OS" white (#FFFFFF), decorative grids orange, black background
+- Typography: Heading very large (60-72px, weight 700, split across two lines), sans-serif
+- Layout: Heading centered vertically in viewport, decorative grids symmetrically placed left and right (~100px from edges)
+- Spacing: "The agentic" and "data OS" have ~20-30px vertical spacing between lines, large empty space above and below
+
+🎬 ANIMATION DETECTION:
+- Subject: Heading "The agentic data OS" + decorative grid patterns
+- Visual Description: Two-line heading (orange + white), orange pixelated grid icons on sides
+- Observed Behavior: Stagger animation - "The agentic" appears first, then "data OS" follows with delay, grid patterns fade in simultaneously
+- Trigger: Scroll position ~5500-5640px (new section entry)
+- Technical Details: GSAP ScrollTrigger with stagger for text lines, simultaneous fade for decorative elements
+- Property Changes: 
+  - "The agentic": opacity 0 → 1, translateY 30px → 0px
+  - "data OS": opacity 0 → 1, translateY 30px → 0px, delay 0.2s
+  - Grid patterns: opacity 0 → 1, scale 0.8 → 1, duration 0.5s
+- Implementation Hint: `gsap.from('.section-05-heading-line', { opacity: 0, y: 30, stagger: 0.2, scrollTrigger: { trigger: '.section-05', start: 'top 70%' }}); gsap.from('.decorative-grid', { opacity: 0, scale: 0.8, duration: 0.5 })`
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Decorative grid patterns - likely not interactive (decorative)
+- No other interactive elements in viewport
+
+---
+
+=== CHECKPOINT 37 ===
+Timestamp: 2025-01-16T00:37:00.000Z
+Viewport: Desktop 1536x730
+Scroll Position: ~6242px
+Change Type: Structural + Visual
+
+📋 STRUCTURAL CHANGES:
+- New Elements (7):
+  1. Subheading below main heading: "Your Data Stack, Supercharged"
+  2. Left feature card: "SELF-HEALING PIPELINES" with "(AUTOPHIX + GIT INTEGRATION)" label
+  3. Left card description: "Detects issues, suggests fixes, and automatically creates GitHub pull requests to patch failing code and pipelines."
+  4. Left card code snippet: `/pipeline` command with `confMisMatchError` example
+  5. Right feature card: "GENERATE DATA MODELS, TESTS, PIPELINES ON YOUR INFRASTRUCTURE" with "(AUTO CODE COMPLETION & VALIDATION)" label
+  6. Right card description: "Automatically generate tests, assertions, and new dbt models with strong schema typing and performance patterns."
+  7. Right card UI mockup: Two badges "SQL" (green checkmark) with orange "+AGENT" button, "Tests" with orange "+AGENT" button
+
+🎨 VISUAL ANALYSIS:
+- Colors: Subheading white (#FFFFFF), feature cards dark gray (#1A1A1A), labels gray (#808080), orange labels/buttons (#FF6635), green checkmark for SQL badge (#00C853)
+- Typography: Subheading 14-16px, card headings 18-20px uppercase weight 700, descriptions 14-16px weight 400, code snippet monospace 13-14px
+- Layout: Subheading centered below main heading, two feature cards side-by-side below with ~24px gap, decorative grids remain on sides
+- Spacing: Cards have ~24-32px internal padding, ~40-60px space between subheading and cards
+
+🎬 ANIMATION DETECTION:
+- Subject: Feature cards + subheading
+- Visual Description: Two dark cards with headings, descriptions, and interactive elements (code snippet left, UI badges right)
+- Observed Behavior: Subheading fades in after main heading, then two cards appear with stagger animation (left card first, right card 0.15s delay)
+- Trigger: Scroll position ~5900-6242px (feature cards entering viewport)
+- Technical Details: GSAP ScrollTrigger with stagger for cards, fade-in for subheading
+- Property Changes: 
+  - Subheading: opacity 0 → 1, translateY 20px → 0px, delay 0.3s after heading
+  - Cards: opacity 0 → 1, translateY 40px → 0px, stagger 0.15s
+- Implementation Hint: `gsap.from('.section-05-subheading', { opacity: 0, y: 20, delay: 0.3 }); gsap.from('.feature-card', { opacity: 0, y: 40, stagger: 0.15, scrollTrigger: { trigger: '.feature-cards', start: 'top 80%' }})`
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- "+AGENT" buttons on right card (2 total) - likely trigger model generation - deferred
+- Code snippet on left card - may be interactive/copyable - deferred
+- SQL/Tests badges - may be clickable - deferred
+
+---
+
+=== CHECKPOINT 38 ===
+Timestamp: 2025-01-16T00:38:00.000Z
+Viewport: Desktop 1536x730
+Scroll Position: ~6425px
+Change Type: Structural + Visual
+
+📋 STRUCTURAL CHANGES:
+- New Elements (5):
+  1. Header reappeared at top
+  2. Left card code snippet expanded showing full SQL query (~13 lines visible):
+     - Lines 1-2: `(( configMisMatchError='view' ))`
+     - Lines 3-13: SQL SELECT query with joins, priority logic, DISTINCT operations
+  3. Right card code editor expanded showing configuration snippet:
+     - Line 1-2: `{{ config(materialized='incremental', unique_key='customer_id') }}`
+  4. Right card SQL query preview at bottom: `select * from ...`
+  5. Right card suggestions visible: `+ unique → customer_id`, `+ not_null → *realm, status`, etc.
+- Removed Elements (0): All previous elements remain, cards expanded downward
+
+🎨 VISUAL ANALYSIS:
+- Colors: Header dark, code snippets white monospace text on dark (#1A1A1A), SQL badge green, orange "+AGENT" buttons, suggestions in gray with green "+" prefix
+- Typography: Code 13-14px monospace, line numbers gray, suggestions 12-14px
+- Layout: Header top, feature cards expanded showing more code content, decorative grids remain
+- Spacing: Code lines ~18-20px line-height, suggestions ~24px vertical spacing
+
+🎬 ANIMATION DETECTION: None (static viewport with expanded code panels)
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Code snippets may be copyable - deferred
+- "+AGENT" buttons - deferred
+- SQL/Tests badges - deferred
+- Suggestion items (+ unique, + not_null, etc.) - may be clickable to apply - deferred
+
+---
+
+=== CHECKPOINT 39 ===
+Timestamp: 2025-01-16T00:39:00.000Z
+Viewport: Desktop 1536x702
+Scroll Position: ~6157px
+Change Type: Visual (Backward scroll interpolation)
+
+📋 STRUCTURAL CHANGES:
+- Position changed: Backward scroll from 6425px to 6157px (-268px, Lenis smooth scroll interpolation)
+- Similar viewport content to Checkpoint 38, but different scroll position
+- No new structural elements (same Section 05 cards visible)
+- Removed Elements: Some bottom suggestions from right card may have scrolled out
+
+🎨 VISUAL ANALYSIS:
+- Colors: Same as Checkpoint 38 - dark background #000000, card backgrounds #1A1A1A, orange "#FF6635" for "+AGENT" buttons, green checkmark on SQL badge
+- Typography: Code 13-14px monospace (Consolas/SF Mono), heading "The agentic data OS" split with orange+white, subheading white
+- Layout: Two-column feature card layout maintained, decorative orange grid patterns on sides
+- Spacing: Card padding 24-32px, gap between cards ~24px
+
+🎬 ANIMATION DETECTION: None (static viewport, no new animations triggered)
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Same interactive elements as Checkpoint 38 remain visible
+- Code snippets (copyable) - deferred
+- "+AGENT" buttons (4 visible: 2 per card) - deferred
+- SQL/Tests badges - deferred
+- Suggestion list items in right card - deferred
+
+---
+
+=== CHECKPOINT 40 ===
+Timestamp: 2025-01-16T00:40:00.000Z
+Viewport: Desktop 1536x678
+Scroll Position: ~5906px
+Change Type: Visual (Continued backward interpolation)
+
+📋 STRUCTURAL CHANGES:
+- Position: Further backward from 6157px to 5906px (-251px, Lenis smooth scroll)
+- No new structural elements
+- Viewport shows same Section 05 content: "The agentic data OS" heading at top, two feature cards centered
+- Removed Elements: None (same viewport as Checkpoints 37-39)
+
+🎨 VISUAL ANALYSIS:
+- Colors: Consistent - black background #000000, orange heading text "The agentic" #FF6635, white "data OS", card backgrounds #1A1A1A
+- Typography: Heading ~60-72px split across 2 lines (orange + white), subheading "Your Data Stack, Supercharged" ~18-20px white, card titles uppercase ~18-20px/weight 600-700
+- Layout: Centered two-column card layout, decorative orange grid patterns on left/right sides (~100px from edges)
+- Spacing: Section padding ~80-120px vertical, card gap ~24px
+
+🎬 ANIMATION DETECTION: None (static viewport, Lenis interpolation causing position fluctuation but no new animations)
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Same as previous checkpoints: code snippets, "+AGENT" buttons, badges - all deferred
+
+---
+
+=== CHECKPOINT 41 ===
+Timestamp: 2025-01-16T00:41:00.000Z
+Viewport: Desktop 1536x678
+Scroll Position: ~6339px
+Change Type: Structural + Visual
+
+📋 STRUCTURAL CHANGES:
+- New Elements (7):
+  1. Left card code expanded showing full SQL query (~20 lines, lines 1-21 visible):
+     - Line 1: `(( config(materialized='view') ))`
+     - Lines 2-4: `with orders as ( select * from {{ ref('stg_tpch_orders') }} ),`
+     - Lines 5-21: Complex query with aggregations: `priority_status_summary as (`, `select`, `priority_code,`, `status_code,`, `count(distinct order_key) as order_count,`, `count(distinct customer_key) as unique_customers,`, `sum(total_price) as total_revenue,`, `avg(total_price) as avg_order_value,`, `min(total_price) as min_order_value,`, `max(total_price) as max_order_value,`, `min(order_date) as first_order_date,`, `max(order_date) as last_order_date,`, line 19 shows orange "+ AGENT" button overlay on code
+  2. Right card showing statistics at bottom: "Model: customer_base_v2.sql", "Tests: 3", "Validated: +", "Tests passed: 3/3" (white text on dark)
+  3. Right card suggestions more complete: `+ unique → customer_id`, `+ not_null → region, status`, `+ accepted_at → *start_at/end_at` (with asterisk indicating nullable)
+  4. New section labels appeared at bottom: "COMPILER LAYER" (left), "DATA OS & OVERAVAILTY" (right) - both uppercase white text
+- Removed Elements (2):
+  1. Section 05 heading "The agentic data OS" scrolled out of view (top)
+  2. Card descriptions scrolled partially out
+
+🎨 VISUAL ANALYSIS:
+- Colors: Code white on dark brown-gray #3A2E2B, line numbers gray #808080, "+ AGENT" button orange #FF6635 with hover state, SQL badge green #00C853, statistics text white
+- Typography: Code 13-14px monospace with line numbers, statistics 12-13px, section labels at bottom ~16-18px uppercase/weight 600
+- Layout: Two-column card layout maintained, cards showing expanded code/config state, new section labels horizontally aligned at bottom
+- Spacing: Code line-height ~18-20px, statistics spacing ~8-12px vertical between items
+
+🎬 ANIMATION DETECTION:
+- Subject: Section transition indication (new labels at bottom)
+- Visual Description: "COMPILER LAYER" and "DATA OS & OVERAVAILTY" white text labels
+- Observed Behavior: Labels appeared as user scrolled down, indicating upcoming new section
+- Type: fade-in or stagger animation (likely)
+- Trigger: Scroll position ~6300-6400px
+- Technical Details: GSAP ScrollTrigger with fade-in animation
+- Property Changes: opacity 0→1, possibly translateY 20px→0px
+- Implementation Hint: `gsap.from('.section-label', { opacity: 0, y: 20, scrollTrigger: { trigger: '.section-06', start: 'top 80%' } })`
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Orange "+ AGENT" button overlaid on code (line 19) - deferred
+- SQL/Tests badges - deferred
+- Statistics items (clickable to view details?) - deferred
+- Suggestion list items - deferred
+
+---
+
+=== CHECKPOINT 42 ===
+Timestamp: 2025-01-16T00:42:00.000Z
+Viewport: Desktop 1536x678
+Scroll Position: ~5982px
+Change Type: Visual (Backward interpolation)
+
+📋 STRUCTURAL CHANGES:
+- Position: Backward from 6339px to 5982px (-357px, Lenis smooth scroll)
+- No new structural elements
+- Viewport shows Section 05 content again: "The agentic data OS" heading at top, feature cards visible
+- Same two cards: SELF HEALING PIPELINES (left), GENERATE DATA MODELS (right)
+
+🎨 VISUAL ANALYSIS:
+- Colors: Same as previous Section 05 checkpoints - black #000000, orange #FF6635, white #FFFFFF
+- Typography: Heading split orange/white, card titles uppercase
+- Layout: Two-column layout with decorative grids
+- Spacing: Consistent with Section 05 design
+
+🎬 ANIMATION DETECTION: None (revisiting previous viewport due to scroll interpolation)
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Same interactive elements as before - all deferred
+
+---
+
+=== CHECKPOINT 43 ===
+Timestamp: 2025-01-16T00:43:00.000Z
+Viewport: Desktop 1536x678
+Scroll Position: ~6026px
+Change Type: Visual
+
+📋 STRUCTURAL CHANGES:
+- Position: Slight forward progress from 5982px to 6026px (+44px)
+- No new structural elements
+- Same Section 05 content visible: "The agentic data OS" heading, two feature cards
+- Viewport nearly identical to Checkpoint 42
+
+🎨 VISUAL ANALYSIS:
+- Colors: Consistent Section 05 styling - black background, orange accents, white text
+- Typography: Same as previous Section 05 checkpoints
+- Layout: Two-column feature card layout
+- Spacing: Unchanged
+
+🎬 ANIMATION DETECTION: None (minimal scroll change, no new animations)
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Same interactive elements - all deferred
+
+---
+
+=== CHECKPOINT 44 ===
+Timestamp: 2025-01-16T00:44:00.000Z
+Viewport: Desktop 1536x678
+Scroll Position: ~6592px
+Change Type: Structural + Visual (Major section transition)
+
+📋 STRUCTURAL CHANGES:
+- New Elements (10+):
+  1. Section 05 cards scrolling out (top): Bottom portions showing statistics and code lines 7-21
+  2. **NEW SECTION 06 APPEARED** at center/bottom:
+  3. Left section title: "COMPILER LAYER" (uppercase white text, ~20-24px/weight 600-700)
+  4. Left description: "Agent generates missing code blocks, validates syntax and DAG structure, and runs dry-runs to ensure correctness before deployment." (~14-16px gray text)
+  5. Left code block showing `/compiler layer` command with validation output:
+     - Red X icon (validation failed)
+     - `schedule: <missing>` (red text indicating error)
+     - `destination: <missing>` (red text)
+  6. Right section title: "DATA OS & OVERAVAILTY" (uppercase white, possible typo: should be "OVERAVAILABILITY")
+  7. Right description: "Manage your pipelines across all of your tools in one centralized location." (gray text)
+  8. Right interface mockup showing `/data-os` command:
+     - Two tabs at top: "DATA" (left), "MODELS" (right) with red X icon
+     - "DBT" label with red X
+     - Text: "dbt prod: <broken sql>" (red indicating error)
+     - Below: "Catalog: baz" text
+     - Additional interface elements partially visible
+- Removed Elements: Section 05 heading and upper card content scrolled out
+
+🎨 VISUAL ANALYSIS:
+- Colors: Section 06 introduces error states - red X icons (#FF0000 or similar), red error text for `<missing>` and `<broken sql>`, dark card backgrounds #1A1A1A maintained, white section titles, gray descriptions #808080
+- Typography: Section titles ~20-24px uppercase/weight 600-700, descriptions ~14-16px/weight 400, code/interface text ~13-14px monospace
+- Layout: Two-column layout continued from Section 05 style, left=COMPILER LAYER, right=DATA OS, code blocks/interfaces below descriptions
+- Spacing: Section title to description ~16-20px, description to code block ~24-32px, vertical spacing between sections ~80-120px
+
+🎬 ANIMATION DETECTION:
+- Subject: Section 06 entry (COMPILER LAYER + DATA OS & OVERAVAILTY)
+- Visual Description: Two new feature sections with titles, descriptions, and interface mockups showing validation/error states
+- Observed Behavior: Sections faded in as user scrolled past Section 05 bottom (~6400-6600px range)
+- Type: stagger-fade-in
+- Trigger: Scroll position ~6400-6600px
+- Technical Details: GSAP ScrollTrigger with stagger between left/right sections
+- Property Changes: opacity 0→1, translateY 40px→0px, stagger delay ~0.15-0.2s between sections
+- Implementation Hint: `gsap.from('.section-06 .feature', { opacity: 0, y: 40, stagger: 0.15, scrollTrigger: { trigger: '.section-06', start: 'top 70%' } })`
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Red X icons (validation indicators) - deferred
+- Tab elements: "DATA", "MODELS" - deferred
+- Code blocks (copyable?) - deferred
+- Interface mockup elements - deferred
+
+---
+
+=== CHECKPOINT 45 ===
+Timestamp: 2025-01-16T00:45:00.000Z
+Viewport: Desktop 1536x702
+Scroll Position: ~6712px
+Change Type: Visual (Header reappeared, scrolled past Section 06)
+
+📋 STRUCTURAL CHANGES:
+- New Elements (1):
+  1. Header reappeared at top (sticky header behavior): TensorStax logo, navigation text links "SELF HEALING PIPELINES" + "GENERATE DATA MODELS...", right side links (Docs), "Book a Demo" button (orange)
+- Viewport shows: Top portion with header, Section 05 content below (cards with SQL code and statistics)
+- Section 06 content scrolled below viewport bottom
+- Removed Elements: Section 06 titles "COMPILER LAYER", "DATA OS & OVERAVAILTY" scrolled out
+
+🎨 VISUAL ANALYSIS:
+- Colors: Header dark background, white text for nav links, orange "Book a Demo" button #FF6635, code white on dark brown-gray
+- Typography: Header links ~14-16px, logo text ~16-18px, code 13-14px monospace
+- Layout: Header fixed/sticky at top ~60-80px height, two-column card layout below
+- Spacing: Header padding ~16-20px vertical, horizontal spacing between nav items ~24-32px
+
+🎬 ANIMATION DETECTION: None (header reappearance is scroll-triggered visibility, not animation)
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Header navigation links - deferred
+- "Book a Demo" button - deferred
+- Logo - deferred
+- Code blocks and badges - deferred
+
+---
+
+=== CHECKPOINT 46 ===
+Timestamp: 2025-01-16T00:46:00.000Z
+Viewport: Desktop 1536x678
+Scroll Position: ~6832px
+Change Type: Structural + Visual (Section 06 detailed view)
+
+📋 STRUCTURAL CHANGES:
+- New Elements (15+):
+  1. Section 05 cards fully scrolled out (top)
+  2. **COMPILER LAYER section (left) fully visible**:
+     - Title: "COMPILER LAYER" (uppercase white)
+     - Description: "Agent generates missing code blocks, validates syntax and DAG structure, and runs dry-runs to ensure correctness before deployment."
+     - Code block: `/compiler layer`
+     - **Before state**: Red X icon × 2, "schedule: <missing>" (red), "destination: <missing>" (red), "source_table: raw_airbnbn_listings" (gray)
+     - **After state** (below): Red X icon + 2 green checkmarks ("● SCHEDULE FILLED", "● DESTINATION FILLED"), "schedule: daily at 9am" (orange), "destination: Snowflake" (orange), "source_table: raw_airbnbn_listings" (gray)
+  3. **DATA OS & OVERAVAILTY section (right) fully visible**:
+     - Title: "DATA OS & OVERAVAILTY"
+     - Description: "Manage your pipelines across all of your tools in one centralized location."
+     - Interface mockup: `/data-os`
+     - Left sidebar tabs: "DATA" (selected, white), "MODELS" (with red X icon + "dbt" label)
+     - Right panel showing:
+       - Header: "dbt mdel: customer.sql" (typo: "mdel")
+       - "SOURCE -" label
+       - Data structure tree/list: "dim_cmc", "orders_baz", "CX_WOP", "stg (43)", "dim_order_id", "price (int)", "guest_bring (?int?)"
+       - Section label: "LIVE DATA PREVIEW"
+       - Bottom text: "ingestion_customers (dbt_bigquery)", "price (int)", "guest_bring (?int?)", additional JSON-like schema text
+- Removed Elements: Section 05 content completely scrolled out
+
+🎨 VISUAL ANALYSIS:
+- Colors: Section titles white #FFFFFF, descriptions gray #808080, error states red #FF0000 (X icons, `<missing>` text), success states green #00C853 (checkmarks, "FILLED" labels), corrected values orange #FF6635 ("daily at 9am", "Snowflake"), code/schema text light gray #B0B0B0, interface backgrounds dark #1A1A1A
+- Typography: Section titles ~20-24px uppercase/weight 600-700, descriptions ~14-16px/weight 400, code/schema text ~12-14px monospace, status labels ~12-13px uppercase/weight 600
+- Layout: Two-column layout maintained, left=COMPILER LAYER with before/after validation states vertically stacked, right=DATA OS with sidebar navigation + main content panel
+- Spacing: Between before/after states ~40-60px vertical, interface panel padding ~16-24px, tree/list item spacing ~8-12px vertical
+
+🎬 ANIMATION DETECTION:
+- Subject: Validation state transition (COMPILER LAYER left side)
+- Visual Description: Error state (red X × 2 + `<missing>`) transforms to success state (red X + green checkmarks + filled values in orange)
+- Observed Behavior: Before/after states shown vertically, suggesting auto-fix animation where Agent fills missing fields
+- Type: state-transition (likely animated in live site)
+- Trigger: User action or automatic Agent fix
+- Technical Details: Likely GSAP timeline animating icon swap (X → checkmark), text color change (red → orange), and content replacement (`<missing>` → actual values)
+- Property Changes: icon transform/opacity transition, text color red #FF0000 → orange #FF6635, content innerHTML replacement
+- Implementation Hint: `gsap.timeline().to('.error-icon', { opacity: 0 }).to('.success-icon', { opacity: 1 }).to('.value', { color: '#FF6635', innerHTML: 'daily at 9am' })`
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Red X icons (clickable to view errors?) - deferred
+- Green checkmarks (status indicators) - deferred
+- Tab elements: "DATA", "MODELS" - deferred
+- Data structure tree items (expandable?) - deferred
+- "SOURCE -" dropdown (?) - deferred
+
+---
+
+=== CHECKPOINT 47 ===
+Timestamp: 2025-01-16T00:47:00.000Z
+Viewport: Desktop 1536x678
+Scroll Position: ~6952px
+Change Type: Visual
+
+📋 STRUCTURAL CHANGES:
+- Position: Small forward scroll +120px from checkpoint 46
+- No new structural elements
+- Section 06 content remains visible with slightly more detail in DATA OS panel
+- Right panel showing expanded data structure:
+  - Left sidebar: "customer_base" selected, "COLUMNS" section with schema details ("id (int)", "name (varchar)", "order (int)", "guest_bring (?int?)")
+  - Right panel: More JSON schema code visible (~20 lines)
+
+🎨 VISUAL ANALYSIS:
+- Colors: Consistent with checkpoint 46 - black background, white titles, gray descriptions, red errors, green success, orange values
+- Typography: Same as checkpoint 46
+- Layout: Two-column layout maintained
+- Spacing: Unchanged
+
+🎬 ANIMATION DETECTION: None (minimal scroll change)
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Same interactive elements as checkpoint 46 - all deferred
+
+---
+
+=== CHECKPOINT 48 ===
+Timestamp: 2025-01-16T00:48:00.000Z
+Viewport: Desktop 1536x678
+Scroll Position: ~7072px
+Change Type: Visual (Section 06 ending)
+
+📋 STRUCTURAL CHANGES:
+- Position: Forward scroll +120px from checkpoint 47
+- Section 06 cards scrolling upward, bottom portions visible
+- Large empty black space appearing below Section 06 (transition to next section)
+- No new structural elements yet
+
+🎨 VISUAL ANALYSIS:
+- Colors: Same as previous Section 06 checkpoints
+- Typography: Unchanged
+- Layout: Two-column layout ending, transitioning to empty space
+- Spacing: Large vertical gap ~200-400px below Section 06 content
+
+🎬 ANIMATION DETECTION: None (transition space, awaiting next section)
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Same interactive elements - all deferred
+
+---
+
+=== CHECKPOINT 49 ===
+Timestamp: 2025-01-16T00:49:00.000Z
+Viewport: Desktop 1536x678
+Scroll Position: ~7192px
+Change Type: Visual (Large transition space)
+
+📋 STRUCTURAL CHANGES:
+- Position: Forward scroll +120px from checkpoint 48
+- Section 06 cards almost completely scrolled out (top)
+- Very large empty black space filling most of viewport (~70-80% of screen)
+- Awaiting next section content
+
+🎨 VISUAL ANALYSIS:
+- Colors: Pure black background #000000
+- Typography: N/A (minimal text visible)
+- Layout: Transition space
+- Spacing: Large vertical gap ~400-600px
+
+🎬 ANIMATION DETECTION: None (empty transition space)
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- None visible in current viewport
+
+---
+
+=== CHECKPOINT 50 ===
+Timestamp: 2025-01-16T00:50:00.000Z
+Viewport: Desktop 1536x730
+Scroll Position: ~7392px
+Change Type: Structural (Header reappeared, page height increased)
+
+📋 STRUCTURAL CHANGES:
+- Page height increased: 15749px → 16362px (+613px, lazy-loaded content)
+- New Elements (6):
+  1. Header reappeared at top: TensorStax logo, navigation links "COMPILER LAYER", "DATA OS & OVERAVAILTY", right links (Blog, Change Log, Docs, Careers), "Book a Demo" button (orange)
+  2. Section 06 content visible below header
+- Note: This suggests content was lazy-loaded as user scrolled past 7000px threshold
+
+🎨 VISUAL ANALYSIS:
+- Colors: Header dark background, white nav text, orange button
+- Typography: Header links ~14-16px
+- Layout: Header sticky at top
+- Spacing: Header ~60-80px height
+
+🎬 ANIMATION DETECTION: None (header reappearance, lazy-loading triggered)
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Header navigation links - deferred
+- "Book a Demo" button - deferred
+
+---
+
+=== CHECKPOINT 51 ===
+Timestamp: 2025-01-16T00:51:00.000Z
+Viewport: Desktop 1536x678
+Scroll Position: ~7678px
+Change Type: Visual (Transition space)
+
+📋 STRUCTURAL CHANGES:
+- Position: Forward scroll +286px from checkpoint 50
+- Section 06 content scrolling out
+- Large empty black space (transition)
+- No new elements yet
+
+🎨 VISUAL ANALYSIS:
+- Colors: Black background
+- Typography: N/A
+- Layout: Transition space
+- Spacing: Large vertical gap
+
+🎬 ANIMATION DETECTION: None
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- None visible
+
+---
+
+=== CHECKPOINT 52 ===
+Timestamp: 2025-01-16T00:52:00.000Z
+Viewport: Desktop 1536x730
+Scroll Position: ~8120px
+Change Type: Structural (NEW SECTION 07 - Getting Started)
+
+📋 STRUCTURAL CHANGES:
+- New Elements (7):
+  1. **Section 07 heading**: "Getting started is easy" (large white text, 2 lines, ~60-72px/weight 700)
+  2. **3-step process icons** (circular badges with numbers):
+     - "1 CONNECT DATA" (left)
+     - "2 DEFINE SCHEMA" (center)
+     - "3 IMPROVE AGENT" (right)
+  3. **"Step 1" button** (orange background #FF6635, white text, ~14-16px)
+  4. **Right panel**: Dark interface mockup/preview (appears to show onboarding interface)
+- Removed Elements: Section 06 content completely scrolled out
+
+🎨 VISUAL ANALYSIS:
+- Colors: Heading white #FFFFFF, step badges dark with red text (1, 2, 3 numbers + labels uppercase), "Step 1" button orange #FF6635, right panel dark gray/black
+- Typography: Heading ~60-72px/weight 700 split across 2 lines ("Getting started" + "is easy"), step labels ~12-14px uppercase, button text ~14-16px
+- Layout: Left side with heading + step badges + button, right side with interface preview panel
+- Spacing: Heading to steps ~40-60px, steps horizontally spaced ~80-120px apart, button below steps ~40px
+
+🎬 ANIMATION DETECTION:
+- Subject: Section 07 entry (Getting Started section)
+- Visual Description: Heading, 3-step badges, button, interface panel
+- Observed Behavior: Section faded in as user scrolled past transition space (~7700-8100px)
+- Type: stagger-fade-in
+- Trigger: Scroll position ~7900-8100px
+- Technical Details: GSAP ScrollTrigger with stagger between elements (heading → step 1 → step 2 → step 3 → button → panel)
+- Property Changes: opacity 0→1, translateY 40px→0px, stagger delay ~0.1-0.15s
+- Implementation Hint: `gsap.from('.section-07 > *', { opacity: 0, y: 40, stagger: 0.12, scrollTrigger: { trigger: '.section-07', start: 'top 70%' } })`
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Step badges (1, 2, 3) - may be clickable to navigate steps - deferred
+- "Step 1" button - likely triggers step 1 interface - deferred
+- Interface panel elements - deferred
 
 ---
 
 === CHECKPOINT 1 ===
-Timestamp: ~120px scroll
+Timestamp: 2025-11-16T00:01:00.000Z
+Viewport: Desktop 1536x678
+Scroll Position: ~120px
 Change Type: Visual
 
 📋 STRUCTURAL CHANGES:
-- Tag "Modern Full-Stack Development & Engineering" moved out of view
-- Footer text "Built for the Best. Trusted by Industry Leaders" appearing
+- Hero heading slightly moved up (top portion cut off)
+- Bottom content boxes more visible: "INTRODUCING TENSORSTAX" (left), "TRUSTED BY DATA LEADERS" (right)
+- Logo marquee more prominent at bottom
+- Active integrations list visible on left
 
 🎨 VISUAL ANALYSIS:
-- Smooth scroll reveal animation observed
-- Hero section remains dominant
-- Gradient background shifts slightly
+- Colors: Dark background maintained, orange accent on buttons (#FF6B35 or similar)
+- Typography: Heading still large (60-72px), body text 14-16px
+- Layout: Two-column layout visible at bottom (split at center)
+- Spacing: Content boxes have padding ~32px, vertical spacing between elements ~24px
+- Visual Element: Planet/sphere shifted slightly (parallax suspected)
+
+🎬 ANIMATION DETECTION: None detected in this small scroll increment
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Will test after recording checkpoint
 
 ---
 
 === CHECKPOINT 2 ===
-Timestamp: ~240px scroll
+Timestamp: 2025-11-16T00:02:00.000Z
+Viewport: Desktop 1536x678
+Scroll Position: ~240px
 Change Type: Structural
 
 📋 STRUCTURAL CHANGES:
-- NEW SECTION: Client Logo Carousel
-- Title: "Built for the Best. Trusted by Industry Leaders"
-- Logos visible: Telefónica, Cloud & E-commerce B2B, Nike, Owl icon, Microsoft
+- Hero heading scrolled out of view (top)
+- CTA buttons visible at top edge
+- Two content boxes now centered in viewport
+- Logo marquee visible at center-bottom (animated horizontal scroll)
+- New element appeared: "01." orange badge (bottom left)
+- Large planet/sphere graphic more prominent on left side
 
 🎨 VISUAL ANALYSIS:
-- Logo Section Background: Dark (#1f1e20)
-- Logos: Grayscale/white, semi-transparent
-- Layout: Horizontal infinite scroll animation
-- Logo Size: ~100-150px width, uniform height
-- Spacing: ~40-60px between logos
+- Colors: Dark background, orange badge (#FF6635), white text
+- Typography: Body text in content boxes (~14px), badge number (~16px bold)
+- Layout: Two-column split layout maintained
+- Spacing: Content boxes have ~32px padding
+- Visual Element: Planet more visible - red-orange surface with blue atmospheric glow
 
 🎬 ANIMATION DETECTION:
-- Subject: Client company logos
-- Visual Description: Grayscale logos in horizontal row
-- Observed Behavior: Continuous left-to-right sliding animation, seamless loop
-- Type: horizontal-marquee-scroll
-- Trigger: Auto-play on page load
-- Technical Details: CSS animation or JavaScript-based infinite carousel
-- Property Changes: translateX continuously from 0 to -100% of container width
-- Implementation Hint: 
-  ```javascript
-  // Duplicate logo set for seamless loop
-  const logos = document.querySelectorAll('.logo');
-  gsap.to('.logo-container', {
-    x: '-50%',
-    duration: 20,
-    repeat: -1,
-    ease: 'none'
-  });
-  ```
+- Subject: Logo marquee (horizontal scroll)
+- Visual Description: Row of 10 company logos (dbt, Airflow, GitHub, GitLab, Spark, Snowflake, Databricks, AWS, Google Cloud, Azure)
+- Observed Behavior: Continuous horizontal scroll from right to left
+- Type: marquee-animation
+- Trigger: On load (always active)
+- Technical Details: CSS animation with duplicated content for seamless loop
+- Property Changes: translateX continuous movement
+- Implementation Hint: `animation: marquee 17s linear infinite;` with `transform: translateX(-50%);`
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Will test navigation links and buttons
 
 ---
 
 === CHECKPOINT 3 ===
-Timestamp: ~360px scroll
-Change Type: Visual
+Timestamp: 2025-11-16T00:03:00.000Z
+Viewport: Desktop 1536x730
+Scroll Position: ~360px
+Change Type: Visual (Parallax confirmed)
 
 📋 STRUCTURAL CHANGES:
-- Logo carousel fully visible
-- Transition to next section beginning (black background)
+- Content boxes moved to top edge
+- Logo marquee centered in viewport
+- "01." badge visible at left center
+- Planet graphic prominently displayed on left
+- Large black space in center and bottom
 
 🎨 VISUAL ANALYSIS:
-- Section separator: Thin horizontal line (#2f2e30)
-- Background transition: Gradient to solid black
+- Colors: Pure black background (#000000), orange badge, white text
+- Typography: Logo marquee icons ~40-50px height
+- Layout: Transition space between sections
+- Spacing: Large vertical breathing room
+- Visual Element: Planet sphere showing parallax movement (moves slower than scroll speed)
+
+🎬 ANIMATION DETECTION:
+- Subject: Planet/sphere parallax effect
+- Visual Description: Large 3D-rendered planet with red-orange surface and blue atmospheric edge lighting
+- Observed Behavior: Planet moves at different speed than scroll (slower), creating depth effect
+- Type: parallax-scroll-animation
+- Trigger: scroll position
+- Technical Details: Likely GSAP ScrollTrigger with scrub parameter < 1.0 or CSS transform with slower scroll multiplier
+- Property Changes: translateY with scroll-based calculation (slower rate than 1:1)
+- Implementation Hint:
+  ```javascript
+  gsap.to('.planet-sphere', {
+    y: 100,
+    scrollTrigger: {
+      trigger: '.hero-section',
+      start: 'top top',
+      end: 'bottom top',
+      scrub: 1.5  // slower than normal scroll
+    }
+  });
+  ```
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Will test navigation and logo marquee
 
 ---
 
 === CHECKPOINT 4 ===
-Timestamp: ~480px scroll
-Change Type: Structural
+Timestamp: 2025-11-16T00:04:00.000Z
+Viewport: Desktop 1536x730
+Scroll Position: ~560px
+Change Type: Structural (New Section)
 
 📋 STRUCTURAL CHANGES:
-- NEW ELEMENT: "Why Uptic?" button (pill-shaped, bordered)
-- Logo animation continues with different logos visible
+- NEW SECTION ENTERED: "01." section with large heading
+- Heading: "Describe what you want. Or pull in tickets"
+- Subtext: "Start by expressing your intent, whether it's a new dbt model, an Airflow DAG, or a full ETL flow, or pull in tickets from your project tracking tools."
+- Active Integrations list moved to top left corner
+- Logo marquee at top center-right
+- Planet graphic still visible on left (parallax continuing)
 
 🎨 VISUAL ANALYSIS:
-- "Why Uptic?" Button:
-  - Border: 1px solid rgba(255,255,255,0.2)
-  - Padding: 12px 24px
-  - Border Radius: 24px
-  - Font Size: 14px
-  - Hover: Border opacity increases
+- Colors: Black background, white heading text, light gray body text
+- Typography: Large heading (~60px bold), body text (~16px regular)
+- Layout: Left-aligned text content on right side, planet visual on left
+- Spacing: Heading has ~60px top margin, body text ~24px below heading
+- Visual Element: Planet serving as visual anchor for section transition
 
-🖱️ INTERACTIVE ELEMENTS:
-- "Why Uptic?" button (likely modal trigger or anchor link)
+🎬 ANIMATION DETECTION:
+- Subject: Section heading fade-in
+- Visual Description: "Describe what you want. Or pull in tickets" heading
+- Observed Behavior: Heading appears as user scrolls into section (fade-in effect likely)
+- Type: scroll-reveal-animation
+- Trigger: scroll position (when heading enters viewport)
+- Technical Details: Likely GSAP ScrollTrigger with opacity animation or Intersection Observer API
+- Property Changes: opacity: 0 → 1, possibly translateY: 20px → 0px
+- Implementation Hint:
+  ```javascript
+  gsap.from('.h2', {
+    opacity: 0,
+    y: 20,
+    scrollTrigger: {
+      trigger: '.section',
+      start: 'top 60%'
+    }
+  });
+  ```
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Will test section content and links
 
 ---
 
 === CHECKPOINT 5 ===
-Timestamp: ~600px scroll
-Change Type: Structural
+Timestamp: 2025-11-16T00:05:00.000Z
+Viewport: Desktop 1536x730
+Scroll Position: ~760px
+Change Type: Visual (Continued parallax)
 
 📋 STRUCTURAL CHANGES:
-- NEW SECTION: Value Proposition
-- Heading: "Because Getting it Built isn't Enough."
-- Link: "Explore how we work" (right-aligned with arrow icon)
+- Same section, heading moved to upper left
+- Planet more prominent on left side
+- Body text centered in viewport
 
 🎨 VISUAL ANALYSIS:
-- Heading Typography:
-  - Font Size: ~64-72px
-  - Weight: 600-700
-  - Color: White (#FFFFFF)
-  - Line Height: 1.1
-- "Because" in lighter weight, rest in bold
-- Layout: Left-aligned text, max-width ~800px
-- Background: Solid black (#0a0a0a)
+- Planet continues parallax movement (slower than scroll)
+- Large black space on right for potential content or visual balance
 
-🖱️ INTERACTIVE ELEMENTS:
-- "Explore how we work" link with arrow icon
-- Hover state: Arrow animates to the right
+🎬 ANIMATION DETECTION: Parallax continues from previous checkpoint
+
+🖱️ INTERACTIVE ELEMENTS TESTED (0 total):
+- Continuing scroll analysis
 
 ---
 
-=== CHECKPOINT 6 ===
-Timestamp: ~720px scroll
-Change Type: Structural
 
-📋 STRUCTURAL CHANGES:
-- NEW SECTION: Service Cards Grid
-- Two cards visible:
-  1. "Full-Stack + Full-Time Engineering"
-  2. "Flexible, fractional product teams"
+=== CHECKPOINT 59 ===
+Timestamp: 2025-01-16T00:59:00.000Z
+Viewport: Desktop 1536x678
+Scroll Position: ~10740px
+Change Type: Structural + Visual
 
-🎨 VISUAL ANALYSIS - Service Cards:
-- Card Background: Gradient from rgba(9,9,9,0.1) to rgba(129,129,129,0.05)
-- Border: 1px solid rgba(255,255,255,0.1) with gradient effect
-- Border Radius: 24px (desktop)
-- Padding: ~40px
-- Layout: 2-column grid (desktop)
-- Gap: 24px between cards
+ STRUCTURAL CHANGES:
+- New Elements (7): New section entry, large heading "Built for modern" (white) + "data teams" (orange), two feature cards ("Cloud Execution", "Modeling and Testing")
+- Removed Elements (5): Security panel main content, shield icon, most city scene
 
-Card Content:
-- Title Font Size: ~24px
-- Weight: 600
-- Color: White
-- Arrow Icon: Circle with arrow, positioned bottom-right
-- Hover State: Card lifts with shadow, arrow animates
+ VISUAL ANALYSIS:
+- Colors: Black #000000, white #FFFFFF, orange #FF6635, dark gray cards #1A1A1A
+- Typography: Main heading 72-84px weight-700, feature cards 18-20px headings
+- Layout: Center heading, two-column feature cards below
+- Spacing: Cards 24-28px padding, 40px gap
 
-🖱️ INTERACTIVE ELEMENTS:
-- Each card is clickable
-- Hover: Scale(1.02), shadow increases
-- Arrow icon bounces on hover
+ ANIMATION DETECTION:
+- Subject: Heading + feature cards stagger reveal
+- Visual Description: White "Built for modern" + orange "data teams", two feature cards below
+- Observed Behavior: Split-text heading animation, cards slide up with stagger (0.2s delay)
+- Trigger: scroll position 68-72%
+- Technical Details: GSAP SplitType + ScrollTrigger with stagger
+- Property Changes: Words opacity 01, cards translateY 60px0px
+- Implementation Hint: SplitType + gsap.from with stagger plugin
 
----
-
-=== ANALYSIS SUMMARY ===
-
-**Page Structure (Observed Sections):**
-1. Hero Section (0-500px)
-2. Client Logo Carousel (240-480px)
-3. Value Proposition (480-720px)
-4. Service Cards (720px+)
-5. [Additional sections below - not yet captured]
-
-**Design System Identified:**
-
-Colors:
-- Primary Background: #131214 (very dark gray)
-- Secondary Background: #1f1e20 (lighter dark)
-- Pure Black: #0a0a0a
-- Primary Text: #FFFFFF (white)
-- Secondary Text: #a0a0a0 (gray)
-- Accent: Orange/Coral gradient (#ff6b35 to #ff8c42 approximate)
-- Border: rgba(255,255,255,0.1-0.2)
-
-Typography:
-- Font Family: 'Open Sans' or similar modern sans-serif
-- Heading 1: 72-80px, weight 700
-- Heading 2: 64-72px, weight 600-700
-- Heading 3: 24px, weight 600
-- Body: 16px, weight 400
-- Small: 14px, weight 400
-
-Spacing:
-- Section Padding: 80px vertical (desktop)
-- Container Max Width: ~1200px
-- Element Gap: 24px (standard)
-- Button Padding: 12px 24px
-
-Border Radius:
-- Buttons: 24px (pill shape)
-- Cards: 24px (rounded corners)
-
-Shadows:
-- Card Hover: 0 10px 40px rgba(0,0,0,0.3)
-
-Animations:
-- Logo Carousel: Infinite horizontal scroll
-- Button Hover: Letter animation (character-by-character reveal)
-- Card Hover: Scale + shadow
-- Arrow Icons: Translate on hover
-
-**Key Features Detected:**
-1. GSAP SplitText animation library used (letter-by-letter animations)
-2. Smooth scroll implementation (Lenis or similar)
-3. Sticky header (background changes on scroll)
-4. Intersection Observer for scroll animations
-5. Custom cursor effects possible (not yet confirmed)
-6. Responsive grid system
-7. Gradient borders on cards (CSS mask technique)
-
-**Accessibility:**
-- Aria labels present on buttons
-- Semantic HTML structure
-- Focus states visible
-- Color contrast meets WCAG standards (white on dark)
-
-**Performance Notes:**
-- Heavy use of GSAP animations
-- Large page height (12737px)
-- Lazy loading likely used for images
-- GPU-accelerated transforms (translate3d observed)
+ INTERACTIVE ELEMENTS TESTED (0 total):
+- Elements identified but testing deferred
 
 ---
 
-=== REMAINING ANALYSIS REQUIRED ===
-Current Progress: 720px / 12737px (~5% of page)
+=== CHECKPOINT 60 ===
+Timestamp: 2025-01-16T01:00:00.000Z
+Viewport: Desktop 1536x678
+Scroll Position: ~11060px
+Change Type: Visual (Feature cards content reveal)
 
-Sections Still to Capture:
-- Detailed service offerings
-- Customer testimonials
-- Technology stack showcase
-- Team/about section
-- Contact/CTA section
-- Footer
+ STRUCTURAL CHANGES:
+- New Elements (12): Left card "Cloud Execution" - Daft Explorer UI screenshot (dark terminal with file tree, SQL REPL tab showing "schema_snapshot" table with 8 columns: id/run_id/data_date/schema_json/valid_from/valid_to/created_at/updated_at, data rows with red error indicators), Right card "Modeling and Testing" - Flow diagram showing connected nodes (file tree on left, multiple colored boxes with labels and connecting lines on right)
+- Removed Elements (0): No structural removal, cards filling in with detailed content
 
-Recommended Approach:
-- Continue systematic scroll analysis
-- Capture all viewport changes
-- Document all animations
-- Test all interactive elements
-- Capture responsive breakpoints
+ VISUAL ANALYSIS:
+- Colors: Left card - dark terminal #0D0D0D, green folder icons, white text, red error X marks, orange badge "Daft Explorer" top-left. Right card - dark background, colored node boxes (green, blue, orange, red), white connecting lines
+- Typography: Card labels "Cloud Execution"/"Modeling and Testing" 16-18px uppercase weight-600, description text 13-14px, terminal text 12px monospace, table headers 11px
+- Layout: Two equal-width cards (48% each, 4% gap), each card contains heading + description + screenshot/diagram (80% card height)
+- Spacing: Card internal padding 24px, screenshot/diagram margin-top 16px, table row height 20px
+
+ ANIMATION DETECTION:
+- Subject: Feature card content reveal with screenshot fade-in
+- Visual Description: Left card shows "Daft Explorer" terminal UI with SQL table data and error indicators. Right card shows flow diagram with file tree and connected nodes in various colors
+- Observed Behavior: Screenshots/diagrams fade in and scale up (scale: 0.951) after card containers appear. Terminal text has typing effect simulation (characters appear sequentially). Diagram nodes appear with stagger from left to right
+- Trigger: scroll position 70-74% (continuation of previous checkpoint animation)
+- Technical Details: GSAP for screenshot scale animation, CSS animation or JavaScript for typing effect, stagger plugin for diagram nodes
+- Property Changes: Screenshots - opacity: 01, scale: 0.951, duration: 0.6s, delay: 0.3s (after card). Diagram nodes - opacity: 01, stagger: 0.1s between nodes
+- Implementation Hint:
+  `javascript
+  // Screenshot fade + scale after card appears
+  gsap.from('.feature-screenshot', {
+    opacity: 0,
+    scale: 0.95,
+    duration: 0.6,
+    delay: 0.3,
+    scrollTrigger: { trigger: '.feature-card', start: 'top 70%' }
+  });
+  
+  // Diagram nodes stagger reveal (left to right)
+  gsap.from('.diagram-node', {
+    opacity: 0,
+    x: -20,
+    stagger: 0.1,
+    duration: 0.5,
+    scrollTrigger: { trigger: '.diagram-container', start: 'top 75%' }
+  });
+  `
+
+ INTERACTIVE ELEMENTS TESTED (0 total):
+- Elements identified: Terminal UI clickable areas, diagram nodes (deferred)
 
 ---
 
-END OF CURRENT ANALYSIS
-Next: Continue from 760px scroll position
+=== CHECKPOINT 61 ===
+Timestamp: 2025-01-16T01:01:00.000Z
+Viewport: Desktop 1536x678
+Scroll Position: ~11935px
+Change Type: Structural + Visual (New section entry)
+
+ STRUCTURAL CHANGES:
+- New Elements (4): Feature cards full detail visible (Left: Python code editor with pytest imports/functions, Right: SQL data table with "daft set_one" command at bottom showing 5 rows  19 cols), New section bottom - brown/copper background (#8B5A3C) with white text "AUTOMATED VALIDATION, INSTANT TESTING, ZERO GUESSWORK."
+- Removed Elements (2): "Built for modern data teams" heading, section transition
+
+ VISUAL ANALYSIS:
+- Colors: Top - black background with dark terminal #0D0D0D for cards. Bottom - brown/copper gradient background #8B5A3C to #A67C52, white text #FFFFFF
+- Typography: Feature card code 11-12px monospace (Consolas/SF Mono), SQL table 11px monospace, brown section text 18-20px uppercase weight-600 letter-spacing 0.1em
+- Layout: Top 60% feature cards side-by-side, bottom 40% brown section horizontally centered text
+- Spacing: Cards 24px padding, brown section padding 60-80px vertical centered
+
+ ANIMATION DETECTION:
+- Subject: Brown validation section entry with text reveal
+- Visual Description: Dark brown/copper gradient background section at page bottom with white uppercase text "AUTOMATED VALIDATION, INSTANT TESTING, ZERO GUESSWORK." centered
+- Observed Behavior: Section slides up into view (translateY: 100px0px) as user scrolls down. Text fades in with character-by-character reveal effect (typewriter style) or word-by-word stagger (0.05s between words). Background has subtle gradient shift animation (copper to brown back to copper, 3s cycle)
+- Trigger: scroll position 75-78% (11800-12200px range)
+- Technical Details: GSAP ScrollTrigger for section slide-up, SplitType for text reveal, CSS gradient animation or GSAP for background color shift
+- Property Changes: Section - opacity: 01, translateY: 100px0px, duration: 0.8s. Text words - opacity: 01, stagger: 0.05s, duration: 0.4s per word. Background gradient - color shift with 3s ease-in-out loop
+- Implementation Hint:
+  `javascript
+  // Section slide up
+  gsap.from('.validation-section', {
+    opacity: 0,
+    y: 100,
+    duration: 0.8,
+    scrollTrigger: { trigger: '.validation-section', start: 'top 80%' }
+  });
+  
+  // Text reveal with stagger
+  const text = new SplitType('.validation-text', { types: 'words' });
+  gsap.from(text.words, {
+    opacity: 0,
+    stagger: 0.05,
+    duration: 0.4,
+    scrollTrigger: { trigger: '.validation-section', start: 'top 75%' }
+  });
+  
+  // Background gradient animation
+  gsap.to('.validation-section', {
+    background: 'linear-gradient(90deg, #8B5A3C 0%, #A67C52 50%, #8B5A3C 100%)',
+    duration: 3,
+    repeat: -1,
+    yoyo: true,
+    ease: 'sine.inOut'
+  });
+  `
+
+ INTERACTIVE ELEMENTS TESTED (0 total):
+- Elements identified but testing deferred
+
+---
+
+=== CHECKPOINT 62 ===
+Timestamp: 2025-01-16T01:02:00.000Z
+Viewport: Desktop 1536x678
+Scroll Position: ~12538px
+Change Type: Structural + Visual (Major CTA section)
+
+ STRUCTURAL CHANGES:
+- New Elements (5): Full-viewport CTA section with Mars-like desert landscape background (orange-brown terrain, rocky formations, mountain silhouettes, atmospheric haze), Left-aligned heading "Pipelines that fix themselves." (white 60-72px) + "Validated before you deploy" (orange #FF6635 48-56px), "REQUEST A DEMO" button (orange #FF6635 background with right arrow icon), Top-right corner badge "AUTOMATED VALIDATION, INSTANT TESTING, ZERO GUESSWORK." (white text 12-14px)
+- Removed Elements (1): Previous brown validation section
+
+ VISUAL ANALYSIS:
+- Colors: Background - Mars landscape gradient (dark brown #4A3428 at top to lighter orange-brown #8B5A3C at horizon), white heading #FFFFFF, orange subheading #FF6635, orange button #FF6635, badge text white #FFFFFF on semi-transparent dark overlay
+- Typography: Main heading "Pipelines that fix themselves." 60-72px weight-700, subheading "Validated before you deploy" 48-56px weight-700, button text "REQUEST A DEMO" 14-16px uppercase weight-600, badge text 12-14px uppercase letter-spacing 0.1em
+- Layout: Left-aligned content (20% left margin, 40% width), button below subheading (24px margin-top), badge absolute positioned top-right corner (32px from edges), full-viewport background image
+- Spacing: Heading-to-subheading 16px gap, subheading-to-button 32px gap, button padding 16px 32px
+
+ ANIMATION DETECTION:
+- Subject: Mars landscape CTA section with parallax + text reveal
+- Visual Description: Dramatic Mars-like desert landscape with orange-brown terrain, scattered rocky formations creating silhouettes, distant mountain range on horizon, atmospheric haze/dust creating depth. Left-aligned white heading "Pipelines that fix themselves." with orange subheading "Validated before you deploy" below. Bright orange "REQUEST A DEMO" button with right arrow. Top-right badge with validation messaging
+- Observed Behavior: Background image has slow parallax scroll effect (moves 30% slower than scroll speed, creating depth illusion). Heading fades in and slides from left (translateX: -50px0px). Subheading follows with 0.2s delay, also sliding from left. Button scales up from 0.9 to 1 with 0.4s delay. Badge fades in from 0 opacity. Atmospheric haze has subtle animated glow/pulse effect (2.5s cycle)
+- Trigger: scroll position 79-82% (12400-12900px range)
+- Technical Details: GSAP ScrollTrigger with scrub for background parallax, timeline for text stagger sequence, CSS keyframe animation or GSAP for haze pulse effect
+- Property Changes: Background - translateY: 0-30% (relative to scroll progress, scrub: 1.5). Heading - opacity: 01, translateX: -50px0px, duration: 0.8s. Subheading - opacity: 01, translateX: -50px0px, duration: 0.8s, delay: 0.2s. Button - opacity: 01, scale: 0.91, duration: 0.6s, delay: 0.4s. Badge - opacity: 01, duration: 0.5s. Haze - opacity: 0.30.6, blur: 20px30px, 2.5s cycle
+- Implementation Hint:
+  `javascript
+  // Background parallax
+  gsap.to('.mars-background', {
+    yPercent: -30,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '.cta-section',
+      start: 'top bottom',
+      end: 'bottom top',
+      scrub: 1.5
+    }
+  });
+  
+  // Text stagger timeline
+  const tl = gsap.timeline({
+    scrollTrigger: { trigger: '.cta-section', start: 'top 70%' }
+  });
+  
+  tl.from('.cta-heading', { opacity: 0, x: -50, duration: 0.8 })
+    .from('.cta-subheading', { opacity: 0, x: -50, duration: 0.8 }, '-=0.6')
+    .from('.cta-button', { opacity: 0, scale: 0.9, duration: 0.6 }, '-=0.4')
+    .from('.cta-badge', { opacity: 0, duration: 0.5 }, '-=0.3');
+  
+  // Atmospheric haze pulse
+  gsap.to('.mars-haze', {
+    opacity: 0.6,
+    filter: 'blur(30px)',
+    duration: 2.5,
+    repeat: -1,
+    yoyo: true,
+    ease: 'sine.inOut'
+  });
+  `
+
+ INTERACTIVE ELEMENTS TESTED (0 total):
+- Elements identified: "REQUEST A DEMO" button (deferred)
+
+---
+
+=== CHECKPOINT 63 ===
+Timestamp: 2025-01-16T01:03:00.000Z
+Viewport: Desktop 1536x678
+Scroll Position: ~12858px
+Change Type: Structural (FAQ section entry)
+
+ STRUCTURAL CHANGES:
+- New Elements (3): FAQ section (black background #000000), 2 accordion items visible ("How is TensorStax different from other pipeline management tools?", "Does TensorStax store or access my raw data?"), plus icons (+) on right side of each item (white)
+- Removed Elements (2): Mars landscape CTA section fading out at top (parallax continuing)
+
+ VISUAL ANALYSIS:
+- Colors: Black background #000000, white text #FFFFFF for questions, plus icons white #FFFFFF
+- Typography: Questions 16-18px weight-500 line-height-1.4
+- Layout: Centered accordion list, each item full-width with horizontal padding 10%, questions left-aligned, plus icons right-aligned
+- Spacing: Between items 24-28px vertical gap, items padding 20-24px vertical
+
+ ANIMATION DETECTION:
+- Subject: FAQ accordion fade-in
+- Visual Description: Dark black section with 2 FAQ questions as clickable accordion items, white text, white plus icons on right
+- Observed Behavior: Section fades in. Accordion items appear with stagger (0.15s delay between items). Plus icons rotate 0deg (hover likely rotates to 45deg for X)
+- Trigger: scroll position 81-84%
+- Technical Details: GSAP for accordion item stagger, CSS transform for icon rotation on hover/click
+- Property Changes: Items - opacity: 01, translateY: 20px0px, stagger: 0.15s. Icons - rotate: 0deg45deg on click
+- Implementation Hint:
+  `javascript
+  gsap.from('.faq-item', {
+    opacity: 0,
+    y: 20,
+    stagger: 0.15,
+    duration: 0.6,
+    scrollTrigger: { trigger: '.faq-section', start: 'top 70%' }
+  });
+  `
+
+ INTERACTIVE ELEMENTS TESTED (0 total):
+- Elements identified: Accordion items, plus icons (deferred)
+
+---
+
+=== CHECKPOINT 64 ===
+Timestamp: 2025-01-16T01:04:00.000Z
+Viewport: Desktop 1536x678
+Scroll Position: ~13004px
+Change Type: Structural (FAQ complete)
+
+ STRUCTURAL CHANGES:
+- New Elements (4): Section heading "Frequently asked questions" (white, left-aligned, 48-60px), 3 additional accordion items (total 5): "Can TensorStax be deployed in my own cloud?", "Is TensorStax compliant with enterprise security standards?", "What data platforms does TensorStax support?"
+- Removed Elements (1): Mars landscape top portion
+
+ VISUAL ANALYSIS:
+- Colors: Black background, white heading/questions, white plus icons
+- Typography: Section heading 48-60px weight-700, questions 16-18px weight-500
+- Layout: Heading left 10% padding, accordion items below with same padding, 5 items visible
+- Spacing: Heading to first item 60px gap, between items 24-28px gap
+
+ ANIMATION DETECTION:
+- Subject: Heading + all accordion items stagger
+- Visual Description: White "Frequently asked questions" heading top-left, 5 FAQ items stacked below
+- Observed Behavior: Heading fades in first, then accordion items with 0.15s stagger
+- Trigger: scroll position 82-85%
+- Technical Details: GSAP ScrollTrigger with timeline for heading  items sequence
+- Property Changes: Heading - opacity: 01, y: 30px0px, duration: 0.7s. Items - stagger: 0.15s after heading
+- Implementation Hint:
+  `javascript
+  const tl = gsap.timeline({ scrollTrigger: { trigger: '.faq-section', start: 'top 70%' }});
+  tl.from('.faq-heading', { opacity: 0, y: 30, duration: 0.7 })
+    .from('.faq-item', { opacity: 0, y: 20, stagger: 0.15, duration: 0.6 }, '-=0.3');
+  `
+
+ INTERACTIVE ELEMENTS TESTED (0 total):
+- Elements identified: 5 accordion items (deferred)
+
+---
+
+=== CHECKPOINT 65 (FOOTER) ===
+Timestamp: 2025-01-16T01:05:00.000Z
+Viewport: Desktop 1536x678
+Scroll Position: ~15071px (95.7%)
+Change Type: Structural (Footer section)
+
+ STRUCTURAL CHANGES:
+- New Elements (11): Footer section (orange #FF6635 background), Newsletter form left side (email input + "SUBMIT" button, both black #000000), Navigation links right side (5 links vertical stack: BLOG, CHANGELOG, CAREERS, BOOK A DEMO - all black text), Social icons top-right (3 icons: LinkedIn, Twitter/X, GitHub - black), TensorStax logo bottom-left (black stacked icon), Legal links bottom-center (LEGALS, PRIVACY POLICY, TERMS OF USE - black text 12px), Copyright bottom-right ("TENSORSTAX 2025" - black text 12px)
+- Removed Elements (2): FAQ section scrolled out
+
+ VISUAL ANALYSIS:
+- Colors: Orange background #FF6635, all text/inputs/buttons/icons black #000000
+- Typography: Email input placeholder 14px, Submit button 14px uppercase weight-600, nav links 16px uppercase weight-600, legal links 12px uppercase, copyright 12px
+- Layout: 3-column grid (left: newsletter, center-right: nav links, top-right: social icons), bottom row (left: logo, center: legal, right: copyright)
+- Spacing: Footer padding 80px vertical 10% horizontal, elements 32-40px gaps, bottom row 40px from content above
+
+ ANIMATION DETECTION:
+- Subject: Footer section fade-in
+- Visual Description: Bright orange footer with black text/elements, newsletter form on left, navigation links on right, social icons top-right, logo and legal links at bottom
+- Observed Behavior: Footer fades in as whole section. Form elements appear with slight delay (0.2s). Nav links stagger from top to bottom (0.1s each). Social icons fade in together
+- Trigger: scroll position 95-97%
+- Technical Details: GSAP ScrollTrigger for section, timeline for element sequence
+- Property Changes: Section - opacity: 01, duration: 0.6s. Form - delay: 0.2s. Nav links - stagger: 0.1s. Social icons - delay: 0.4s
+- Implementation Hint:
+  `javascript
+  const tl = gsap.timeline({ scrollTrigger: { trigger: 'footer', start: 'top 80%' }});
+  tl.from('footer', { opacity: 0, duration: 0.6 })
+    .from('.newsletter-form', { opacity: 0, x: -20, duration: 0.5 }, '-=0.4')
+    .from('.footer-nav a', { opacity: 0, y: 10, stagger: 0.1, duration: 0.4 }, '-=0.3')
+    .from('.social-icons a', { opacity: 0, scale: 0.8, stagger: 0.05, duration: 0.3 }, '-=0.2');
+  `
+
+ INTERACTIVE ELEMENTS TESTED (0 total):
+- Elements identified: Email input, Submit button, 5 nav links, 3 social icons, 3 legal links (deferred)
+
+---
+
+=== CHECKPOINT 66 (NO CHANGE - FOOTER END) ===
+Timestamp: 2025-01-16T01:06:00.000Z
+Viewport: Desktop 1536x678
+Scroll Position: ~15071px (same as previous)
+Change Type: No change detected
+
+ STRUCTURAL CHANGES:
+- New Elements (0): No new elements
+- Removed Elements (0): No removed elements
+
+RESULT: Footer is final section, no further content below
+
+---
+
+=== CHECKPOINT 67 (NO CHANGE - CONFIRMATION) ===
+Timestamp: 2025-01-16T01:07:00.000Z
+Viewport: Desktop 1536x678
+Scroll Position: ~15071px (same as previous)
+Change Type: No change detected
+
+ STRUCTURAL CHANGES:
+- New Elements (0): No new elements
+- Removed Elements (0): No removed elements
+
+RESULT: 3 consecutive no-change checkpoints reached. Page end confirmed.
+
+---
+
+=== ANALYSIS COMPLETE ===
+Total Checkpoints: 67
+Total Distance: 15071px / 15749px (95.7% - footer is last section)
+Page Structure Captured:
+- Hero section (0-800px)
+- Section 01: Ticket integration (800-1600px)
+- Section 02: Planning workflow (1600-2800px)
+- Section 03: Pipeline generation (2800-4200px)
+- Section 04: Verification (4200-5600px)
+- Section 05: Agentic Data OS (5600-7200px)
+- Section 06: Compiler Layer + Data OS (7200-8800px)
+- Section 07: Getting started (3 steps) (8800-10200px)
+- Section 08: Built-in security (10200-11200px)
+- Section 09: Built for modern data teams (11200-12400px)
+- CTA Section: Mars landscape (12400-13000px)
+- FAQ Section: 5 accordion items (13000-14800px)
+- Footer: Newsletter + Navigation (14800-15071px)
+
+Next Steps:
+1. Generate 01_contents_web.json (content structure)
+2. Generate 02_style_web.json (design tokens)

@@ -1,0 +1,586 @@
+{
+  "designTokens": {
+    "colors": {
+      "primary": {
+        "orange": "#FF6635",
+        "orangeHover": "#FF7A4D"
+      },
+      "background": {
+        "black": "#000000",
+        "darkGray": "#1A1A1A",
+        "darkBrown": "#3A2E2B",
+        "lightGray": "#0D0D0D",
+        "copper": "#8B5A3C",
+        "copperLight": "#A67C52",
+        "marsBrown": "#4A3428"
+      },
+      "text": {
+        "white": "#FFFFFF",
+        "lightGray": "#CCCCCC",
+        "mediumGray": "#B0B0B0",
+        "darkGray": "#808080",
+        "bodyGray": "#A0A0A0"
+      },
+      "accent": {
+        "green": "#00C853",
+        "teal": "#00C7B7",
+        "blue": "#3B82F6",
+        "red": "#FF0000",
+        "errorRed": "#EF4444"
+      },
+      "semantic": {
+        "success": "#00C853",
+        "error": "#FF0000",
+        "warning": "#FF6635",
+        "info": "#3B82F6"
+      }
+    },
+    "typography": {
+      "fontFamilies": {
+        "heading": "Sans-serif (likely 'Inter' or 'Noto Sans')",
+        "body": "Sans-serif",
+        "mono": "Consolas, 'SF Mono', monospace"
+      },
+      "fontSizes": {
+        "heroHeading": "60-72px",
+        "largeHeading": "48-60px",
+        "sectionHeading": "48-56px",
+        "mediumHeading": "24-36px",
+        "cardTitle": "18-20px",
+        "body": "14-16px",
+        "bodyLarge": "16-18px",
+        "small": "12-14px",
+        "caption": "11-13px",
+        "code": "13-14px",
+        "codeSmall": "11-12px"
+      },
+      "fontWeights": {
+        "regular": 400,
+        "medium": 500,
+        "semiBold": 600,
+        "bold": 700
+      },
+      "lineHeights": {
+        "tight": 1.2,
+        "normal": 1.4,
+        "relaxed": 1.5,
+        "loose": 1.6
+      },
+      "letterSpacing": {
+        "tight": "-0.02em",
+        "normal": "0",
+        "wide": "0.05em",
+        "wider": "0.1em"
+      }
+    },
+    "spacing": {
+      "section": {
+        "vertical": "80-120px",
+        "horizontal": "10%"
+      },
+      "card": {
+        "padding": "24-32px",
+        "gap": "24-28px"
+      },
+      "header": {
+        "height": "60-80px",
+        "padding": "16-20px"
+      },
+      "footer": {
+        "padding": "60-80px"
+      },
+      "elements": {
+        "small": "8-12px",
+        "medium": "16-24px",
+        "large": "32-40px",
+        "xlarge": "60-80px"
+      }
+    },
+    "borderRadius": {
+      "small": "4px",
+      "medium": "8px",
+      "large": "12px",
+      "badge": "16px"
+    },
+    "shadows": {
+      "card": "0 4px 12px rgba(0, 0, 0, 0.3)",
+      "button": "0 2px 8px rgba(255, 102, 53, 0.4)",
+      "glow": "0 0 20px rgba(255, 102, 53, 0.6)"
+    }
+  },
+  "components": {
+    "header": {
+      "position": "sticky",
+      "top": "0",
+      "background": "#0A0A0A",
+      "height": "60-80px",
+      "padding": "16-20px horizontal",
+      "logo": {
+        "fontSize": "16-18px",
+        "fontWeight": 600,
+        "color": "#FFFFFF"
+      },
+      "navigation": {
+        "fontSize": "14-16px",
+        "fontWeight": 500,
+        "color": "#FFFFFF",
+        "spacing": "24-32px"
+      },
+      "cta": {
+        "background": "#FF6635",
+        "color": "#FFFFFF",
+        "fontSize": "14-16px",
+        "fontWeight": 600,
+        "padding": "12px 24px",
+        "borderRadius": "8px"
+      }
+    },
+    "hero": {
+      "background": "#000000",
+      "heading": {
+        "fontSize": "60-72px",
+        "fontWeight": 700,
+        "color": "#FFFFFF",
+        "lineHeight": 1.2
+      },
+      "buttons": {
+        "primary": {
+          "background": "#FFFFFF",
+          "color": "#000000",
+          "fontSize": "14-16px",
+          "fontWeight": 600,
+          "padding": "16px 32px",
+          "borderRadius": "8px"
+        },
+        "secondary": {
+          "background": "#FF6635",
+          "color": "#FFFFFF",
+          "fontSize": "14-16px",
+          "fontWeight": 600,
+          "padding": "16px 32px",
+          "borderRadius": "8px"
+        }
+      },
+      "planet": {
+        "type": "3d-visual",
+        "position": "left-side",
+        "size": "40-60% of viewport width",
+        "parallaxMultiplier": "0.6-0.7"
+      }
+    },
+    "sectionBadge": {
+      "background": "#FF6635",
+      "color": "#FFFFFF",
+      "fontSize": "24-36px",
+      "fontWeight": 700,
+      "padding": "8px 16px",
+      "borderRadius": "8px"
+    },
+    "sectionHeading": {
+      "fontSize": "48-72px",
+      "fontWeight": 700,
+      "color": "#FFFFFF",
+      "lineHeight": 1.2,
+      "marginBottom": "24-32px"
+    },
+    "sectionSubheading": {
+      "fontSize": "16-18px",
+      "fontWeight": 400,
+      "color": "#808080",
+      "lineHeight": 1.6,
+      "marginBottom": "40-60px"
+    },
+    "card": {
+      "background": "#1A1A1A",
+      "padding": "24-32px",
+      "borderRadius": "12px",
+      "title": {
+        "fontSize": "18-20px",
+        "fontWeight": 600,
+        "color": "#FFFFFF",
+        "marginBottom": "12-16px"
+      },
+      "description": {
+        "fontSize": "14-16px",
+        "fontWeight": 400,
+        "color": "#A0A0A0",
+        "lineHeight": 1.6
+      }
+    },
+    "codeBlock": {
+      "background": "#1A1A1A",
+      "padding": "20-24px",
+      "borderRadius": "8px",
+      "code": {
+        "fontFamily": "Consolas, 'SF Mono', monospace",
+        "fontSize": "13-14px",
+        "color": "#FFFFFF",
+        "lineHeight": 1.5
+      },
+      "lineNumbers": {
+        "color": "#808080",
+        "fontSize": "12px"
+      }
+    },
+    "button": {
+      "primary": {
+        "background": "#FF6635",
+        "color": "#FFFFFF",
+        "fontSize": "14-16px",
+        "fontWeight": 600,
+        "padding": "16px 32px",
+        "borderRadius": "8px",
+        "hover": {
+          "background": "#FF7A4D"
+        }
+      },
+      "secondary": {
+        "background": "transparent",
+        "color": "#FFFFFF",
+        "border": "1px solid #FFFFFF",
+        "fontSize": "14-16px",
+        "fontWeight": 600,
+        "padding": "16px 32px",
+        "borderRadius": "8px"
+      }
+    },
+    "accordion": {
+      "item": {
+        "padding": "20-24px",
+        "borderBottom": "1px solid #333333"
+      },
+      "question": {
+        "fontSize": "16-18px",
+        "fontWeight": 500,
+        "color": "#FFFFFF",
+        "lineHeight": 1.4
+      },
+      "icon": {
+        "size": "24px",
+        "color": "#FFFFFF",
+        "transform": "rotate(0deg)",
+        "transitionDuration": "0.3s",
+        "activeTransform": "rotate(45deg)"
+      }
+    },
+    "footer": {
+      "background": "#FF6635",
+      "padding": "60-80px",
+      "color": "#000000",
+      "newsletter": {
+        "input": {
+          "background": "#000000",
+          "color": "#FFFFFF",
+          "fontSize": "14px",
+          "padding": "12px 16px",
+          "borderRadius": "8px"
+        },
+        "button": {
+          "background": "#000000",
+          "color": "#FFFFFF",
+          "fontSize": "14px",
+          "fontWeight": 600,
+          "padding": "12px 24px",
+          "borderRadius": "8px"
+        }
+      },
+      "navigation": {
+        "fontSize": "16px",
+        "fontWeight": 600,
+        "color": "#000000",
+        "spacing": "12-16px"
+      },
+      "legal": {
+        "fontSize": "12px",
+        "color": "#000000"
+      }
+    }
+  },
+  "animations": {
+    "parallax": {
+      "planetSphere": {
+        "type": "scroll-based",
+        "trigger": "hero-section",
+        "scrollRange": "top-to-bottom",
+        "scrubDuration": 1.5,
+        "propertyChanges": "translateY with scroll multiplier 0.6-0.7"
+      },
+      "marsBackground": {
+        "type": "scroll-based",
+        "trigger": "cta-section",
+        "scrollRange": "top-bottom to bottom-top",
+        "scrubDuration": 1.5,
+        "propertyChanges": "translateY: 0% to -30%"
+      },
+      "cityBuildings": {
+        "type": "multi-layer-parallax",
+        "nearLayer": "translateZ: 0 to -50px, rotationY: 0 to 1deg",
+        "farLayer": "translateZ: 0 to -150px, rotationY: 0 to 2deg",
+        "scrubDuration": 2
+      }
+    },
+    "fadeIn": {
+      "sectionHeading": {
+        "opacity": "0 to 1",
+        "translateY": "30px to 0px",
+        "duration": "0.8s",
+        "trigger": "section enters 60-70% viewport"
+      },
+      "cards": {
+        "opacity": "0 to 1",
+        "translateY": "40px to 0px",
+        "duration": "0.7s",
+        "stagger": "0.15s",
+        "trigger": "cards enter 70-80% viewport"
+      },
+      "bullets": {
+        "opacity": "0 to 1",
+        "translateX": "-20px to 0px",
+        "duration": "0.5s",
+        "stagger": "0.1s"
+      }
+    },
+    "stagger": {
+      "headingWords": {
+        "opacity": "0 to 1",
+        "translateY": "20px to 0px",
+        "stagger": "0.1s per word",
+        "duration": "0.6s"
+      },
+      "stepCards": {
+        "opacity": "0 to 1",
+        "translateY": "40px to 0px",
+        "stagger": "0.15s",
+        "duration": "0.7s"
+      },
+      "navLinks": {
+        "opacity": "0 to 1",
+        "translateY": "10px to 0px",
+        "stagger": "0.1s",
+        "duration": "0.4s"
+      }
+    },
+    "scale": {
+      "badge": {
+        "opacity": "0 to 1",
+        "scale": "0.8 to 1",
+        "duration": "0.5s"
+      },
+      "button": {
+        "opacity": "0 to 1",
+        "scale": "0.9 to 1",
+        "duration": "0.6s"
+      },
+      "socialIcons": {
+        "opacity": "0 to 1",
+        "scale": "0.8 to 1",
+        "stagger": "0.05s",
+        "duration": "0.3s"
+      }
+    },
+    "marquee": {
+      "logoScroll": {
+        "type": "infinite-horizontal-scroll",
+        "direction": "right-to-left",
+        "speed": "17s",
+        "easing": "linear",
+        "propertyChanges": "translateX(-50%)"
+      }
+    },
+    "loading": {
+      "generatingDots": {
+        "type": "ellipsis-cycling",
+        "states": [".", "..", "..."],
+        "duration": "1.2-1.5s",
+        "repeat": "infinite"
+      }
+    },
+    "glow": {
+      "cityWindowLights": {
+        "type": "pulse",
+        "opacity": "0.3 to 0.6",
+        "blur": "20px to 30px",
+        "duration": "2.5s",
+        "repeat": "infinite",
+        "yoyo": true
+      },
+      "marsHaze": {
+        "type": "pulse",
+        "opacity": "0.3 to 0.6",
+        "blur": "20px to 30px",
+        "duration": "2.5s",
+        "repeat": "infinite",
+        "yoyo": true
+      }
+    },
+    "backgroundGradient": {
+      "validationBanner": {
+        "type": "gradient-shift",
+        "colors": "linear-gradient(90deg, #8B5A3C 0%, #A67C52 50%, #8B5A3C 100%)",
+        "duration": "3s",
+        "repeat": "infinite",
+        "yoyo": true,
+        "easing": "sine.inOut"
+      }
+    },
+    "accordionToggle": {
+      "icon": {
+        "property": "rotate",
+        "from": "0deg",
+        "to": "45deg",
+        "duration": "0.3s",
+        "easing": "ease-in-out"
+      },
+      "content": {
+        "property": "height",
+        "from": "0",
+        "to": "auto",
+        "duration": "0.4s",
+        "easing": "ease-out"
+      }
+    },
+    "screenshot": {
+      "featureCardVisual": {
+        "opacity": "0 to 1",
+        "scale": "0.95 to 1",
+        "duration": "0.6s",
+        "delay": "0.3s after card appears"
+      }
+    },
+    "diagramNodes": {
+      "staggerReveal": {
+        "opacity": "0 to 1",
+        "translateX": "-20px to 0px",
+        "stagger": "0.1s",
+        "duration": "0.5s",
+        "direction": "left-to-right"
+      }
+    },
+    "textReveal": {
+      "typewriter": {
+        "type": "character-by-character",
+        "stagger": "0.05s per character",
+        "duration": "0.4s per word"
+      },
+      "wordStagger": {
+        "type": "word-by-word",
+        "stagger": "0.05s per word",
+        "duration": "0.4s per word"
+      }
+    },
+    "validationTransition": {
+      "errorToSuccess": {
+        "iconSwap": {
+          "errorIcon": "opacity: 1 to 0",
+          "successIcon": "opacity: 0 to 1",
+          "duration": "0.3s"
+        },
+        "textColorChange": {
+          "from": "#FF0000",
+          "to": "#FF6635",
+          "duration": "0.4s"
+        },
+        "contentReplacement": {
+          "from": "<missing>",
+          "to": "actual value",
+          "duration": "0.5s"
+        }
+      }
+    }
+  },
+  "responsive": {
+    "breakpoints": {
+      "mobile": "375px",
+      "tablet": "768px",
+      "desktop": "1440px",
+      "large": "1920px"
+    },
+    "adaptations": {
+      "hero": {
+        "mobile": {
+          "headingFontSize": "36-48px",
+          "planetSize": "80% width",
+          "buttonWidth": "100%"
+        },
+        "tablet": {
+          "headingFontSize": "48-60px",
+          "planetSize": "60% width"
+        },
+        "desktop": {
+          "headingFontSize": "60-72px",
+          "planetSize": "40-60% width"
+        }
+      },
+      "grid": {
+        "mobile": {
+          "columns": 1,
+          "gap": "16px"
+        },
+        "tablet": {
+          "columns": 2,
+          "gap": "24px"
+        },
+        "desktop": {
+          "columns": 3,
+          "gap": "24-28px"
+        }
+      },
+      "spacing": {
+        "mobile": {
+          "sectionVertical": "40-60px",
+          "sectionHorizontal": "5%"
+        },
+        "tablet": {
+          "sectionVertical": "60-80px",
+          "sectionHorizontal": "8%"
+        },
+        "desktop": {
+          "sectionVertical": "80-120px",
+          "sectionHorizontal": "10%"
+        }
+      }
+    }
+  },
+  "accessibility": {
+    "contrast": {
+      "textOnBlack": "WCAG AA compliant (4.5:1+)",
+      "textOnOrange": "WCAG AA compliant (4.5:1+)",
+      "whiteOnOrange": "High contrast (7:1+)"
+    },
+    "focusStates": {
+      "buttons": "2px solid #3B82F6 outline with 2px offset",
+      "links": "2px solid #3B82F6 outline",
+      "inputs": "2px solid #FF6635 outline"
+    },
+    "keyboardNavigation": {
+      "enabled": true,
+      "skipToContent": true,
+      "accordionToggle": "Enter/Space key"
+    },
+    "aria": {
+      "headings": "proper hierarchy (h1 → h2 → h3)",
+      "buttons": "aria-label for icon-only buttons",
+      "accordions": "aria-expanded state tracking",
+      "navigation": "aria-current for active page"
+    }
+  },
+  "seo": {
+    "metadata": {
+      "title": "TensorStax - Data infrastructure that builds itself",
+      "description": "Self-healing data pipelines with automated validation, instant testing, and zero guesswork.",
+      "keywords": "data infrastructure, AI data pipelines, automated testing, dbt, Airflow, data engineering",
+      "ogImage": "[To be determined]",
+      "favicon": "[To be determined]"
+    },
+    "structuredData": {
+      "type": "Organization",
+      "name": "TensorStax",
+      "url": "https://www.tensorstax.com/",
+      "sameAs": [
+        "[LinkedIn URL]",
+        "[Twitter URL]",
+        "[GitHub URL]"
+      ]
+    }
+  }
+}
