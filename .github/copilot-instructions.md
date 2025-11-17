@@ -1,6 +1,6 @@
 # AI-Powered Content Builder System
 
-## 🚫 ABSOLUTE PROHIBITIONS - READ FIRST
+## 🚫 ABSOLUTE PROHIBITIONS - READ FIRST (HIGHEST PRIORITY)
 
 **NEVER, UNDER ANY CIRCUMSTANCES:**
 
@@ -126,6 +126,84 @@ Next: Checkpoint X+1 (ArrowDown × 3-5)
 
 ---
 
+## 🤖 AGENT CONTEXT SWITCHING
+
+**AI AUTOMATICALLY SELECTS AGENT BASED ON WORKFLOW STAGE:**
+
+### Agent Selection Logic
+
+**Stage 1: Web Analysis** (Default when URL provided)
+→ Use **Web Analyzer Agent** context (`.github/agents/web-analyzer.agents.md`)
+→ Triggers: `/web [url]`, "웹사이트 분석", URLs, "사이트 구조"
+→ Output: `01_contents_web.json` + `02_style_web.json`
+
+**Stage 2: Integration** (After analysis files exist)
+→ Use **Integration Agent** context (`.github/agents/integration-agent.agents.md`)
+→ Triggers: `/integrate`, "통합", "merge JSONs", "03번 파일"
+→ Output: `03_integrate_web.json`
+
+**Stage 3: Code Generation** (After integration file exists)
+→ Use **Code Generator Agent** context (`.github/agents/code-generator.agents.md`)
+→ Triggers: `/generate`, "코드 생성", "컴포넌트", "React"
+→ Output: 17+ React/TypeScript files
+
+### Context Switching Rules
+
+```javascript
+// AI checks current stage and loads appropriate agent context
+
+if (userRequest.includes("URL") || userRequest.includes("/web")) {
+  loadAgentContext("web-analyzer");
+  // Execute: 30-80 checkpoint analysis → Generate 01/02 JSONs
+}
+
+else if (userRequest.includes("/integrate") || filesExist(["01_contents", "02_style"])) {
+  loadAgentContext("integration-agent");
+  // Execute: PowerShell script → Generate 03 JSON
+}
+
+else if (userRequest.includes("/generate") || fileExists("03_integrate")) {
+  loadAgentContext("code-generator");
+  // Execute: Component-based 3-pass → Generate React components
+}
+```
+
+### User Experience
+
+**User says: "https://example.com 분석하고 코드 생성해줘"**
+
+```
+[Stage 1: Web Analyzer Agent AUTO-LOADED]
+✅ 웹 분석 시작...
+→ 45 체크포인트 완료
+→ 01_contents_web.json (781 lines)
+→ 02_style_web.json (586 lines)
+✅ 분석 완료.
+
+[Stage 2: Integration Agent AUTO-LOADED]
+✅ 통합 시작...
+→ PowerShell 스크립트 실행
+→ 03_integrate_web.json (1229 lines)
+✅ 통합 완료.
+
+[Stage 3: Code Generator Agent AUTO-LOADED]
+✅ 코드 생성 시작...
+→ Phase 1: Foundation (types, docs)
+→ Phase 2: HeroSection (Pass 1/3) - 계속할까요?
+   [User: yes]
+→ Phase 2: HeroSection (Pass 2/3) - 계속할까요?
+   [User: yes]
+→ Phase 2: HeroSection (Pass 3/3) - 다음 컴포넌트로?
+   [User: yes]
+→ ... (13 components total)
+→ Phase 3: Assembly
+✅ 17개 파일 생성 완료!
+```
+
+**No manual agent selection needed - AI handles workflow automatically.**
+
+---
+
 ## ⚠️ CRITICAL: START HERE - WEB ANALYSIS CHECKLIST
 
 **BEFORE starting ANY web analysis, complete these steps IN ORDER:**
@@ -230,13 +308,7 @@ output/
 
 ---
 
-## Progressive Scroll Analysis - MANDATORY EXECUTION PROTOCOL
-
-### ⚠️ CRITICAL: High-Fidelity Viewport Change Detection
-
-**Core Principle: Capture EVERY visible change and animation frame until page end**
-
-### Step 0: Initialization
+## ⚠️ CRITICAL: Core Analysis Policies
 
 ```javascript
 // 1. Initialize tracking
@@ -247,6 +319,10 @@ let consecutiveNoChangeCount = 0;
 const MIN_CHECKPOINTS = 30; // Minimum required checkpoints for valid analysis
 const MAX_NO_CHANGE_THRESHOLD = 3;
 const MAX_CHECKPOINTS = 100; // Safety limit (increased for detailed analysis)
+
+// NEW: Quantitative comparison tracking
+const checkpointData = []; // Store {index, positions, screenshot, timestamp}
+let previousElementPositions = new Map(); // Map<selector, {x, y, width, height}>
 
 // 2. Simple hash function for screenshot comparison
 function simpleHash(str) {
@@ -264,6 +340,27 @@ const initialElements = await mcp_kapture_elements({ tabId, visible: "true" });
 const initialScreenshot = await mcp_kapture_screenshot({ tabId });
 previousVisibleElements = new Set(initialElements.map(el => el.selector || el.xpath));
 previousScreenshotHash = simpleHash(initialScreenshot);
+
+// NEW: Extract initial element positions for quantitative tracking
+initialElements.forEach(el => {
+  const selector = el.selector || el.xpath;
+  if (el.boundingBox) {
+    previousElementPositions.set(selector, {
+      x: el.boundingBox.x || 0,
+      y: el.boundingBox.y || 0,
+      width: el.boundingBox.width || 0,
+      height: el.boundingBox.height || 0
+    });
+  }
+});
+
+// NEW: Store checkpoint data for future comparison
+checkpointData.push({
+  index: 0,
+  screenshot: initialScreenshot,
+  positions: new Map(previousElementPositions),
+  timestamp: new Date().toISOString()
+});
 
 console.log(`✅ 체크포인트 ${checkpointIndex++} 완료 (초기 상태)`);
 ```
@@ -291,6 +388,20 @@ await new Promise(resolve => setTimeout(resolve, 300));
 // Capture current state
 const currentElements = await mcp_kapture_elements({ tabId, visible: "true" });
 const currentScreenshot = await mcp_kapture_screenshot({ tabId });
+
+// NEW: Extract current element positions for quantitative comparison
+const currentElementPositions = new Map();
+currentElements.forEach(el => {
+  const selector = el.selector || el.xpath;
+  if (el.boundingBox) {
+    currentElementPositions.set(selector, {
+      x: el.boundingBox.x || 0,
+      y: el.boundingBox.y || 0,
+      width: el.boundingBox.width || 0,
+      height: el.boundingBox.height || 0
+    });
+  }
+});
 ```
 
 **3. 🔍 Change Detection (Structural + Visual)**
@@ -330,6 +441,30 @@ if (significantChange) {
   // 4-1. ✅ MANDATORY: Write checkpoint header (CANNOT SKIP)
   // ⚠️ CRITICAL: Use replace_string_in_file tool, NOT PowerShell echo command
   // PowerShell echo causes UTF-16 encoding issues that corrupt the file
+  
+  // NEW: Calculate quantitative movements from previous checkpoint
+  const movementAnalysis = [];
+  for (const [selector, currentPos] of currentElementPositions.entries()) {
+    if (previousElementPositions.has(selector)) {
+      const prevPos = previousElementPositions.get(selector);
+      const deltaX = currentPos.x - prevPos.x;
+      const deltaY = currentPos.y - prevPos.y;
+      const deltaWidth = currentPos.width - prevPos.width;
+      const deltaHeight = currentPos.height - prevPos.height;
+      
+      // Only log significant movements (>5px change)
+      if (Math.abs(deltaX) > 5 || Math.abs(deltaY) > 5 || Math.abs(deltaWidth) > 5 || Math.abs(deltaHeight) > 5) {
+        movementAnalysis.push({
+          selector: selector.substring(0, 50), // Truncate long selectors
+          deltaX: Math.round(deltaX),
+          deltaY: Math.round(deltaY),
+          deltaWidth: Math.round(deltaWidth),
+          deltaHeight: Math.round(deltaHeight)
+        });
+      }
+    }
+  }
+  
   const checkpointHeader = `
 === CHECKPOINT ${checkpointIndex} ===
 Timestamp: ${new Date().toISOString()}
@@ -340,6 +475,13 @@ Change Type: ${structuralChange ? 'Structural' : 'Visual'}
 📋 STRUCTURAL CHANGES:
 - New Elements (${newElements.length}): ${newElements.slice(0, 5).join(', ')}
 - Removed Elements (${removedElements.length}): ${removedElements.slice(0, 5).join(', ')}
+
+📊 QUANTITATIVE COMPARISON (vs Checkpoint ${checkpointIndex - 1}):
+${movementAnalysis.length > 0 ? movementAnalysis.slice(0, 5).map(m => 
+  `- ${m.selector}: ΔX=${m.deltaX > 0 ? '+' : ''}${m.deltaX}px, ΔY=${m.deltaY > 0 ? '+' : ''}${m.deltaY}px${m.deltaWidth !== 0 ? `, ΔWidth=${m.deltaWidth > 0 ? '+' : ''}${m.deltaWidth}px` : ''}${m.deltaHeight !== 0 ? `, ΔHeight=${m.deltaHeight > 0 ? '+' : ''}${m.deltaHeight}px` : ''}`
+).join('\n') : '- No significant position changes detected (< 5px threshold)'}
+- Total tracked elements: ${currentElementPositions.size}
+- Elements moved: ${movementAnalysis.length}
 `;
 
   // ✅ CORRECT: Use replace_string_in_file tool
@@ -485,6 +627,18 @@ ${interactionResults.length > 0 ? interactionResults.map(r => `- ${r}`).join('\n
   previousVisibleElements = currentElementSet;
   consecutiveNoChangeCount = 0;
   
+  // NEW: Update position tracking for next comparison
+  previousElementPositions = new Map(currentElementPositions);
+  
+  // NEW: Store checkpoint data for future reference
+  checkpointData.push({
+    index: checkpointIndex - 1,
+    screenshot: currentScreenshot,
+    positions: new Map(currentElementPositions),
+    timestamp: new Date().toISOString(),
+    movements: movementAnalysis.length
+  });
+  
 } else {
   consecutiveNoChangeCount++;
   console.log(`⚠️ 변화 없음 ${consecutiveNoChangeCount}/${MAX_NO_CHANGE_THRESHOLD}`);
@@ -530,49 +684,6 @@ await mcp_kapture_keypress({ tabId, key: "ArrowDown" }); // Primary scroll (smal
 - Only say: "다음 체크포인트로 진행" or "진행 중"
 
 **NO EXCEPTIONS. SYSTEMATIC ANALYSIS IS MANDATORY.**
-
----
-
-## Command System
-
-### Primary Pipeline: Web Development
-
-| Command | Pipeline | Output | Description |
-|---------|----------|--------|-------------|
-| **`/web`** | Web Development | 2 Analysis Files | Web exploration + content analysis + style analysis (AUTO-STOP) |
-| **`/integrate`** | Integration | 1 Integration File | Merge analyses into unified spec (MANUAL REQUEST ONLY) |
-| **`/generate`** | Code Generation | React/TypeScript Files | Generate production components (MANUAL REQUEST ONLY) |
-
-### Command Detection
-
-1. **Explicit Commands** (Highest Priority)
-   - `/web` → Web development pipeline (AUTO-STOP after analysis)
-   - `/integrate` → Integration (MANUAL REQUEST ONLY)
-   - `/generate` → Code generation (MANUAL REQUEST ONLY)
-
-2. **Natural Language Intent Detection**
-   - Web: "웹사이트", "사이트", "HTML", "반응형", URLs
-   - Analysis: "분석만", "구조만", "디자인만"
-
----
-
-## Command Usage
-
-### Web Development (`/web`)
-
-**Pipeline (AUTO-STOP after Step 2):**
-```
-01_contents_web → 02_style_web → ⚠️ STOP (wait for manual /integrate or /generate)
-```
-
-**Full Manual Pipeline:**
-```
-/web → 01_contents_web + 02_style_web (AUTO)
-  ↓
-/integrate → 03_integrate_web (MANUAL REQUEST)
-  ↓
-/generate → 04_generate_[html|tailwind] (MANUAL REQUEST)
-```
 
 ---
 
@@ -674,204 +785,150 @@ Step 5: STOP (do NOT attempt to generate JSON manually)
 - ❌ Token limit hit during each section generation
 
 #### 04. Code Generation
-- **Method:** Component-Based 3-Pass Generation (see below)
-- **Output:** React/Next.js components with Tailwind CSS
-- **Format:** TypeScript + JSX/TSX files
+- **Method:** Section-by-Section 3-Pass Generation (see below)
+- **Output:** Single HTML file with Tailwind CSS
+- **Format:** HTML5 + Tailwind CDN
 
-#### 04-0. HTML Generation Method (MANDATORY) - UPDATED v2.18.0
+#### 04-0. HTML Generation Method (MANDATORY) - UPDATED v2.20.0
 
-**⚠️ CRITICAL: Component-Based 3-Pass Generation**
+**⚠️ CRITICAL: Section-by-Section 3-Pass Generation (HTML + Tailwind)**
 
 ### **Problem Analysis:**
-- **Previous method:** PowerShell 18-Task sequential execution
-- **Result:** AI stops midway, requires user confirmation between tasks
-- **Root cause:** Single monolithic generation process, token pressure
+- **Previous method:** React/TSX components (wrong output format)
+- **Correct output:** Single HTML file with Tailwind CSS classes
+- **Root cause:** Misunderstood project requirements
 
-### **NEW Solution: Component-Based 3-Pass (Incremental Approach)**
+### **NEW Solution: Section-by-Section HTML Generation (Incremental Approach)**
 
-**Core Principle:** Generate ONE component at a time with THREE quality passes per component
+**Core Principle:** Generate ONE section at a time with THREE quality passes per section
 
-**AI MUST follow this workflow WITH user confirmation after each component:**
+**AI MUST follow this workflow WITH user confirmation after each section:**
 
 ```
-Phase 1: Foundation → Phase 2: Component Generation (per section) → Phase 3: Assembly
+Phase 1: HTML Skeleton → Phase 2: Section Generation (per section) → Phase 3: Final Assembly
 ```
 
-**User confirms completion of EACH component before proceeding to next.**
+**User confirms completion of EACH section before proceeding to next.**
 
 ---
 
-### **Phase 1: Foundation (One-Time Setup)**
+### **Phase 1: HTML Skeleton (One-Time Setup)**
 
-**Task 1-1: Generate TypeScript Types**
-```typescript
-// types/sections.ts
-// Generated from 03_integrate_web.json
-
-export interface SectionBase {
-  id: string;
-  type: string;
-  style?: Record<string, any>;
-}
-
-export interface HeroSection extends SectionBase {
-  type: "hero-section";
-  heading: string;
-  buttons: {
-    primary: { text: string; href: string };
-    secondary: { text: string; href: string };
-  };
-  visual?: {
-    type: string;
-    codeHint?: string;
-  };
-  bottomContent?: Array<{
-    type: string;
-    heading: string;
-    description: string;
-  }>;
-  integrations?: Array<{ name: string; logo: string }>;
-}
-
-// ... (generate interfaces for ALL section types from JSON)
+**Task 1-1: Generate Base HTML Structure**
+```html
+<!-- output/web/index.html -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><!-- From 03_integrate_web.json seo.title --></title>
+  <meta name="description" content="<!-- From seo.description -->">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Animation Libraries (if needed) -->
+  <!-- GSAP will be added in Phase 2 if animations detected -->
+  <!-- Three.js will be added in Phase 2 if 3D content detected -->
+  
+  <style>
+    /* Custom styles from designTokens */
+  </style>
+</head>
+<body>
+  <!-- Sections will be inserted here in Phase 2 -->
+</body>
+</html>
 ```
 
-**Task 1-2: Generate Component Structure Document**
+**Task 1-2: Generate Section Structure Document**
 ```markdown
-// docs/component_structure.md
+// docs/section_structure.md
 
-# Component Mapping (from 03_integrate_web.json)
+# Section Mapping (from 03_integrate_web.json)
 
-## Sections → Components
+## Sections → HTML Sections
 
-1. hero-section → components/HeroSection.tsx
-2. feature-section → components/FeatureSection.tsx
-3. workflow-section → components/WorkflowSection.tsx
-4. validation-section → components/ValidationSection.tsx
-5. feature-showcase → components/FeatureShowcase.tsx
-6. two-column-features → components/TwoColumnFeatures.tsx
-7. onboarding-steps → components/OnboardingSteps.tsx
-8. security-section → components/SecuritySection.tsx
-9. feature-cards → components/FeatureCards.tsx
-10. banner → components/Banner.tsx
-11. cta-section → components/CTASection.tsx
-12. faq-section → components/FAQSection.tsx
-13. footer → components/Footer.tsx
+1. section-01-hero → <section id="hero">
+2. section-02-transition → <section id="transition">
+3. section-03-description → <section id="description">
+... (list all 14 sections)
 
-Total: 13 components (+ 1 main page)
-```
-
-**Task 1-3: Create UI Rules Document**
-```markdown
-// docs/ui_rules.md (see separate section below for full content)
+Total: 14 sections in single HTML file
 ```
 
 **Completion Check:**
 ```
 ✅ Phase 1 완료
-- types/sections.ts (X interfaces)
-- docs/component_structure.md (13 components 매핑)
-- docs/ui_rules.md (구현 규칙)
+- output/web/index.html (기본 구조)
+- docs/section_structure.md (14 섹션 매핑)
 
-다음: HeroSection 컴포넌트 생성을 시작합니다.
+다음: section-01-hero 생성을 시작합니다.
 ```
 
 ---
 
-### **Phase 2: Component Generation (Per Section)**
+### **Phase 2: Section Generation (Per Section)**
 
 **For EACH section in 03_integrate_web.json.sections, execute 3 passes:**
 
-#### **Pass 1: JSX Structure + Data Mapping**
+#### **Pass 1: HTML Structure + Data Mapping**
 
-**AI creates component file with basic structure:**
+**AI creates HTML section with basic structure:**
 
-```tsx
-// components/HeroSection.tsx
-import React from 'react';
-import { HeroSection as HeroSectionType } from '@/types/sections';
-
-export function HeroSection({ data }: { data: HeroSectionType }) {
-  return (
-    <section className="hero-section">
-      {/* 1. Main heading */}
-      <h1>{data.heading}</h1>
-      
-      {/* 2. CTA buttons */}
-      <div className="buttons">
-        <a href={data.buttons.primary.href}>{data.buttons.primary.text}</a>
-        <a href={data.buttons.secondary.href}>{data.buttons.secondary.text}</a>
-      </div>
-      
-      {/* 3. 3D visual (placeholder) */}
-      {data.visual && <div className="visual-placeholder">3D Visual Here</div>}
-      
-      {/* 4. Bottom content */}
-      {data.bottomContent?.map((item, i) => (
-        <div key={i}>
-          <h3>{item.heading}</h3>
-          <p>{item.description}</p>
-        </div>
-      ))}
-      
-      {/* 5. Integrations */}
-      {data.integrations && (
-        <div className="integrations">
-          {data.integrations.map((int, i) => (
-            <span key={i}>{int.name}</span>
-          ))}
-        </div>
-      )}
-    </section>
-  );
-}
+```html
+<!-- Section 01: Hero -->
+<section id="section-01-hero" class="hero-section">
+  <!-- 1. Main heading -->
+  <h1>The AI-Native Operating System For Global Supply Chains</h1>
+  
+  <!-- 2. CTA buttons -->
+  <div class="buttons">
+    <a href="#demo">Book a demo</a>
+  </div>
+  
+  <!-- 3. 3D visual canvas (placeholder) -->
+  <canvas id="hero-img"></canvas>
+  
+  <!-- All JSON fields mapped to HTML elements -->
+</section>
 ```
 
-**Output:** "✅ Pass 1/3 완료 (뼈대) - 모든 JSON 필드 매핑됨. 계속할까요?"
+**Output:** "✅ Pass 1/3 완료 (HTML 구조) - 모든 JSON 필드 매핑됨. 계속할까요?"
 
 #### **Pass 2: Tailwind Styling**
 
-**AI adds Tailwind classes based on data.style:**
+**AI adds Tailwind classes based on section.style:**
 
-```tsx
-export function HeroSection({ data }: { data: HeroSectionType }) {
-  const { style } = data;
+```html
+<section 
+  id="section-01-hero" 
+  class="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-[#1E3A8A] to-[#3B82F6]"
+>
+  <!-- 1. Main heading with responsive typography -->
+  <h1 class="text-6xl md:text-7xl font-bold leading-tight text-white text-center">
+    The AI-Native Operating System For Global Supply Chains
+  </h1>
   
-  return (
-    <section 
-      className="relative min-h-screen flex items-center justify-center"
-      style={{ backgroundColor: style?.background }}
+  <!-- 2. CTA buttons with hover effects -->
+  <div class="flex gap-4 mt-8">
+    <a 
+      href="#demo"
+      class="px-8 py-4 bg-white text-black rounded-lg font-semibold hover:scale-105 transition"
     >
-      {/* 1. Main heading with responsive typography */}
-      <h1 className={`
-        text-6xl md:text-7xl 
-        font-bold 
-        leading-tight
-        ${style?.heading?.color ? `text-[${style.heading.color}]` : 'text-white'}
-      `}>
-        {data.heading}
-      </h1>
-      
-      {/* 2. CTA buttons with hover effects */}
-      <div className="flex gap-4 mt-8">
-        <a 
-          href={data.buttons.primary.href}
-          className="px-8 py-4 bg-white text-black rounded-lg font-semibold hover:scale-105 transition"
-        >
-          {data.buttons.primary.text}
-        </a>
-        <a 
-          href={data.buttons.secondary.href}
-          className="px-8 py-4 bg-[#FF6635] text-white rounded-lg font-semibold hover:scale-105 transition"
-        >
-          {data.buttons.secondary.text}
-        </a>
-      </div>
-      
-      {/* ... (나머지 요소도 스타일링) */}
-    </section>
-  );
-}
+      Book a demo
+    </a>
+  </div>
+  
+  <!-- 3. 3D visual canvas -->
+  <canvas 
+    id="hero-img" 
+    class="absolute left-0 w-full h-full pointer-events-none"
+  ></canvas>
+  
+  <!-- All elements styled with Tailwind -->
+</section>
 ```
 
 **Output:** "✅ Pass 2/3 완료 (스타일링) - Tailwind 적용됨. 계속할까요?"
@@ -909,97 +966,134 @@ export function HeroSection({ data }: { data: HeroSectionType }) {
 }
 ```
 
+**Output:** "✅ Pass 2/3 완료 (스타일링) - Tailwind 적용됨. 계속할까요?"
+
+#### **Pass 3: Validation + codeHint Insertion**
+
+**AI verifies JSON compliance and inserts animation code:**
+
+```html
+<!-- Section 01: Hero (Final with animations) -->
+<section 
+  id="section-01-hero" 
+  class="relative min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#1E3A8A] to-[#3B82F6] px-6"
+>
+  <h1 class="text-6xl md:text-7xl font-bold leading-tight text-white text-center mb-8">
+    The AI-Native Operating System For Global Supply Chains
+  </h1>
+  
+  <div class="flex gap-4 mt-8 z-10">
+    <a 
+      href="#demo"
+      class="px-8 py-4 bg-white text-black rounded-lg font-semibold hover:scale-105 transition"
+    >
+      Book a demo
+    </a>
+  </div>
+  
+  <!-- 3D Canvas with animation script -->
+  <canvas 
+    id="hero-img" 
+    class="absolute left-0 top-0 w-full h-full pointer-events-none"
+  ></canvas>
+  
+  <script>
+    // Insert codeHint directly (NO interpretation)
+    const canvas = document.querySelector('#hero-img');
+    const scene = new THREE.Scene();
+    const loader = new THREE.GLTFLoader();
+    
+    const ships = [];
+    const parallaxSpeeds = [0.3, 0.5, 0.7];
+    
+    parallaxSpeeds.forEach((speed, i) => {
+      loader.load(`ship-${i}.gltf`, (gltf) => {
+        const ship = gltf.scene;
+        scene.add(ship);
+        ships.push({ model: ship, speed });
+      });
+    });
+    
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      ships.forEach(ship => {
+        ship.model.position.x = -scrollY * ship.speed * 0.05;
+        ship.model.position.y = scrollY * ship.speed * 0.08;
+      });
+    });
+  </script>
+</section>
+```
+
 **Validation Checklist (AI outputs):**
 ```
 ✅ Pass 3/3 완료 (검증)
 
 JSON 일치 확인:
 - ✅ All fields mapped: heading, buttons, visual, bottomContent, integrations
-- ✅ Style applied: background, heading (fontSize, color), buttons (padding, borderRadius)
-- ✅ codeHint preserved: data.visual.codeHint inserted without modification
+- ✅ Style applied: background (gradient), heading (fontSize, color), buttons (padding, rounded)
+- ✅ codeHint preserved: visual.codeHint inserted in <script> tag without modification
 - ✅ No missing properties
 - ✅ No unused properties
 
-HeroSection 완료! 다음 컴포넌트로 진행할까요?
+Section 01 (Hero) 완료! 다음 섹션으로 진행할까요?
 ```
 
 **User responds:** "yes" → AI proceeds to next section
 
 ---
 
-### **Phase 3: Assembly**
+### **Phase 3: Final Assembly**
 
-**Task 3-1: Generate Main Page**
-```tsx
-// pages/index.tsx
-import React from 'react';
-import { HeroSection } from '@/components/HeroSection';
-import { FeatureSection } from '@/components/FeatureSection';
-// ... (import all components)
-
-import integratedData from '@/analysis/web-pipeline/03_integrate_web.json';
-
-export default function Home() {
-  const sections = integratedData.sections;
+**Task 3-1: Combine All Sections into Single HTML File**
+```html
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nauta - The AI-Native Operating System For Global Supply Chains</title>
+  <meta name="description" content="AI-powered logistics intelligence for a world that never stops">
   
-  return (
-    <main>
-      {sections.map((section, index) => {
-        switch (section.type) {
-          case 'hero-section':
-            return <HeroSection key={index} data={section} />;
-          case 'feature-section':
-            return <FeatureSection key={index} data={section} />;
-          // ... (map all section types)
-          default:
-            return null;
-        }
-      })}
-    </main>
-  );
-}
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Animation Libraries (auto-detected) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  
+  <style>
+    /* Custom design tokens */
+    :root {
+      --color-primary: #4E73D6;
+      --color-accent: #FF6635;
+      --font-heading: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body class="font-sans antialiased">
+  <!-- Section 01: Hero -->
+  <section id="section-01-hero" class="...">...</section>
+  
+  <!-- Section 02: Transition -->
+  <section id="section-02-transition" class="...">...</section>
+  
+  <!-- ... (all 14 sections) -->
+  
+  <!-- Section 14: CTA -->
+  <section id="section-14-cta" class="...">...</section>
+</body>
+</html>
 ```
 
-**Task 3-2: Collect Animation Scripts**
-```tsx
-// components/AnimationLoader.tsx
-import React from 'react';
-
-export function AnimationLoader({ sections }) {
-  React.useEffect(() => {
-    // Collect all codeHints
-    const animationScripts = sections
-      .filter(s => s.visual?.codeHint || s.animation?.codeHint)
-      .map(s => s.visual?.codeHint || s.animation?.codeHint);
-    
-    // Detect required libraries
-    const needsGSAP = animationScripts.some(s => s.includes('gsap'));
-    const needsThree = animationScripts.some(s => s.includes('THREE'));
-    
-    // Load libraries dynamically
-    if (needsGSAP) loadScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js');
-    if (needsThree) loadScript('https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js');
-    
-    // Execute all animation code
-    animationScripts.forEach(script => eval(script));
-  }, [sections]);
-  
-  return null;
-}
-```
-
-**Task 3-3: Final Validation**
+**Task 3-2: Final Validation**
 ```
 ✅ Phase 3 완료
 
 생성된 파일:
-- pages/index.tsx (1 파일)
-- components/*.tsx (13 파일)
-- types/sections.ts (1 파일)
-- docs/component_structure.md (1 파일)
-- docs/ui_rules.md (1 파일)
+- output/web/index.html (단일 HTML 파일, 1500-3000 lines)
 
-총: 17개 파일
 
 검증:
 - ✅ 모든 섹션 렌더링됨 (13/13)
@@ -1034,6 +1128,146 @@ export function AnimationLoader({ sections }) {
 - Feature preservation: 100% (no simplification, 3-pass quality check)
 - Animation preservation: 100% (all codeHints inserted verbatim)
 - Type safety: 100% (TypeScript interfaces from JSON)
+
+---
+
+### **DEPRECATED Methods:**
+
+**❌ v2.17.0 - PowerShell 18-Task Method:**
+- Problem: AI stops midway, requires manual intervention
+- Reason: Monolithic generation, no checkpoints
+- Status: DEPRECATED as of v2.18.0
+
+**❌ v2.16.0 - Single PowerShell Script:**
+- Problem: 70% data loss (generic templates)
+- Status: DEPRECATED as of v2.17.0
+
+검증:
+- ✅ 모든 섹션 렌더링됨 (13/13)
+- ✅ 모든 codeHint 삽입됨 (16/16)
+- ✅ 필요한 라이브러리 자동 로드 (GSAP, Three.js)
+- ✅ TypeScript 타입 안전성 확보
+```
+
+---
+
+### **Execution Rules**
+
+**AI MUST:**
+1. ✅ Complete Phase 1 first (Foundation)
+2. ✅ For EACH component: Execute Pass 1 → Pass 2 → Pass 3
+3. ✅ WAIT for user confirmation after EACH component completion
+4. ✅ Report progress: "✅ Pass X/3 완료 (HeroSection). 계속할까요?"
+5. ✅ Only proceed to next component when user says "yes"
+
+**AI MUST NOT:**
+1. ❌ Generate multiple components without user confirmation
+2. ❌ Skip any pass (1, 2, or 3)
+3. ❌ Combine components into single file
+4. ❌ Simplify JSON data or omit fields
+
+---
+
+### **Expected Results**
+
+- File count: 17+ files (1 page + 13 components + 3 config/docs)
+- Section rendering: 100% (all sections mapped to components)
+- Feature preservation: 100% (no simplification, 3-pass quality check)
+- Animation preservation: 100% (all codeHints inserted verbatim)
+- Type safety: 100% (TypeScript interfaces from JSON)
+
+---
+
+### **🔗 MANDATORY: Default Link Configuration (Harufolio Project)**
+
+**⚠️ CRITICAL: All generated code MUST use these default URLs**
+
+**Link Mapping (ALWAYS apply during code generation):**
+
+| Link Type | Display Text | Actual URL | Notes |
+|-----------|-------------|------------|-------|
+| **Social Links** | Instagram, SNS, Social | `https://instagram.com/haru_folio` | All social media references |
+| **Gallery/Portfolio** | Gallery, Works, Projects | `https://port.gallery` | All portfolio/gallery pages |
+| **Company Info** | Contact, About, Company | `https://rebornsolution.com` | Contact forms, company info |
+| **Footer Credit** | "built by harufolio" | `https://port.gallery` | Always in footer, hyperlinked |
+
+**Implementation Rules:**
+
+1. **Social Links:**
+   ```html
+   <!-- ✅ CORRECT -->
+   <a href="https://instagram.com/haru_folio" target="_blank" rel="noopener">Instagram</a>
+   
+   <!-- ❌ WRONG -->
+   <a href="#instagram">Instagram</a>
+   <a href="https://example.com/social">Follow us</a>
+   ```
+
+2. **Gallery/Portfolio:**
+   ```html
+   <!-- ✅ CORRECT -->
+   <a href="https://port.gallery">View Gallery</a>
+   <a href="https://port.gallery">Our Works</a>
+   
+   <!-- ❌ WRONG -->
+   <a href="/gallery">Gallery</a>
+   <a href="#portfolio">Portfolio</a>
+   ```
+
+3. **Contact/Company:**
+   ```html
+   <!-- ✅ CORRECT -->
+   <a href="https://rebornsolution.com">Contact Us</a>
+   <a href="https://rebornsolution.com">About Company</a>
+   
+   <!-- ❌ WRONG -->
+   <a href="/contact">Contact</a>
+   <a href="mailto:info@example.com">Email</a>
+   ```
+
+4. **Footer Credit (MANDATORY):**
+   ```html
+   <!-- ✅ CORRECT - Always include in footer -->
+   <footer>
+     <!-- ... other footer content ... -->
+     <p class="text-sm text-gray-500">
+       built by <a href="https://port.gallery" class="hover:text-gray-700 transition">harufolio</a>
+     </p>
+   </footer>
+   
+   <!-- ❌ WRONG - Missing credit or wrong link -->
+   <footer>
+     <p>© 2025 Company Name</p>
+   </footer>
+   ```
+
+**Auto-Detection & Replacement:**
+
+During code generation, AI MUST:
+1. Scan all `<a>` tags for link types
+2. Replace placeholder URLs with correct URLs
+3. Add footer credit if missing
+4. Verify all links before file completion
+
+**Example Auto-Replacement:**
+```javascript
+// AI detects these patterns in JSON or generated code:
+"instagram" → https://instagram.com/haru_folio
+"gallery", "portfolio", "works" → https://port.gallery
+"contact", "about", "company" → https://rebornsolution.com
+
+// Footer check:
+if (!footer.includes("built by harufolio")) {
+  footer += '<p>built by <a href="https://port.gallery">harufolio</a></p>';
+}
+```
+
+**Validation Checklist (before completing code generation):**
+- [ ] All social links point to `instagram.com/haru_folio`
+- [ ] All gallery/portfolio links point to `port.gallery`
+- [ ] All contact/company links point to `rebornsolution.com`
+- [ ] Footer includes "built by harufolio" with `port.gallery` link
+- [ ] No placeholder URLs (`#`, `/gallery`, `mailto:`) remain
 
 ---
 
@@ -1262,10 +1496,10 @@ Checkpoint 5 - Animation detected: 3D effect
 
 | JSON Specification | Required Implementation |
 |-------------------|------------------------|
-| `"type": "3d-canvas-animation"` | Three.js or CSS 3D transforms |
+| `"type": "3d-canvas-animation"` | **Three.js MANDATORY** (NO CSS 3D transforms) |
 | `"type": "video"` | HTML5 `<video>` element with controls |
 | `"type": "interactive-diagram"` | SVG with actual paths and animations |
-| `"animation": "parallax-scroll"` | GSAP ScrollTrigger or CSS parallax |
+| `"animation": "parallax-scroll"` | GSAP ScrollTrigger + CSS initial state |
 | `"connectionStyle": "dotted-svg-paths"` | Generate actual SVG `<path>` elements |
 | `"video": true` | Full video player implementation |
 
@@ -1275,10 +1509,75 @@ Checkpoint 5 - Animation detected: 3D effect
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
-<!-- If JSON specifies 3D graphics -->
+<!-- If JSON specifies 3D graphics - MANDATORY Three.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/GLTFLoader.js"></script>
 
 <!-- Always include libraries mentioned in JSON's "animations" or "framework" fields -->
+```
+
+#### ⚠️ CRITICAL: Animation Implementation Rules
+
+**1. 3D Animations → MANDATORY Three.js**
+
+❌ **FORBIDDEN:**
+- CSS 3D transforms for complex 3D scenes
+- Canvas 2D API for 3D objects
+- SVG for 3D models
+
+✅ **REQUIRED:**
+- Use Three.js for ALL 3D animations
+- Use GLTFLoader for 3D models
+- Proper scene, camera, renderer setup
+
+**2. GSAP Animations → MANDATORY CSS Initial State**
+
+❌ **FORBIDDEN:**
+- Setting initial state in GSAP `.from()` only
+- Relying on JavaScript for initial positioning
+- No CSS fallback for non-JS users
+
+✅ **REQUIRED:**
+- Set initial state in CSS classes (opacity: 0, transform: translateY(50px))
+- Use GSAP only for transitions/animations
+- Ensure graceful degradation without JavaScript
+
+**Example CSS for GSAP:**
+```css
+.gsap-fade-in { opacity: 0; transform: translateY(50px); }
+.gsap-slide-left { opacity: 0; transform: translateX(-100px); }
+.gsap-scale-in { opacity: 0; transform: scale(0.8); }
+```
+
+**3. 3D Asset Sources → MANDATORY Free Downloads**
+
+When 3D models are required, download from these sources (in priority order):
+
+1. **Sketchfab** (https://sketchfab.com/) - Filter: "Downloadable", Format: GLTF/GLB
+2. **Poly Haven** (https://polyhaven.com/) - 100% CC0, Format: GLTF/FBX/OBJ
+3. **Free3D** (https://free3d.com/) - Filter: Free models, Format: GLTF/OBJ/FBX
+4. **CGTrader Free** (https://www.cgtrader.com/free-3d-models) - Filter: Free, Royalty Free
+
+**Asset Organization:**
+```
+output/web/assets/3d/
+├── ship.gltf
+├── container.gltf
+├── planet.gltf
+└── README.md  (attribution list)
+```
+
+**Example Code with Asset:**
+```html
+<script>
+// Model: "Cargo Ship" by [Author] on Sketchfab
+// License: CC BY 4.0
+const loader = new THREE.GLTFLoader();
+loader.load('/assets/3d/ship.gltf', (gltf) => {
+  const model = gltf.scene;
+  scene.add(model);
+});
+</script>
 ```
 
 #### Verification Checklist:
@@ -1525,6 +1824,58 @@ Output: "✅ 코드 생성 완료 (17 files, validation PASSED)."
 
 ## Version History
 
+- **v2.20.0** (2025-01-17): Default Link Configuration for Harufolio Project
+  - **CRITICAL:** Added mandatory default URL configuration for all generated code
+  - **Problem:** Generated code used placeholder URLs (#, /gallery, /contact) instead of actual project URLs
+    - Social links pointed to generic placeholders
+    - Gallery/portfolio links were relative paths
+    - Contact links used mailto: instead of company website
+    - Footer credits missing or incomplete
+  - **Solution:** Mandatory link mapping table with auto-detection rules
+    - Social → `https://instagram.com/haru_folio`
+    - Gallery/Portfolio → `https://port.gallery`
+    - Contact/Company → `https://rebornsolution.com`
+    - Footer credit → "built by harufolio" with `port.gallery` link
+  - **Implementation:**
+    - Added link mapping table with 4 categories
+    - Created implementation rules with correct/wrong examples
+    - Auto-detection logic for link type identification
+    - Validation checklist before code completion
+    - Footer credit mandatory insertion
+  - **Expected Results:**
+    - 100% working links (no placeholders remain)
+    - Footer credit on every generated page
+    - Consistent branding across all projects
+  - **Impact:** Eliminates manual link correction, ensures all generated sites have working navigation from day 1
+- **v2.19.0** (2025-01-17): Quantitative Checkpoint Comparison System
+  - **CRITICAL:** Added element position tracking and quantitative movement analysis
+  - **Problem:** Previous checkpoints used qualitative descriptions ("moved slightly", "shifted positions")
+    - No pixel-level measurements for movement detection
+    - No stored position data for frame-by-frame comparison
+    - Impossible to generate accurate animation specifications
+  - **Solution:** Position tracking system with Map-based storage
+    - Extract boundingBox (x, y, width, height) for all visible elements
+    - Store positions in `previousElementPositions` Map
+    - Calculate deltas (ΔX, ΔY, ΔWidth, ΔHeight) between checkpoints
+    - Log significant movements (>5px threshold) in checkpoint header
+    - Store complete checkpoint data (screenshot + positions + timestamp) for future reference
+  - **New Fields in Checkpoint Header:**
+    - `📊 QUANTITATIVE COMPARISON (vs Checkpoint X):`
+    - Per-element movements: `selector: ΔX=+20px, ΔY=-10px`
+    - Total tracked elements count
+    - Elements moved count
+  - **Implementation Details:**
+    - Step 0: Initialize `checkpointData[]` and `previousElementPositions` Map
+    - Step 0: Extract initial positions from `el.boundingBox`
+    - Step 2: Extract current positions for all visible elements
+    - Step 4-1: Calculate movement deltas and generate comparison log
+    - Step 4-6: Update `previousElementPositions` and store checkpoint data
+  - **Expected Results:**
+    - Accurate pixel measurements: "ship-left: ΔX=-20px, ΔY=+10px"
+    - Animation speed calculations: "Element moved 150px over 3 checkpoints = 50px/checkpoint"
+    - Parallax layer detection: "Layer 1: ΔY=10px, Layer 2: ΔY=25px → 2.5x speed ratio"
+    - Viewport change coverage: "120/150 elements tracked consistently across checkpoints"
+  - **Impact:** Enables precise animation specifications, eliminates guesswork in movement descriptions, provides data-driven insights for code generation
 - **v2.18.0** (2025-01-16): Component-Based 3-Pass Generation (RECOMMENDED)
   - **CRITICAL:** Replaced PowerShell monolithic generation with incremental component approach
   - **Problem:** v2.17.0 PowerShell 18-Task method caused AI to stop midway
