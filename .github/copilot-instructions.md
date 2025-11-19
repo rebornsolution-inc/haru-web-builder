@@ -45,20 +45,27 @@ IF intendedKey == "PageDown" OR "PageUp" OR "End" OR "Home":
 
 **Step 2: Only allowed command**
 ```javascript
-// ✅ ONLY THIS IS ALLOWED
+// ✅ ONLY THIS IS ALLOWED (with mandatory 500ms wait after each call)
 await mcp_kapture_keypress({ tabId, key: "ArrowDown" });
+await new Promise(resolve => setTimeout(resolve, 500)); // macOS CDP session cleanup
 
 // ❌ NEVER USE THESE
 await mcp_kapture_keypress({ tabId, key: "PageDown" }); // FORBIDDEN
 await mcp_kapture_keypress({ tabId, key: "End" });      // FORBIDDEN
 await mcp_kapture_keypress({ tabId, key: "Home" });     // FORBIDDEN
 await mcp_kapture_keypress({ tabId, key: "PageUp" });   // FORBIDDEN
+
+// ❌ FORBIDDEN: Batch calls without wait time
+for (let i = 0; i < 5; i++) {
+  await mcp_kapture_keypress({ tabId, key: "ArrowDown" }); // Missing 500ms wait!
+}
 ```
 
 **Rationale:**
 - PageDown/PageUp = Jumps 800-1000px → Skips 5-10 viewports
 - ArrowDown = Moves 50px → Captures EVERY viewport change
 - End/Home = Jumps to page extremes → Completely skips content
+- **500ms wait** = macOS CDP debugger session cleanup time (prevents "Another debugger is already attached" error)
 
 ### Behavioral Triggers - AI Self-Check
 
@@ -374,9 +381,11 @@ console.log(`✅ 체크포인트 ${checkpointIndex++} 완료 (초기 상태)`);
 // Small scroll increment (ArrowDown × 3-5 for fine-grained capture)
 const SCROLL_INCREMENT = 3; // ~150-300px per checkpoint
 
+// ⚠️ CRITICAL: macOS CDP session cleanup requires 500ms between keypress calls
+// DO NOT use batch loops - each keypress must wait for previous session to close
 for (let i = 0; i < SCROLL_INCREMENT; i++) {
   await mcp_kapture_keypress({ tabId, key: "ArrowDown" });
-  await new Promise(resolve => setTimeout(resolve, 50));
+  await new Promise(resolve => setTimeout(resolve, 500)); // macOS CDP session cleanup
 }
 
 // Wait for animations to settle
@@ -668,6 +677,7 @@ await mcp_kapture_click({ tabId }); // No selector = error
 
 // ✅ ONLY USE
 await mcp_kapture_keypress({ tabId, key: "ArrowDown" }); // Primary scroll (small increment)
+await new Promise(resolve => setTimeout(resolve, 500)); // MANDATORY: Wait for macOS CDP session cleanup
 ```
 
 ### 🚨 ENFORCEMENT RULES
